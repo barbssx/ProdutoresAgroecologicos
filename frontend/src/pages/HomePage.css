@@ -1,0 +1,8 @@
+.header-titulo {
+    border: 5px solid red;
+    box-sizing: content-box;
+    width: 100%;
+    height: fit-content;
+    text-align: center;
+    font-size: 50px;
+}

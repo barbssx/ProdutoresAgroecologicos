@@ -1,0 +1,56 @@
+:root {
+    background-color: darkgrey !important;
+}
+
+.container-login {
+    max-width: 400px;
+    margin: 170px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .container-login h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .container-login form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .container-login label {
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  .container-login input {
+    padding: 10px;
+    margin-left: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #3c3f3c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
