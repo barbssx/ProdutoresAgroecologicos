@@ -1,4 +1,4 @@
-//Essencial para a comunicação do frontend com o backend, sendo o ponto central onde todas as requisições HTTP são realizadas.
+// Essencial para a comunicação do frontend com o backend, sendo o ponto central onde todas as requisições HTTP são realizadas.
 import axios from 'axios';
 
 const api = axios.create({
@@ -102,6 +102,21 @@ export const updateProduct = async (productId, updatedData) => {
     return response.data;
   } catch (error) {
     console.error('Erro ao atualizar o produto:', error.response ? error.response.data : error.message);
+    throw error;
+  }
+};
+
+// Função para excluir um produtor
+export const deleteProducer = async (producerId) => {
+  try {
+    const response = await api.delete(`/producers/${producerId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao excluir o produtor:', error.response ? error.response.data : error.message);
     throw error;
   }
 };

@@ -1,5 +1,3 @@
-//Produtores fazem login para acessar e gerenciar seus produtos.
-
 import React, { useState } from 'react';
 import { login } from '../services/api';
 import { useNavigate } from 'react-router-dom';
@@ -10,16 +8,23 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(''); // Limpa mensagens de erro anteriores
+    setError('');
     try {
       const data = await login(email, password);
+      console.log('Dados retornados:', data); 
       localStorage.setItem('token', data.token);
-      navigate(`/producers/${data.producerId}`); // Verifique se a rota está correta
+
+    
+      if (data.isAdmin) {
+        navigate('/admin');
+      } else {
+        navigate(`/producers/${data.producerId}`); 
+      }
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
         setError(err.response.data.message);

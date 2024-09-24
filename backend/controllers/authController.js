@@ -29,7 +29,11 @@ const loginProducer = async (req, res) => {
       return res.status(401).json({ message: 'Credenciais inválidas' });
     }
     const token = producer.getSignedJwtToken();
-    res.status(200).json({ producerId: producer._id, token });
+    res.status(200).json({ 
+      producerId: producer._id, 
+      token,
+      isAdmin: producer.isAdmin 
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

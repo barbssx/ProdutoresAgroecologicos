@@ -19,7 +19,7 @@ app.use(express.json());
 // Rotas
 app.use('/api/auth', authRoutes);
 app.use('/api/producers', producerRoutes); 
-app.use('/api', productRoutes);
+app.use('/api/products', productRoutes);
 
 // Tratamento de erros 404
 app.use((req, res, next) => {

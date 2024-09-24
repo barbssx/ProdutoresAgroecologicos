@@ -85,7 +85,7 @@ const addProduct = async (req, res) => {
 
 // Obter produtos de um produtor específico pelo ID
 const getProductsByProducerId = async (req, res) => {
-  const { id } = req.params; // ID do produtor
+  const { id } = req.params;
   try {
     const producer = await Producer.findById(id).populate('products');
     if (!producer) {
