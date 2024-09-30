@@ -19,7 +19,6 @@ const LoginPage = () => {
       console.log('Dados retornados:', data); 
       localStorage.setItem('token', data.token);
 
-    
       if (data.isAdmin) {
         navigate('/admin');
       } else {
@@ -38,9 +37,10 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
+      <img src="/assets/duck-ducky.gif" alt="Patinho" className="login-image" />
       <div className="login-container">
         <div className="container-login">
-          <h1>Produtor, faça o seu login</h1>
+          <h1 className="jersey-15-charted-regular">Produtor, faça o seu login</h1>
           <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email">Email</label>
@@ -69,6 +69,7 @@ const LoginPage = () => {
           </form>
         </div>
       </div>
+      <div className="footer" />
     </div>
   );
 };
