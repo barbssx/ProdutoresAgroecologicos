@@ -1,73 +1,42 @@
-//A página principal onde produtos e produtores devem ser exibidos para os visitantes.
-
-import React, { useState, useEffect } from 'react';
+// src/pages/HomePage.js
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getProducers } from '../services/api';
-import ProducerProfile from '../components/ProducerProfile';
-import ProductFilter from '../components/ProductFilter';
+import './HomePage.css';
 
 const HomePage = () => {
-  const [producers, setProducers] = useState([]);
-  const [filteredProducers, setFilteredProducers] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedSeason, setSelectedSeason] = useState('');
   const navigate = useNavigate();
 
-  const categories = ['vegetais', 'frutas', 'carnes', 'laticínios'];
-  const seasons = ['verão', 'outono', 'inverno', 'primavera'];
-
-  useEffect(() => {
-    const fetchProducers = async () => {
-      try {
-        const data = await getProducers();
-        console.log('Producers data:', data);
-        setProducers(data);
-        setFilteredProducers(data);
-      } catch (err) {
-        console.error('Erro ao carregar produtores:', err);
-      }
-    };
-
-    fetchProducers();
-  }, []);
-
-  useEffect(() => {
-    const filtered = producers.filter((producer) => {
-      return (!selectedCategory || producer.products.some((product) => product.category === selectedCategory)) &&
-             (!selectedSeason || producer.products.some((product) => product.season === selectedSeason));
-    });
-    setFilteredProducers(filtered);
-  }, [selectedCategory, selectedSeason, producers]);
-
-  const handleFilterChange = (filters) => {
-    setSelectedCategory(filters.category || selectedCategory);
-    setSelectedSeason(filters.season || selectedSeason);
+  const handleProducerLogin = () => {
+    console.log("Redirecionando para o login...");
+    navigate('/login'); 
   };
 
-  const handleLogin = () => {
-    navigate('/login');
+  const handleConsumerView = () => {
+    console.log("Redirecionando para a lista de produtores...");
+    navigate('/producers'); 
   };
 
   return (
-    <div>
-      <ProductFilter
-        categories={categories}
-        seasons={seasons}
-        onFilterChange={handleFilterChange}
-      />
-      <div>
-        {filteredProducers.length > 0 ? (
-          filteredProducers.map((producer) => (
-            <ProducerProfile 
-              key={producer._id} 
-              producer={producer} 
-            />
-          ))
-        ) : (
-          <p>Nenhum produtor encontrado com os filtros selecionados.</p>
-        )}
+    <div className="homepage-container">
+      <h1>Bem-vindo à nossa plataforma agroecológica!</h1>
+      <p className="homepage-info">
+        Produtos agroecológicos são sazonais, garantindo frescor e sustentabilidade. 
+        Tenha paciência ao escolher produtos, pois sua disponibilidade varia de acordo com as estações.
+      </p>
+
+      <div className="homepage-divs-container">
+        {/* Div para Produtores */}
+        <div className="homepage-div" onClick={handleProducerLogin}>
+          <h3>Se você é um produtor</h3>
+          <p>Faça o login para acessar sua conta e gerenciar seus produtos.</p>
+        </div>
+
+        {/* Div para Consumidores */}
+        <div className="homepage-div" onClick={handleConsumerView}>
+          <h3>Se você é um consumidor</h3>
+          <p>Veja os produtores e descubra os produtos disponíveis.</p>
+        </div>
       </div>
-      <button onClick={handleLogin}>Login</button>
     </div>
   );
 };

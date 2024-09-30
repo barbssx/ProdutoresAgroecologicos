@@ -3,8 +3,10 @@ const {
     registerProducer,
     getProducers,
     getProducerById,
-    getProductsByProducerId
-} = require('../controllers/producerController');
+    getProductsByProducerId,
+    deleteProducer,
+    deleteProduct
+} = require('../controllers/producerController'); 
 const { protect, admin } = require('../middleware/authMiddleware');
 
 const router = express.Router();
@@ -31,6 +33,18 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/products', async (req, res) => {
     console.log("Requisitando produtos do produtor com ID:", req.params.id);
     await getProductsByProducerId(req, res);
+});
+
+// Rota para excluir um produtor (apenas admin pode acessar)
+router.delete('/:id', protect, admin, async (req, res) => {
+    console.log("Tentativa de exclusão do produtor com ID:", req.params.id);
+    await deleteProducer(req, res);
+});
+
+// Rota para excluir um produto de um produtor específico
+router.delete('/:producerId/products/:productId', protect, async (req, res) => {
+    console.log("Tentativa de exclusão do produto com ID:", req.params.productId);
+    await deleteProduct(req, res); 
 });
 
 module.exports = router;

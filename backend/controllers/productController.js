@@ -66,10 +66,12 @@ const deleteProduct = async (req, res) => {
             return res.status(404).json({ message: 'Produto não encontrado' });
         }
 
-        
         if (product.producer.toString() !== req.user._id.toString()) {
             return res.status(403).json({ message: 'Você não tem permissão para deletar este produto.' });
         }
+
+        // Remove o ID do produto do array de produtos do produtor
+        await Producer.findByIdAndUpdate(product.producer, { $pull: { products: product._id } });
 
         await product.remove();
         res.status(200).json({ message: 'Produto deletado com sucesso' });

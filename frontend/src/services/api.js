@@ -91,6 +91,36 @@ export const addProduct = async (producerId, productData) => {
   }
 };
 
+// Função para excluir um produto
+export const deleteProduct = async (producerId, productId) => {
+  try {
+    const response = await api.delete(`/producers/${producerId}/products/${productId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data; 
+  } catch (error) {
+    console.error('Erro ao excluir o produto:', error.response ? error.response.data : error.message);
+    throw error;
+  }
+};
+
+// Função para Adicionar um Novo Produtor 
+export const addProducer = async (producerData) => {
+  try {
+    const response = await api.post('/producers', producerData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao adicionar produtor:', error.response ? error.response.data : error.message);
+    throw error;
+  }
+};
+
 // Função para atualizar um produto
 export const updateProduct = async (productId, updatedData) => {
   try {

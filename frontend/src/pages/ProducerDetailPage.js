@@ -1,7 +1,6 @@
-//Exibe os detalhes do produtor e permite gerenciar produtos (criar, editar, excluir).
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getProducerById, updateProducer, addProduct, updateProduct } from '../services/api';
+import { getProducerById, updateProducer, addProduct, updateProduct, deleteProduct } from '../services/api';
 
 const ProducerDetailPage = () => {
   const { producerId } = useParams();
@@ -112,6 +111,20 @@ const ProducerDetailPage = () => {
     }
   };
 
+  // ** Nova Função para Excluir Produto **
+  const handleDeleteProduct = async (productId) => {
+    if (window.confirm('Você tem certeza que deseja excluir este produto?')) {
+      try {
+        await deleteProduct(producerId, productId); // Passando producerId e productId
+        const updatedProducer = await getProducerById(producerId);
+        setProducer(updatedProducer);
+      } catch (err) {
+        console.error('Erro ao excluir o produto:', err);
+        setError('Erro ao excluir o produto.');
+      }
+    }
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/');
@@ -189,6 +202,8 @@ const ProducerDetailPage = () => {
                 <p>Preço: R${product.pricePerKg} por kg</p>
                 <p>Estação: {product.season || 'Não informado'}</p>
                 <button onClick={() => handleEditProduct(product)}>Editar</button>
+                {/* ** Botão de Exclusão ** */}
+                <button onClick={() => handleDeleteProduct(product._id)}>Excluir</button>
               </div>
             ))
           ) : (

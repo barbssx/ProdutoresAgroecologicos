@@ -1,10 +1,30 @@
 //Exibe os detalhes do perfil do produtor, como suas informações pessoais e, possivelmente, seus produtos. 
 //É responsável por renderizar a interface onde os produtores podem visualizar ou editar seus dados.
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProducerProfile.css';
 
-const ProducerProfile = ({ producer }) => {
+const ProducerProfile = ({ producerId }) => {
+  const [producer, setProducer] = useState(null);
+
+  useEffect(() => {
+    const fetchProducer = async () => {
+      const response = await fetch(`/api/producers/${producerId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setProducer(data);
+      } else {
+        console.error('Erro ao carregar o produtor:', response.statusText);
+      }
+    };
+
+    fetchProducer();
+  }, [producerId]);
+
+  if (!producer) {
+    return <p>Carregando...</p>;
+  }
+
   const { name, localizacao, products, photo, telefone } = producer;
 
   return (

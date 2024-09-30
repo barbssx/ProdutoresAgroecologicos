@@ -98,10 +98,51 @@ const getProductsByProducerId = async (req, res) => {
   }
 };
 
+// Excluir um produtor pelo ID
+const deleteProducer = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const producer = await Producer.findByIdAndDelete(id);
+    if (!producer) {
+      return res.status(404).json({ message: 'Produtor não encontrado' });
+    }
+    res.status(204).send(); 
+  } catch (error) {
+    console.error('Erro ao excluir o produtor:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Função para Excluir um Produto
+const deleteProduct = async (req, res) => {
+  const { producerId, productId } = req.params;
+
+  try {
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Produto não encontrado' });
+    }
+
+    // Verifica se o produto pertence ao produtor autenticado
+    if (product.producer.toString() !== producerId && product.producer.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: 'Você não tem permissão para deletar este produto.' });
+    }
+
+    // Exclui o produto
+    await Product.findByIdAndDelete(productId);
+    res.status(204).send(); 
+  } catch (error) {
+    console.error('Erro ao deletar produto:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = { 
   registerProducer, 
   getProducers, 
   getProducerById, 
   addProduct, 
-  getProductsByProducerId
+  getProductsByProducerId,
+  deleteProducer,
+  deleteProduct 
 };
