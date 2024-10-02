@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getProducerById, updateProducer, addProduct, updateProduct, deleteProduct } from '../services/api';
+import { getProducerById, updateProducer, addProduct, deleteProduct } from '../services/api';
+import './ProducerDetailPage.css';
 
 const ProducerDetailPage = () => {
   const { producerId } = useParams();
@@ -15,6 +16,7 @@ const ProducerDetailPage = () => {
     email: '',
     telefone: '',
     localizacao: '',
+    biografia: '',
   });
   const [showAddProductForm, setShowAddProductForm] = useState(false);
   const [productFormData, setProductFormData] = useState({
@@ -24,7 +26,6 @@ const ProducerDetailPage = () => {
     season: '',
   });
   const [productLoading, setProductLoading] = useState(false);
-  const [editingProduct, setEditingProduct] = useState(null);
 
   useEffect(() => {
     const fetchProducer = async () => {
@@ -36,6 +37,7 @@ const ProducerDetailPage = () => {
           email: data.email,
           telefone: data.telefone || '',
           localizacao: data.localizacao || '',
+          biografia: data.biografia || '',
         });
       } catch (err) {
         console.error('Erro ao carregar os detalhes do produtor:', err);
@@ -87,35 +89,10 @@ const ProducerDetailPage = () => {
     }
   };
 
-  const handleEditProduct = (product) => {
-    setEditingProduct(product);
-    setProductFormData({
-      name: product.name,
-      category: product.category,
-      pricePerKg: product.pricePerKg,
-      season: product.season,
-    });
-  };
-
-  const handleUpdateProduct = async (e) => {
-    e.preventDefault();
-    try {
-      await updateProduct(editingProduct._id, productFormData);
-      const updatedProducer = await getProducerById(producerId);
-      setProducer(updatedProducer);
-      setEditingProduct(null);
-      setProductFormData({ name: '', category: '', pricePerKg: '', season: '' });
-    } catch (err) {
-      console.error('Erro ao atualizar o produto:', err);
-      setError('Erro ao atualizar o produto.');
-    }
-  };
-
-  // ** Nova Função para Excluir Produto **
   const handleDeleteProduct = async (productId) => {
     if (window.confirm('Você tem certeza que deseja excluir este produto?')) {
       try {
-        await deleteProduct(producerId, productId); // Passando producerId e productId
+        await deleteProduct(producerId, productId);
         const updatedProducer = await getProducerById(producerId);
         setProducer(updatedProducer);
       } catch (err) {
@@ -134,10 +111,10 @@ const ProducerDetailPage = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="producer-detail-page">
+    <main className="producer-detail-page">
       {editing ? (
         <form onSubmit={handleSave}>
-          <h1>Editar {producer.name}</h1>
+          <h1 className='jersey-15-charted-regular'>Editar {producer.name}</h1>
           <div>
             <label htmlFor="name">Nome</label>
             <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} required />
@@ -154,29 +131,49 @@ const ProducerDetailPage = () => {
             <label htmlFor="localizacao">Endereço</label>
             <input type="text" id="localizacao" name="localizacao" value={formData.localizacao} onChange={handleInputChange} />
           </div>
+          <div>
+            <label htmlFor="biografia">Biografia</label>
+            <textarea id="biografia" name="biografia" value={formData.biografia} onChange={handleInputChange} />
+          </div>
           <button type="submit">Salvar</button>
           <button type="button" onClick={() => setEditing(false)}>Cancelar</button>
         </form>
       ) : (
         <div>
-          <h1>{producer.name}</h1>
+          <h1 className='jersey-15-charted-regular'>{producer.name}</h1>
           <p>Email: {producer.email}</p>
           <p>Telefone: {producer.telefone || 'Não informado'}</p>
           <p>Endereço: {producer.localizacao || 'Não informado'}</p>
+          <p>Biografia: {producer.biografia || 'Não informada'}</p>
           <button onClick={() => setEditing(true)}>Editar</button>
           <button onClick={handleLogout}>Sair</button>
           <button onClick={() => setShowAddProductForm(true)}>Incluir Novo Produto</button>
 
           {showAddProductForm && (
             <form onSubmit={handleAddProduct}>
-              <h2>Cadastrar Novo Produto</h2>
+              <h2 className='jersey-15-charted-regular'>Cadastrar Novo Produto</h2>
               <div>
                 <label htmlFor="name">Nome do Produto</label>
                 <input type="text" id="name" name="name" value={productFormData.name} onChange={handleProductInputChange} required />
               </div>
               <div>
                 <label htmlFor="category">Categoria</label>
-                <input type="text" id="category" name="category" value={productFormData.category} onChange={handleProductInputChange} required />
+                <select id="category" name="category" value={productFormData.category} onChange={handleProductInputChange} required>
+                  <option value="">Selecione uma categoria</option>
+                  <option value="Queijos artesanais">Queijos artesanais</option>
+                  <option value="Hortaliças">Hortaliças</option>
+                  <option value="Leite e derivados">Leite e derivados</option>
+                  <option value="Frutas">Frutas</option>
+                  <option value="Verduras">Verduras</option>
+                  <option value="Legumes">Legumes</option>
+                  <option value="Massas artesanais">Massas artesanais</option>
+                  <option value="Artesanato">Artesanato</option>
+                  <option value="Conservas">Conservas</option>
+                  <option value="Doces">Doces</option>
+                  <option value="Ervas medicinais">Ervas medicinais</option>
+                  <option value="Flores">Flores</option>
+                  <option value="Plantas">Plantas</option>
+                </select>
               </div>
               <div>
                 <label htmlFor="pricePerKg">Preço por Kg</label>
@@ -184,7 +181,14 @@ const ProducerDetailPage = () => {
               </div>
               <div>
                 <label htmlFor="season">Estação</label>
-                <input type="text" id="season" name="season" value={productFormData.season} onChange={handleProductInputChange} />
+                <select id="season" name="season" value={productFormData.season} onChange={handleProductInputChange} required>
+                  <option value="">Selecione uma estação</option>
+                  <option value="verão">Verão</option>
+                  <option value="outono">Outono</option>
+                  <option value="inverno">Inverno</option>
+                  <option value="primavera">Primavera</option>
+                  <option value="anual">Anual</option>
+                </select>
               </div>
               <button type="submit" disabled={productLoading}>
                 {productLoading ? 'Cadastrando...' : 'Cadastrar Produto'}
@@ -193,49 +197,27 @@ const ProducerDetailPage = () => {
             </form>
           )}
 
-          <h2>Produtos</h2>
-          {producer && producer.products && producer.products.length > 0 ? (
-            producer.products.map(product => (
-              <div key={product._id}>
-                <h3>{product.name}</h3>
-                <p>Categoria: {product.category}</p>
-                <p>Preço: R${product.pricePerKg} por kg</p>
-                <p>Estação: {product.season || 'Não informado'}</p>
-                <button onClick={() => handleEditProduct(product)}>Editar</button>
-                {/* ** Botão de Exclusão ** */}
-                <button onClick={() => handleDeleteProduct(product._id)}>Excluir</button>
-              </div>
-            ))
-          ) : (
-            <p>Nenhum produto cadastrado.</p>
-          )}
-
-          {editingProduct && (
-            <form onSubmit={handleUpdateProduct}>
-              <h3>Editar Produto</h3>
-              <div>
-                <label htmlFor="name">Nome do Produto</label>
-                <input type="text" id="name" name="name" value={productFormData.name} onChange={handleProductInputChange} required />
-              </div>
-              <div>
-                <label htmlFor="category">Categoria</label>
-                <input type="text" id="category" name="category" value={productFormData.category} onChange={handleProductInputChange} required />
-              </div>
-              <div>
-                <label htmlFor="pricePerKg">Preço por Kg</label>
-                <input type="number" id="pricePerKg" name="pricePerKg" value={productFormData.pricePerKg} onChange={handleProductInputChange} required min="0" />
-              </div>
-              <div>
-                <label htmlFor="season">Estação</label>
-                <input type="text" id="season" name="season" value={productFormData.season} onChange={handleProductInputChange} />
-              </div>
-              <button type="submit">Salvar Alterações</button>
-              <button type="button" onClick={() => setEditingProduct(null)}>Cancelar</button>
-            </form>
-          )}
+          <h2 className='jersey-15-charted-regular'>Produtos</h2>
+          <div className="product-list">
+            {producer && producer.products && producer.products.length > 0 ? (
+              producer.products.map(product => (
+                <div key={product._id} className="product-item">
+                  <h3 className='jersey-15-charted-regular'>{product.name}</h3>
+                  <p>
+                    Categoria: <span className={`category ${product.category.toLowerCase().replace(/\s+/g, '-')}`}>{product.category}</span>
+                  </p>
+                  <p>Preço por Kg: R$ {product.pricePerKg}</p>
+                  <p>Estação: {product.season}</p>
+                  <button onClick={() => handleDeleteProduct(product._id)}>Excluir</button>
+                </div>
+              ))
+            ) : (
+              <p>Não há produtos cadastrados.</p>
+            )}
+          </div>
         </div>
       )}
-    </div>
+    </main>
   );
 };
 

@@ -98,6 +98,28 @@ const getProductsByProducerId = async (req, res) => {
   }
 };
 
+// Atualizar um produtor
+const updateProducer = async (req, res) => {
+  const { id } = req.params;
+  const updateData = req.body;
+
+  try {
+    const producer = await Producer.findById(id);
+    if (!producer) {
+      return res.status(404).json({ message: 'Produtor não encontrado' });
+    }
+
+    // Atualiza os dados do produtor
+    Object.assign(producer, updateData);
+    await producer.save();
+
+    res.status(200).json({ message: 'Produtor atualizado com sucesso', producer });
+  } catch (error) {
+    console.error('Erro ao atualizar os dados do produtor:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
 // Excluir um produtor pelo ID
 const deleteProducer = async (req, res) => {
   const { id } = req.params;
@@ -143,6 +165,7 @@ module.exports = {
   getProducerById, 
   addProduct, 
   getProductsByProducerId,
+  updateProducer,
   deleteProducer,
   deleteProduct 
 };

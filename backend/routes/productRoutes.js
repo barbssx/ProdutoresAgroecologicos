@@ -8,10 +8,10 @@ const router = express.Router();
 router.post('/producers/:producerId/products', protect, addProduct); // Apenas produtores podem adicionar
 
 // Rota para editar um produto
-router.put('/products/:id', protect, updateProduct); // Apenas produtores podem editar
+router.put('/producers/:producerId/products/:id', protect, updateProduct); 
 
 // Rota para deletar um produto
-router.delete('/products/:id', protect, deleteProduct); // Apenas produtores podem deletar
+router.delete('/producers/:producerId/products/:id', protect, deleteProduct); 
 
 // Rota para obter todos os produtos de um produtor específico
 router.get('/producers/:producerId/products', async (req, res) => {

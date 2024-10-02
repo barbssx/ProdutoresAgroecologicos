@@ -71,7 +71,7 @@ export const updateProducer = async (producerId, updatedData) => {
     });
     return response.data;
   } catch (error) {
-    console.error('Erro ao atualizar o produtor:', error.response ? error.response.data : error.message);
+    console.error('Erro ao atualizar os dados do produtor:', error.response ? error.response.data : error.message);
     throw error;
   }
 };

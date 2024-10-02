@@ -4,6 +4,8 @@ const {
     getProducers,
     getProducerById,
     getProductsByProducerId,
+    addProduct,
+    updateProducer, 
     deleteProducer,
     deleteProduct
 } = require('../controllers/producerController'); 
@@ -33,6 +35,18 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/products', async (req, res) => {
     console.log("Requisitando produtos do produtor com ID:", req.params.id);
     await getProductsByProducerId(req, res);
+});
+
+// Rota para adicionar um produto a um produtor específico
+router.post('/:producerId/products', protect, async (req, res) => {
+    console.log("Tentativa de adicionar produto ao produtor com ID:", req.params.producerId);
+    await addProduct(req, res); 
+});
+
+// Rota para atualizar um produtor (somente o produtor pode acessar)
+router.put('/:id', protect, async (req, res) => {
+    console.log("Tentativa de atualização do produtor com ID:", req.params.id);
+    await updateProducer(req, res);
 });
 
 // Rota para excluir um produtor (apenas admin pode acessar)

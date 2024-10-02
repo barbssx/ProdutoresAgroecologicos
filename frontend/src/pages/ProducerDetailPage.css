@@ -1,0 +1,247 @@
+
+.producer-detail-page {
+  padding: 20px;
+  background-color: #d2b48c;
+  color: #3e3d2f; 
+  font-family: "Open Sans", sans-serif;
+  min-height: 100vh;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  color: #2f6035;
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #2f6035;
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+h3 {
+  color: #2f6035;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.prod {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+/* Formulários */
+form {
+  background-color: #f5deb3; 
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #3e3d2f;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #8b4513;
+  border-radius: 5px;
+  background-color: #f5deb3;
+  color: #3e3d2f;
+  font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+select:focus {
+  outline: none;
+  border-color: #2f6035;
+  background-color: #e5b78e; 
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #2f6035;
+  color: white; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+  background-color: #3e3d2f;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Lista de produtos lado a lado */
+.product-list {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+}
+
+.product-list div {
+  padding: 15px;
+  border: 2px solid #8b4513;
+  border-radius: 10px;
+  background-color: #f5deb3; 
+  margin: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 0 1 calc(25% - 20px);
+  text-align: left;
+}
+
+.product-list div:hover {
+  background-color: #e5b78e; 
+}
+
+.product-list h3 {
+  color: #2f6035; 
+  margin-bottom: 10px;
+}
+
+.product-list p {
+  color: #3e3d2f; 
+}
+
+.category.queijos-artesanais {
+  background-color: #f9d85a; 
+  color: #3e3d2f; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.hortaliças {
+  background-color: #78c679; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.leite-e-derivados {
+  background-color: #ffb3b3; 
+  color: #3e3d2f; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.frutas {
+  background-color: #ff6f61; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.verduraselegumes {
+  background-color: #6f42c1; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.massas-artesanais {
+  background-color: #fd7e14; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.artesanato {
+  background-color: #6610f2; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.conservas {
+  background-color: #20c997; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.doces {
+  background-color: #dc3545; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.erbas-medicinais {
+  background-color: #17a2b8; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.flores {
+  background-color: #e83e8c; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.plantas {
+  background-color: #ffc107; 
+  color: #3e3d2f; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+  h1 {
+      font-size: 2.5rem;
+  }
+
+  h2 {
+      font-size: 2rem;
+  }
+
+  form {
+      padding: 15px; 
+  }
+
+  button {
+      width: 100%;
+      margin-top: 10px; 
+  }
+
+  .product-list div {
+      padding: 10px; 
+      flex: 0 1 calc(50% - 20px);
+  }
+}
+
+/* Fontes */
+.jersey-10-regular {
+  font-family: "Jersey 10", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.jersey-15-charted-regular {
+  font-family: "Jersey 15 Charted", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.lora-500 {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: italic;
+}
