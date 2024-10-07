@@ -122,9 +122,9 @@ export const addProducer = async (producerData) => {
 };
 
 // Função para atualizar um produto
-export const updateProduct = async (productId, updatedData) => {
+export const updateProduct = async (producerId, productId, updatedData) => {
   try {
-    const response = await api.put(`/products/${productId}`, updatedData, {
+    const response = await api.put(`/producers/${producerId}/products/${productId}`, updatedData, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },

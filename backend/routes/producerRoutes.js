@@ -7,7 +7,8 @@ const {
     addProduct,
     updateProducer, 
     deleteProducer,
-    deleteProduct
+    deleteProduct,
+    updateProduct
 } = require('../controllers/producerController'); 
 const { protect, admin } = require('../middleware/authMiddleware');
 
@@ -60,5 +61,13 @@ router.delete('/:producerId/products/:productId', protect, async (req, res) => {
     console.log("Tentativa de exclusão do produto com ID:", req.params.productId);
     await deleteProduct(req, res); 
 });
+
+// Rota para atualizar um produto de um produtor específico
+router.put('/:producerId/products/:productId', protect, async (req, res) => {
+    console.log("Tentativa de atualização do produto com ID:", req.params.productId, "do produtor com ID:", req.params.producerId);
+    
+    await updateProduct(req, res);
+});
+
 
 module.exports = router;

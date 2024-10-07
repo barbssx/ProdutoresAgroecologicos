@@ -31,7 +31,7 @@ const registerProducer = async (req, res) => {
 // Obter todos os produtores (excluindo administradores) e seus produtos
 const getProducers = async (req, res) => {
   try {
-    const producers = await Producer.find({ isAdmin: false }).populate('products'); 
+    const producers = await Producer.find({ isAdmin: false }).populate('products');
     res.status(200).json(producers);
   } catch (error) {
     console.error('Erro ao obter produtores:', error);
@@ -56,8 +56,8 @@ const getProducerById = async (req, res) => {
 
 // Adicionar produto ao produtor
 const addProduct = async (req, res) => {
-  const { producerId } = req.params; 
-  const productData = req.body; 
+  const { producerId } = req.params;
+  const productData = req.body;
 
   try {
     console.log("ID do produtor recebido:", producerId);
@@ -159,6 +159,33 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+// Atualizar um produto
+const updateProduct = async (req, res) => {
+  const { producerId, productId } = req.params;
+  const updateData = req.body;
+
+  try {
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Produto não encontrado' });
+    }
+
+    // Verifica se o produto pertence ao produtor autenticado
+    if (product.producer.toString() !== producerId && product.producer.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: 'Você não tem permissão para atualizar este produto.' });
+    }
+
+    // Atualiza os dados do produto
+    Object.assign(product, updateData);
+    await product.save();
+
+    res.status(200).json({ message: 'Produto atualizado com sucesso', product });
+  } catch (error) {
+    console.error('Erro ao atualizar o produto:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = { 
   registerProducer, 
   getProducers, 
@@ -167,5 +194,6 @@ module.exports = {
   getProductsByProducerId,
   updateProducer,
   deleteProducer,
-  deleteProduct 
+  deleteProduct,
+  updateProduct
 };

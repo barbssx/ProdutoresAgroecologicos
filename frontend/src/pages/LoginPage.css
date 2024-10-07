@@ -14,8 +14,8 @@ html, body {
 /* Imagem de patinho */
 .login-image {
   display: block;
-  margin: 5px auto; 
-  width: 140px; 
+  margin: auto; 
+  width: 130px; 
   border-radius: 10px; 
 }
 
@@ -29,8 +29,8 @@ html, body {
 
 /* Container do formulário de login */
 .container-login {
-  max-width: 400px;
-  margin: 20px 0; 
+  max-width: 500px;
+  margin: 5px 0; 
   padding: 30px;
   background-color: #d2b48c;
   border-radius: 10px;
@@ -45,7 +45,7 @@ html, body {
   margin-bottom: 20px;
 }
 
-/* Estilo geral do formulário */
+/* Estilodo formulário */
 .container-login form {
   display: flex;
   flex-direction: column;
@@ -106,5 +106,4 @@ button:hover:not(:disabled) {
   background-size: contain;
   position: relative;
   bottom: 0;
-  margin-top: 10px;
 }

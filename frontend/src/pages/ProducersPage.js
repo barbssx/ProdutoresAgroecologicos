@@ -1,6 +1,5 @@
-// src/pages/ProducersPage.js
 import React, { useEffect, useState } from 'react';
-import { getProducers } from '../services/api';
+import { getProducers, getProductsByProducer } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
 const ProducersPage = () => {
@@ -12,16 +11,14 @@ const ProducersPage = () => {
   useEffect(() => {
     const fetchProducers = async () => {
       try {
-        const token = localStorage.getItem('token');
-
-        // Verifica se o usuário está autenticado
-        if (!token) {
-          navigate('/login'); // Redireciona para a página de login se não estiver autenticado
-          return;
-        }
-
         const data = await getProducers();
-        setProducers(data);
+        // Para cada produtor, obtenha seus produtos e categorias
+        const producersWithProducts = await Promise.all(data.map(async (producer) => {
+          const products = await getProductsByProducer(producer._id);
+          return { ...producer, products }; // Adiciona produtos ao objeto do produtor
+        }));
+
+        setProducers(producersWithProducts);
       } catch (err) {
         console.error('Erro ao carregar produtores:', err);
         setError('Erro ao carregar os produtores');
@@ -31,7 +28,7 @@ const ProducersPage = () => {
     };
 
     fetchProducers();
-  }, [navigate]); // Adiciona 'navigate' como dependência
+  }, []);
 
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>{error}</p>;
@@ -50,6 +47,16 @@ const ProducersPage = () => {
             <p>Email: {producer.email}</p>
             <p>Telefone: {producer.telefone || 'Não informado'}</p>
             <p>Endereço: {producer.localizacao || 'Não informado'}</p>
+            {producer.products && producer.products.length > 0 && (
+              <div>
+                <h4>Categorias dos Produtos:</h4>
+                <ul>
+                  {producer.products.map(product => (
+                    <li key={product._id}>{product.category}</li> // Exibe a categoria de cada produto
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ))
       ) : (
