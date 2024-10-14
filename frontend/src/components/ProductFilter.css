@@ -1,0 +1,25 @@
+.filter-container {
+  display: flex;
+  justify-content: flex-end; /* Posiciona o filtro à direita */
+  gap: 15px;
+  margin-right: 50px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 25%; /* Deixa o filtro com bordas arredondadas */
+}
+
+.filter-options {
+  display: flex;
+  gap: 10px;
+}
+
+select, input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+select {
+  width: 150px;
+}
