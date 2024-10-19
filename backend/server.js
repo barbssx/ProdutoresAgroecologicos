@@ -23,7 +23,7 @@ app.use('/api/products', productRoutes);
 
 // Tratamento de erros 404
 app.use((req, res, next) => {
-  res.status(404).json({ message: 'Rota não encontrada' });
+  res.status(404).json({ message: 'Rota não encontrada', path: req.originalUrl });
 });
 
 // Tratamento de erros gerais
