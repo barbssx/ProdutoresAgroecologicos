@@ -124,6 +124,12 @@ button:hover {
 }
 
 
+.category.massas {
+  background-color: #e83e8c; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
 
 .category.queijos-artesanais {
   background-color: #f9d85a; 
@@ -139,7 +145,13 @@ button:hover {
   border-radius: 5px;
 }
 
-.category.leite-e-derivados {
+.category.verduras {
+  background-color: #3001ff; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+.category.laticínios {
   background-color: #ffb3b3; 
   color: #3e3d2f; 
   padding: 5px;
@@ -153,12 +165,7 @@ button:hover {
   border-radius: 5px;
 }
 
-.category.verduraselegumes {
-  background-color: #6f42c1; 
-  color: white; 
-  padding: 5px;
-  border-radius: 5px;
-}
+
 
 .category.massas-artesanais {
   background-color: #fd7e14; 
@@ -188,7 +195,7 @@ button:hover {
   border-radius: 5px;
 }
 
-.category.erbas-medicinais {
+.category.ervas-medicinais {
   background-color: #17a2b8; 
   color: white; 
   padding: 5px;
@@ -201,6 +208,8 @@ button:hover {
   padding: 5px;
   border-radius: 5px;
 }
+
+
 
 .category.plantas {
   background-color: #ffc107; 
@@ -257,7 +266,7 @@ button:hover {
 
 .jersey-15-regular {
   font-family: "Jersey 15", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
-  font-size: 1rem;
+  font-size: 20px;
 }

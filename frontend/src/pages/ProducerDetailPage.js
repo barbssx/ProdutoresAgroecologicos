@@ -138,13 +138,13 @@ const ProducerDetailPage = () => {
     navigate('/');
   };
 
-  if (loading) return <p className="lora-500">Carregando...</p>;
-  if (error) return <p className="lora-500">{error}</p>;
+  if (loading) return <p className="jersey-15-regular">Carregando...</p>;
+  if (error) return <p className="jersey-15-regular">{error}</p>;
 
   return (
     <main className="producer-detail-page">
       {editing ? (
-        <form onSubmit={handleSave} className="lora-500">
+        <form onSubmit={handleSave} className="jersey-15-regular">
           <h1 className='jersey-15-charted-regular'>Editar {producer.name}</h1>
           <div>
             <label htmlFor="name">Nome</label>
@@ -155,7 +155,7 @@ const ProducerDetailPage = () => {
               value={formData.name} 
               onChange={handleInputChange} 
               required 
-              className="lora-500"
+              className="jersey-15-regular"
             />
           </div>
           <div>
@@ -167,7 +167,7 @@ const ProducerDetailPage = () => {
               value={formData.email} 
               onChange={handleInputChange} 
               required 
-              className="lora-500"
+              className="jersey-15-regular"
             />
           </div>
           <div>
@@ -178,7 +178,7 @@ const ProducerDetailPage = () => {
               name="telefone" 
               value={formData.telefone} 
               onChange={handleInputChange} 
-              className="lora-500"
+              className="jersey-15-regular"
             />
           </div>
           <div>
@@ -189,7 +189,7 @@ const ProducerDetailPage = () => {
               name="localizacao" 
               value={formData.localizacao} 
               onChange={handleInputChange} 
-              className="lora-500"
+              className="jersey-15-regular"
             />
           </div>
           <div>
@@ -199,19 +199,19 @@ const ProducerDetailPage = () => {
               name="biografia" 
               value={formData.biografia} 
               onChange={handleInputChange} 
-              className="lora-500"
+              className="jersey-15-regular"
             />
           </div>
           <button type="submit" className="jersey-15-regular">Salvar</button>
           <button type="button" onClick={() => setEditing(false)} className="jersey-15-regular">Cancelar</button>
         </form>
       ) : (
-        <div className="lora-500">
+        <div className="jersey-15-regular">
           <h1 className='jersey-15-charted-regular'>{producer.name}</h1>
-          <p className="lora-500">Email: {producer.email}</p>
-          <p className="lora-500">Telefone: {producer.telefone || 'Não informado'}</p>
-          <p className="lora-500">Endereço: {producer.localizacao || 'Não informado'}</p>
-          <p className="lora-500">Biografia: {producer.biografia || 'Não informada'}</p>
+          <p className="jersey-15-regular">Email: {producer.email}</p>
+          <p className="jersey-15-regular">Telefone: {producer.telefone || 'Não informado'}</p>
+          <p className="jersey-15-regular">Endereço: {producer.localizacao || 'Não informado'}</p>
+          <p className="jersey-15-regular">Biografia: {producer.biografia || 'Não informada'}</p>
 
           <div className="button-group">
             <button onClick={() => setEditing(true)} className="jersey-15-regular">Editar</button>
@@ -224,24 +224,24 @@ const ProducerDetailPage = () => {
           <div className="product-list">
             {producer.products && producer.products.length > 0 ? (
               producer.products.map(product => (
-                <div key={product._id} className="product-item lora-500">
+                <div key={product._id} className="product-item jersey-15-regular">
                   <h3 className='jersey-15-charted-regular'>{product.name}</h3>
-                  <p className="lora-500">
+                  <p className="jersey-15-regular">
                     Categoria: <span className={`category ${product.category.toLowerCase().replace(/\s+/g, '-')}`}>{product.category}</span>
                   </p>
-                  <p className="lora-500">Preço por Kg: R$ {product.pricePerKg}</p>
-                  <p className="lora-500">Estação: {product.season}</p>
+                  <p className="jersey-15-regular">Preço por Kg:{product.pricePerKg} R$</p>
+                  <p className="jersey-15-regular">Estação: {product.season}</p>
                   <button onClick={() => handleEditProduct(product)} className="jersey-15-regular">Editar Produto</button>
                   <button onClick={() => handleDeleteProduct(product._id)} className="jersey-15-regular">Excluir</button>
                 </div>
               ))
             ) : (
-              <p className="lora-500">Não há produtos cadastrados.</p>
+              <p className="jersey-15-regular">Não há produtos cadastrados.</p>
             )}
           </div>
 
           {showAddProductForm && !editingProduct && (
-            <form onSubmit={handleAddProduct} className="lora-500">
+            <form onSubmit={handleAddProduct} className="jersey-15-regular">
               <h2 className='jersey-15-charted-regular'>Cadastrar Novo Produto</h2>
               <div>
                 <label htmlFor="name">Nome do Produto</label>
@@ -252,7 +252,7 @@ const ProducerDetailPage = () => {
                   value={productFormData.name} 
                   onChange={handleProductInputChange} 
                   required 
-                  className="lora-500"
+                  className="jersey-15-regular"
                 />
               </div>
               <div>
@@ -272,9 +272,11 @@ const ProducerDetailPage = () => {
                             <option value="Conservas">Conservas</option>
                             <option value="Hortaliças">Hortaliças</option>
                             <option value="Legumes">Legumes</option>
+                            <option value="Verduras">Verduras</option>
                             <option value="Frutas">Frutas</option>
                             <option value="Temperos">Temperos</option>
                             <option value="Grãos">Grãos</option>
+                            <option value="Massas">Massas</option>
                             <option value="Ovos">Ovos</option>
                             <option value="Carnes">Carnes</option>
                             <option value="Peixes">Peixes</option>
@@ -293,7 +295,7 @@ const ProducerDetailPage = () => {
                   value={productFormData.pricePerKg} 
                   onChange={handleProductInputChange} 
                   required 
-                  className="lora-500"
+                  className="jersey-15-regular"
                 />
               </div>
               <div>
@@ -304,7 +306,7 @@ const ProducerDetailPage = () => {
                     value={productFormData.season} 
                     onChange={handleProductInputChange} 
                     required 
-                    className="lora-500"
+                    className="jersey-15-regular"
                   >
                     <option value="">Selecione a estação</option>
                     <option value="ANUAL">Anual</option>
@@ -323,7 +325,7 @@ const ProducerDetailPage = () => {
           )}
 
           {editingProduct && (
-            <form onSubmit={handleUpdateProduct} className="lora-500">
+            <form onSubmit={handleUpdateProduct} className="jersey-15-regular">
               <h2 className='jersey-15-charted-regular'>Editar Produto</h2>
               <div>
                 <label htmlFor="name">Nome do Produto</label>
@@ -334,7 +336,7 @@ const ProducerDetailPage = () => {
                   value={productFormData.name} 
                   onChange={handleProductInputChange} 
                   required 
-                  className="lora-500"
+                  className="jersey-15-regular"
                 />
               </div>
               <div>
@@ -345,7 +347,7 @@ const ProducerDetailPage = () => {
                   value={productFormData.category} 
                   onChange={handleProductInputChange} 
                   required
-                  className="lora-500"
+                  className="jersey-15-regular"
                 >
                   <option value="">Selecione uma categoria</option>
                   <option value="Queijos artesanais">Queijos artesanais</option>
@@ -364,7 +366,7 @@ const ProducerDetailPage = () => {
                   value={productFormData.pricePerKg} 
                   onChange={handleProductInputChange} 
                   required 
-                  className="lora-500"
+                  className="jersey-15-regular"
                 />
               </div>
               <div>
@@ -375,7 +377,7 @@ const ProducerDetailPage = () => {
                   value={productFormData.season} 
                   onChange={handleProductInputChange} 
                   required 
-                  className="lora-500"
+                  className="jersey-15-regular"
                 >
                   <option value="">Selecione a estação</option>
                   <option value="ANUAL">Anual</option>

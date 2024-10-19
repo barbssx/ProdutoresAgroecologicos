@@ -81,7 +81,7 @@ const ProducersPage = () => {
       {/* Filtro */}
       <ProductFilter
         categories={[...new Set(producers.flatMap((p) => p.products.map((product) => product.category)))]}
-        seasons={['anual', 'verão', 'outono', 'inverno', 'primavera']}
+        seasons={['Anual', 'Verão', 'Outono', 'Inverno', 'Primavera']}
         onFilterChange={handleFilterChange}
       />
       
@@ -93,9 +93,9 @@ const ProducersPage = () => {
         filteredProducers.map((producer) => (
           <div key={producer._id} onClick={() => handleProducerClick(producer)} className="producer-card">
             <h3 className="jersey-15-charted-regular">{producer.name}</h3>
-            <p className="lora-500">Email: {producer.email || 'Não informado'}</p>
-            <p className="lora-500">Telefone: {producer.telefone || 'Não informado'}</p>
-            <p className="lora-500">Endereço: {producer.localizacao || 'Não informado'}</p>
+            <p className="jersey-15-regular">Email: {producer.email || 'Não informado'}</p>
+            <p className="jersey-15-regular">Telefone: {producer.telefone || 'Não informado'}</p>
+            <p className="jersey-15-regular">Endereço: {producer.localizacao || 'Não informado'}</p>
             {producer.products.length > 0 ? (
               <div className="product-list">
                 {producer.products.map((product) => (
@@ -104,18 +104,18 @@ const ProducersPage = () => {
                       {product.category}
                     </span>
                     <p className="jersey-15-regular">
-                      <strong>{product.name}</strong> - Preço por KG: {product.pricePerKg} - Estação: {product.season}
+                      <strong>{product.name}</strong> <br /><br /> Preço por KG: {product.pricePerKg}  <br /><br /> Estação: {product.season}
                     </p>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="lora-500">Nenhum produto cadastrado.</p>
+              <p className="jersey-15-regular">Nenhum produto cadastrado.</p>
             )}
           </div>
         ))
       ) : (
-        <p className="lora-500">Nenhum produtor cadastrado.</p>
+        <p className="jersey-15-regular">Nenhum produtor cadastrado.</p>
       )}
 
       {/* Modal com os produtos filtrados */}
@@ -123,10 +123,10 @@ const ProducersPage = () => {
         <div className="modal-overlay">
           <div className="modal-content">
             <h2 className="jersey-15-charted-regular">{selectedProducer.name}</h2>
-            <p className="lora-500">Email: {selectedProducer.email}</p>
-            <p className="lora-500">Telefone: {selectedProducer.telefone || 'Não informado'}</p>
-            <p className="lora-500">Endereço: {selectedProducer.localizacao || 'Não informado'}</p>
-            <h4 className="jersey-15-charted-regular">Produtos:</h4>
+            <p className="jersey-15-regular">Email: {selectedProducer.email}</p>
+            <p className="jersey-15-regular">Telefone: {selectedProducer.telefone || 'Não informado'}</p>
+            <p className="jersey-15-regular">Endereço: {selectedProducer.localizacao || 'Não informado'}</p>
+            <h4 className="jersey-15-regular">Produtos:</h4>
             <ul className="product-list">
               {filteredProductsForPopup.length > 0 ? (
                 filteredProductsForPopup.map((product) => (
@@ -135,7 +135,7 @@ const ProducersPage = () => {
                   </li>
                 ))
               ) : (
-                <p className="lora-500">Nenhum produto disponível para este produtor.</p>
+                <p className="jersey-15-regular">Nenhum produto disponível para este produtor.</p>
               )}
             </ul>
             <button onClick={handleCloseModal}>Fechar</button>

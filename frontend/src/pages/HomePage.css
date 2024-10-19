@@ -79,23 +79,4 @@ h3 {
   color: #3e3d2f; 
 }
 
-/* Fontes */
-.jersey-10-regular {
-  font-family: "Jersey 10", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.jersey-15-charted-regular {
-  font-family: "Jersey 15 Charted", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.lora-500 {
-  font-family: "Lora", serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: italic;
-}
 

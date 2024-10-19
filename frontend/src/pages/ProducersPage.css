@@ -15,6 +15,10 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.product-item{
+    background-color: #ddd;
+}
+
 .product-categories {
     margin-top: 10px; 
 }
@@ -36,7 +40,7 @@
 .category.artesanato { background-color: #6610f2; color: white; }
 .category.conservas { background-color: #20c997; color: white; }
 .category.doces { background-color: #dc3545; color: white; }
-.category.erbas-medicinais { background-color: #17a2b8; color: white; }
+.category.ervas-medicinais { background-color: #17a2b8; color: white; }
 .category.flores { background-color: #e83e8c; color: white; }
 .category.plantas { background-color: #ffc107; color: #3e3d2f; }
 
@@ -99,6 +103,7 @@ p {
 
 .jersey-15-charted-regular {
     font-family: "Jersey 15 Charted", sans-serif;
+    font-size: 50px;
     font-weight: 400;
     font-style: normal;
 }

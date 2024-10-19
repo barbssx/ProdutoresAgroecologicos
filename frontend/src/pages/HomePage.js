@@ -32,7 +32,9 @@ const HomePage = () => {
           tabIndex={0} 
           onKeyPress={(e) => e.key === 'Enter' && handleProducerLogin()}
         >
-          <h3 className="jersey-15-charted-regular">Se você é um produtor</h3>
+          <h3 className="jersey-15-charted-regular" style={{ fontSize: "30px" }}>
+                Se você é um produtor
+              </h3>
           <p className="lora-500">Faça o login para acessar sua conta e gerenciar seus produtos.</p>
         </div>
 
@@ -43,8 +45,9 @@ const HomePage = () => {
           tabIndex={0} 
           onKeyPress={(e) => e.key === 'Enter' && handleConsumerView()}
         >
-          <h3 className="jersey-15-charted-regular">Se você é um consumidor</h3>
-          <p className="lora-500">Veja os produtores e descubra os produtos disponíveis.</p>
+            <h3 className="jersey-15-charted-regular" style={{ fontSize: "30px" }}>
+              Se você é um consumidor
+            </h3><p className="lora-500">Veja os produtores e descubra os produtos disponíveis.</p>
         </div>
       </div>
     </div>
