@@ -5,7 +5,7 @@ const {
     getProducerById,
     getProductsByProducerId,
     addProduct,
-    updateProducer, 
+    updateProducer,
     deleteProducer,
     deleteProduct,
     updateProduct
@@ -41,7 +41,7 @@ router.get('/:id/products', async (req, res) => {
 // Rota para adicionar um produto a um produtor específico
 router.post('/:producerId/products', protect, async (req, res) => {
     console.log("Tentativa de adicionar produto ao produtor com ID:", req.params.producerId);
-    await addProduct(req, res); 
+    await addProduct(req, res);
 });
 
 // Rota para atualizar um produtor (somente o produtor pode acessar)
@@ -59,15 +59,13 @@ router.delete('/:id', protect, admin, async (req, res) => {
 // Rota para excluir um produto de um produtor específico
 router.delete('/:producerId/products/:productId', protect, async (req, res) => {
     console.log("Tentativa de exclusão do produto com ID:", req.params.productId);
-    await deleteProduct(req, res); 
+    await deleteProduct(req, res);
 });
 
 // Rota para atualizar um produto de um produtor específico
 router.put('/:producerId/products/:productId', protect, async (req, res) => {
     console.log("Tentativa de atualização do produto com ID:", req.params.productId, "do produtor com ID:", req.params.producerId);
-    
     await updateProduct(req, res);
 });
-
 
 module.exports = router;

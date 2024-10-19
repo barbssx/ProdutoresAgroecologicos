@@ -1,42 +1,44 @@
+const jwt = require('jsonwebtoken');
 const Producer = require('../models/Producer');
 
-// Registrar um novo produtor
-const registerProducer = async (req, res) => {
-  const { name, email, password } = req.body;
-
-  if (!req.user.isAdmin) {
-    return res.status(403).json({ message: 'Somente administradores podem registrar novos produtores.' });
-  }
-
-  try {
-    if (!name || !email || !password) {
-      return res.status(400).json({ message: 'Todos os campos são obrigatórios' });
-    }
-    const producer = new Producer({ name, email, password });
-    await producer.save();
-    res.status(201).json({ message: 'Produtor registrado com sucesso', producer });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-// Login de um produtor
+// Função de login
 const loginProducer = async (req, res) => {
-  const { email, password } = req.body;
-  try {
+    const { email, password } = req.body;
+
     const producer = await Producer.findOne({ email });
-    if (!producer || !(await producer.matchPassword(password))) {
-      return res.status(401).json({ message: 'Credenciais inválidas' });
+    if (producer && (await producer.matchPassword(password))) { 
+        const token = jwt.sign({ id: producer._id, isAdmin: producer.isAdmin }, process.env.JWT_SECRET, {
+            expiresIn: '1d', 
+        });
+
+        res.json({ token });
+    } else {
+        res.status(401).json({ message: 'Credenciais inválidas' });
     }
-    const token = producer.getSignedJwtToken();
-    res.status(200).json({ 
-      producerId: producer._id, 
-      token,
-      isAdmin: producer.isAdmin 
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
 };
 
-module.exports = { registerProducer, loginProducer };
+// Função para registrar um novo produtor
+const registerProducer = async (req, res) => {
+    const { name, email, password, isAdmin } = req.body; // Inclua isAdmin se necessário
+
+    const producerExists = await Producer.findOne({ email });
+
+    if (producerExists) {
+        return res.status(400).json({ message: 'Produtor já existe' });
+    }
+
+    const producer = new Producer({
+        name,
+        email,
+        password,
+        isAdmin: isAdmin || false, 
+    });
+
+    await producer.save();
+    res.status(201).json({ message: 'Produtor registrado com sucesso' });
+};
+
+module.exports = {
+    loginProducer,
+    registerProducer,
+};
