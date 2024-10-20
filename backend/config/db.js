@@ -5,7 +5,7 @@ dotenv.config();
 
 const connectDB = async () => {
   try {
-    const uri = process.env.MONGO_URI;
+    const uri = process.env.MONGO_PUBLIC_URL;
     if (!uri) {
       throw new Error('MONGO_URI não está definido no arquivo .env');
     }
