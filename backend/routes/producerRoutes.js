@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 });
 
 // Rota para obter um produtor pelo ID (qualquer usuário pode acessar)
-router.get('/:id', async (req, res) => {
+router.get('/:producerId', async (req, res) => {
     console.log("Requisitando produtor com ID:", req.params.id);
     await getProducerById(req, res);
 });
@@ -45,13 +45,13 @@ router.post('/:producerId/products', protect, async (req, res) => {
 });
 
 // Rota para atualizar um produtor (somente o produtor pode acessar)
-router.put('/:id', protect, async (req, res) => {
+router.put('/:producerId', protect, async (req, res) => {
     console.log("Tentativa de atualização do produtor com ID:", req.params.id);
     await updateProducer(req, res);
 });
 
 // Rota para excluir um produtor (apenas admin pode acessar)
-router.delete('/:id', protect, admin, async (req, res) => {
+router.delete('/:producerId', protect, admin, async (req, res) => {
     console.log("Tentativa de exclusão do produtor com ID:", req.params.id);
     await deleteProducer(req, res);
 });
