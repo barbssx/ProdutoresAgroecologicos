@@ -41,9 +41,9 @@ const getProducers = async (req, res) => {
 
 // Obter um produtor específico pelo ID
 const getProducerById = async (req, res) => {
-  const { id } = req.params;
+  const { producerId } = req.params; // Mudança de 'id' para 'producerId'
   try {
-    const producer = await Producer.findById(id).populate('products');
+    const producer = await Producer.findById(producerId).populate('products');
     if (!producer) {
       return res.status(404).json({ message: 'Produtor não encontrado' });
     }
@@ -85,9 +85,9 @@ const addProduct = async (req, res) => {
 
 // Obter produtos de um produtor específico pelo ID
 const getProductsByProducerId = async (req, res) => {
-  const { id } = req.params;
+  const { producerId } = req.params; // Mudança de 'id' para 'producerId'
   try {
-    const producer = await Producer.findById(id).populate('products');
+    const producer = await Producer.findById(producerId).populate('products');
     if (!producer) {
       return res.status(404).json({ message: 'Produtor não encontrado' });
     }
@@ -100,11 +100,11 @@ const getProductsByProducerId = async (req, res) => {
 
 // Atualizar um produtor
 const updateProducer = async (req, res) => {
-  const { id } = req.params;
+  const { producerId } = req.params; // Mudança de 'id' para 'producerId'
   const updateData = req.body;
 
   try {
-    const producer = await Producer.findById(id);
+    const producer = await Producer.findById(producerId);
     if (!producer) {
       return res.status(404).json({ message: 'Produtor não encontrado' });
     }
@@ -122,9 +122,9 @@ const updateProducer = async (req, res) => {
 
 // Excluir um produtor pelo ID
 const deleteProducer = async (req, res) => {
-  const { id } = req.params;
+  const { producerId } = req.params; // Mudança de 'id' para 'producerId'
   try {
-    const producer = await Producer.findByIdAndDelete(id);
+    const producer = await Producer.findByIdAndDelete(producerId);
     if (!producer) {
       return res.status(404).json({ message: 'Produtor não encontrado' });
     }
