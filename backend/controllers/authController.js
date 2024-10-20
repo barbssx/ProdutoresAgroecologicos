@@ -7,19 +7,32 @@ const loginProducer = async (req, res) => {
     try {
         const { email, password } = req.body;
 
+        // Verificar se o produtor existe
         const producer = await Producer.findOne({ email });
-        if (producer && (await producer.matchPassword(password))) {
+        if (!producer) {
+            return res.status(401).json({ message: 'Produtor não encontrado' });
+        }
+
+        // Verificar se a senha está correta
+        if (await producer.matchPassword(password)) {
+            // Gerar um token JWT
             const token = jwt.sign(
-                { id: producer._id, isAdmin: producer.isAdmin },
-                process.env.JWT_SECRET,
-                { expiresIn: '1d' }
+                { id: producer._id, isAdmin: producer.isAdmin }, 
+                process.env.JWT_SECRET, 
+                { expiresIn: '1d' } 
             );
 
-            return res.json({ token });
+            // Retornar o token, ID do produtor e a URL do produtor
+            return res.json({ 
+                token, 
+                producerId: producer._id, 
+                producerUrl: `/producers/${producer._id}`
+            });
         } else {
             return res.status(401).json({ message: 'Credenciais inválidas' });
         }
     } catch (error) {
+        console.error('Erro ao autenticar produtor:', error);
         return res.status(500).json({ message: 'Erro no servidor', error: error.message });
     }
 };

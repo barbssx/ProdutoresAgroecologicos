@@ -10,7 +10,7 @@ const protect = async (req, res, next) => {
         try {
             // Extrai o token do cabeçalho
             token = req.headers.authorization.split(' ')[1];
-            
+
             // Decodifica o token usando a chave secreta
             const decoded = jwt.verify(token, process.env.JWT_SECRET); 
 

@@ -1,6 +1,5 @@
 const Producer = require('../models/Producer');
 const Product = require('../models/Product');
-const { body, validationResult } = require('express-validator');
 
 // Registrar um novo produtor
 const registerProducer = async (req, res) => {
@@ -34,6 +33,7 @@ const registerProducer = async (req, res) => {
 const getProducers = async (req, res) => {
     try {
         const producers = await Producer.find({ isAdmin: false }).populate('products');
+        console.log('Produtores encontrados:', producers); 
         res.status(200).json(producers);
     } catch (error) {
         console.error('Erro ao obter produtores:', error);
@@ -43,11 +43,11 @@ const getProducers = async (req, res) => {
 
 // Obter um produtor específico pelo ID
 const getProducerById = async (req, res) => {
-    const { id } = req.params;
+    const { producerId } = req.params; // use 'producerId' como está na rota
     try {
-        const producer = await Producer.findById(id).populate('products');
-        if (!producer) {
-            return res.status(404).json({ message: 'Produtor não encontrado' });
+        const producer = await Producer.findById(producerId).populate('products'); // Use 'producerId'
+        if (!producer || producer.isAdmin) { // Certifique-se de que o produtor não é admin
+            return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
         }
         res.status(200).json(producer);
     } catch (error) {
@@ -63,11 +63,11 @@ const addProduct = async (req, res) => {
 
     try {
         console.log("ID do produtor recebido:", producerId);
-        const producer = await Producer.findById(producerId);
+        const producer = await Producer.findById(producerId).populate('products');
 
-        if (!producer) {
-            console.log("Produtor não encontrado:", producerId);
-            return res.status(404).json({ message: 'Produtor não encontrado' });
+        if (!producer || producer.isAdmin) {
+            console.log("Produtor não encontrado ou é admin:", producerId);
+            return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
         }
 
         // Criar e salvar o produto
@@ -87,11 +87,11 @@ const addProduct = async (req, res) => {
 
 // Obter produtos de um produtor específico pelo ID
 const getProductsByProducerId = async (req, res) => {
-    const { id } = req.params;
+    const { producerId } = req.params; // use 'producerId' como está na rota
     try {
-        const producer = await Producer.findById(id).populate('products');
-        if (!producer) {
-            return res.status(404).json({ message: 'Produtor não encontrado' });
+        const producer = await Producer.findById(producerId).populate('products');
+        if (!producer || producer.isAdmin) { // Certifique-se de que o produtor não é admin
+            return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
         }
         res.status(200).json(producer.products);
     } catch (error) {
@@ -102,13 +102,13 @@ const getProductsByProducerId = async (req, res) => {
 
 // Atualizar um produtor
 const updateProducer = async (req, res) => {
-    const { id } = req.params;
+    const { producerId } = req.params;
     const updateData = req.body;
 
     try {
-        const producer = await Producer.findById(id);
-        if (!producer) {
-            return res.status(404).json({ message: 'Produtor não encontrado' });
+        const producer = await Producer.findById(producerId);
+        if (!producer || producer.isAdmin) { // Certifique-se de que o produtor não é admin
+            return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
         }
 
         // Atualiza os dados do produtor
@@ -124,11 +124,11 @@ const updateProducer = async (req, res) => {
 
 // Excluir um produtor pelo ID
 const deleteProducer = async (req, res) => {
-    const { id } = req.params;
+    const { producerId } = req.params;
     try {
-        const producer = await Producer.findByIdAndDelete(id);
-        if (!producer) {
-            return res.status(404).json({ message: 'Produtor não encontrado' });
+        const producer = await Producer.findByIdAndDelete(producerId);
+        if (!producer || producer.isAdmin) { // Certifique-se de que o produtor não é admin
+            return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
         }
         res.status(204).send();
     } catch (error) {
@@ -148,7 +148,7 @@ const deleteProduct = async (req, res) => {
         }
 
         // Verifica se o produto pertence ao produtor autenticado
-        if (product.producer.toString() !== producerId && product.producer.toString() !== req.user._id.toString()) {
+        if (product.producer.toString() !== producerId) {
             return res.status(403).json({ message: 'Você não tem permissão para deletar este produto.' });
         }
 
@@ -173,7 +173,7 @@ const updateProduct = async (req, res) => {
         }
 
         // Verifica se o produto pertence ao produtor autenticado
-        if (product.producer.toString() !== producerId && product.producer.toString() !== req.user._id.toString()) {
+        if (product.producer.toString() !== producerId) {
             return res.status(403).json({ message: 'Você não tem permissão para atualizar este produto.' });
         }
 
