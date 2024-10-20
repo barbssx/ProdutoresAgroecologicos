@@ -1,22 +1,27 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
-// Usando as variáveis de ambiente
-const mongoUser = process.env.MONGOUSER;
-const mongoPassword = process.env.MONGOPASSWORD;
-const mongoHost = process.env.MONGOHOST;
-const mongoPort = process.env.MONGOPORT;
-const databaseName = 'backend';
+dotenv.config();
 
-// Construindo a URL de conexão
-const mongoUrl = `mongodb://${mongoUser}:${mongoPassword}@${mongoHost}:${mongoPort}/${databaseName}`;
+const connectDB = async () => {
+  try {
+    const uri = process.env.MONGO_URI;
+    if (!uri) {
+      throw new Error('MONGO_URI não está definido no arquivo .env');
+    }
+    
+    console.log('Tentando conectar ao MongoDB com URI:', uri);
 
-mongoose.connect(mongoUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => {
-  console.log('Conectado ao MongoDB');
-})
-.catch((err) => {
-  console.error('Erro ao conectar ao MongoDB:', err.message);
-});
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log('Conectado ao MongoDB');
+  } catch (error) {
+    console.error('Erro ao conectar ao MongoDB:', error.message);
+    process.exit(1);
+  }
+};
+
+module.exports = connectDB;
