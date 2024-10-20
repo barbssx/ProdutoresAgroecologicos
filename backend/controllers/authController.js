@@ -1,32 +1,44 @@
 const jwt = require('jsonwebtoken');
+const { body, validationResult } = require('express-validator');
 const Producer = require('../models/Producer');
 
 // Função de login
 const loginProducer = async (req, res) => {
-    const { email, password } = req.body;
-
     try {
-        const producer = await Producer.findOne({ email });
-        if (producer && (await producer.matchPassword(password))) { 
-            const token = jwt.sign({ id: producer._id, isAdmin: producer.isAdmin }, process.env.JWT_SECRET, {
-                expiresIn: '1d', 
-            });
+        const { email, password } = req.body;
 
-            return res.json({ token, id: producer._id });
+        const producer = await Producer.findOne({ email });
+        if (producer && (await producer.matchPassword(password))) {
+            const token = jwt.sign(
+                { id: producer._id, isAdmin: producer.isAdmin },
+                process.env.JWT_SECRET,
+                { expiresIn: '1d' }
+            );
+
+            return res.json({ token });
         } else {
             return res.status(401).json({ message: 'Credenciais inválidas' });
         }
     } catch (error) {
-        console.error('Erro ao fazer login:', error);
-        return res.status(500).json({ message: 'Erro no servidor' });
+        return res.status(500).json({ message: 'Erro no servidor', error: error.message });
     }
 };
 
 // Função para registrar um novo produtor
 const registerProducer = async (req, res) => {
-    const { name, email, password, isAdmin } = req.body; 
+    // Validação dos dados de entrada
+    await body('name').notEmpty().withMessage('Nome é obrigatório').run(req);
+    await body('email').isEmail().withMessage('Email inválido').run(req);
+    await body('password').isLength({ min: 6 }).withMessage('A senha deve ter pelo menos 6 caracteres').run(req);
+    await body('isAdmin').optional().isBoolean().withMessage('isAdmin deve ser um booleano').run(req);
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
 
     try {
+        const { name, email, password, isAdmin } = req.body;
         const producerExists = await Producer.findOne({ email });
 
         if (producerExists) {
@@ -37,14 +49,13 @@ const registerProducer = async (req, res) => {
             name,
             email,
             password,
-            isAdmin: isAdmin || false, 
+            isAdmin: isAdmin || false,
         });
 
         await producer.save();
-        res.status(201).json({ message: 'Produtor registrado com sucesso' });
+        return res.status(201).json({ message: 'Produtor registrado com sucesso' });
     } catch (error) {
-        console.error('Erro ao registrar produtor:', error);
-        res.status(500).json({ message: 'Erro no servidor' });
+        return res.status(500).json({ message: 'Erro no servidor', error: error.message });
     }
 };
 

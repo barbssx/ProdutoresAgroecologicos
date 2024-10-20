@@ -3,32 +3,28 @@ const Producer = require('../models/Producer');
 
 // Função para adicionar um novo produto
 const addProduct = async (req, res) => {
-    const { id } = req.params;  
-    // Verifica se o produtor no token é o mesmo do id
-    if (req.user._id.toString() !== id) {
+    const { producerId } = req.params;
+
+    // Verifica se o produtor no token é o mesmo do producerId
+    if (req.user._id.toString() !== producerId) {
         return res.status(403).json({ message: 'Você não tem permissão para adicionar produtos a este produtor.' });
     }
 
     const { name, category, pricePerKg, season } = req.body;
-
-    // Verifica se todos os campos estão presentes
-    if (!name || !category || !pricePerKg || !season) {
-        return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
-    }
 
     const newProduct = new Product({
         name,
         category,
         pricePerKg,
         season,
-        producer: id,
+        producer: producerId,
     });
 
     try {
         const savedProduct = await newProduct.save();
         
         // Adiciona o novo produto ao array de produtos do produtor
-        await Producer.findByIdAndUpdate(id, { $push: { products: savedProduct._id } });
+        await Producer.findByIdAndUpdate(producerId, { $push: { products: savedProduct._id } });
 
         res.status(201).json(savedProduct);
     } catch (error) {

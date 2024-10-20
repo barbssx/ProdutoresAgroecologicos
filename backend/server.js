@@ -8,6 +8,7 @@ const cors = require('cors');
 
 dotenv.config();
 
+// Conectar ao banco de dados
 connectDB();
 
 const app = express();
@@ -23,16 +24,17 @@ app.use('/api/products', productRoutes);
 
 // Tratamento de erros 404
 app.use((req, res, next) => {
-  res.status(404).json({ message: 'Rota não encontrada', path: req.originalUrl });
+    res.status(404).json({ message: 'Rota não encontrada', path: req.originalUrl });
 });
 
 // Tratamento de erros gerais
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Erro no servidor', error: err.message });
+    console.error(err.stack);
+    res.status(500).json({ message: 'Erro no servidor', error: err.message });
 });
 
+// Inicializa o servidor
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
