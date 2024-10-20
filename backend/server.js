@@ -13,8 +13,23 @@ connectDB();
 
 const app = express();
 
+// Domínios permitidos
+const allowedOrigins = [
+    'https://produtores-agroecologicos.vercel.app',
+    'http://localhost:3000',
+];
+
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Não autorizado por CORS'));
+        }
+    },
+    credentials: true,
+}));
 app.use(express.json());
 
 // Rotas
