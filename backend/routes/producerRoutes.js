@@ -11,6 +11,7 @@ const {
     updateProduct
 } = require('../controllers/producerController'); 
 const { protect, admin } = require('../middleware/authMiddleware');
+const Producer = require('../models/Producer');
 
 const router = express.Router();
 
@@ -20,10 +21,11 @@ router.post('/', protect, admin, async (req, res) => {
     await registerProducer(req, res);
 });
 
+// Rota para obter todos os produtores (qualquer usuário pode acessar)
 router.get('/', async (req, res) => {
     console.log("Requisitando todos os produtores");
     try {
-        const producers = await Producer.find().populate('products');
+        const producers = await Producer.find().populate('products'); // Acesso aos produtos se necessário
         res.status(200).json(producers);
     } catch (error) {
         console.error('Erro ao obter produtores:', error.message);

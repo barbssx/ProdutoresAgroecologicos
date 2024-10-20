@@ -4,9 +4,17 @@ const jwt = require('jsonwebtoken');
 
 const producerSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
+  email: { 
+      type: String, 
+      required: true, 
+      unique: true, 
+      match: /.+\@.+\..+/ // Validação simples de email
+  },
   password: { type: String, required: true },
-  telefone: { type: String },
+  telefone: { 
+      type: String,
+      match: /^\+?[1-9]\d{1,14}$/ // Validação para formato de telefone
+  },
   localizacao: { type: String },
   products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
   isAdmin: { type: Boolean, default: false },
@@ -28,6 +36,17 @@ producerSchema.methods.matchPassword = async function(enteredPassword) {
 // Método para gerar o token JWT
 producerSchema.methods.getSignedJwtToken = function() {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+};
+
+// Método para excluir a senha antes de enviar a resposta
+producerSchema.methods.toJSON = function() {
+    const producer = this;
+    const producerObject = producer.toObject();
+    
+    // Remova a senha
+    delete producerObject.password;
+
+    return producerObject;
 };
 
 module.exports = mongoose.model('Producer', producerSchema);
