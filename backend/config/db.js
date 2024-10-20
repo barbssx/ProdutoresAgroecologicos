@@ -5,9 +5,9 @@ dotenv.config();
 
 const connectDB = async () => {
     try {
-        const uri = process.env.MONGO_URL;
+        const uri = process.env.MONGO_PUBLIC_URL;
         if (!uri) {
-            throw new Error('MONGO_URL não está definido no arquivo .env');
+            throw new Error('MONGO_PUBLIC_URL não está definido no arquivo .env');
         }
 
         console.log('Tentando conectar ao MongoDB...');
