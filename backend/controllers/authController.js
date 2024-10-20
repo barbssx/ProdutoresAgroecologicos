@@ -11,7 +11,7 @@ const loginProducer = async (req, res) => {
             expiresIn: '1d', 
         });
 
-        res.json({ token });
+        res.json({ token, id: producer._id });
     } else {
         res.status(401).json({ message: 'Credenciais inválidas' });
     }
