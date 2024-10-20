@@ -19,7 +19,7 @@ const loginProducer = async (req, res) => {
 
 // Função para registrar um novo produtor
 const registerProducer = async (req, res) => {
-    const { name, email, password, isAdmin } = req.body; // Inclua isAdmin se necessário
+    const { name, email, password, isAdmin } = req.body;
 
     const producerExists = await Producer.findOne({ email });
 

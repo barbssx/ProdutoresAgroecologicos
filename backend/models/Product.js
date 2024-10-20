@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema({
   season: { 
     type: String, 
     enum: ['Anual', 'Verão', 'Outono', 'Inverno', 'Primavera']
-  }, // Estação em que o produto está disponível
+  }, 
   producer: { type: mongoose.Schema.Types.ObjectId, ref: 'Producer' }, 
 });
 
