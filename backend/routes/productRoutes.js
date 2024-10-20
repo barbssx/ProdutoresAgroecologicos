@@ -25,4 +25,5 @@ router.get('/producers/:producerId/products', async (req, res) => {
     }
 });
 
+
 module.exports = router;
