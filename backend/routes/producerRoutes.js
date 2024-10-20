@@ -20,10 +20,15 @@ router.post('/', protect, admin, async (req, res) => {
     await registerProducer(req, res);
 });
 
-// Rota para obter todos os produtores (qualquer usuário pode acessar)
 router.get('/', async (req, res) => {
     console.log("Requisitando todos os produtores");
-    await getProducers(req, res);
+    try {
+        const producers = await Producer.find().populate('products');
+        res.status(200).json(producers);
+    } catch (error) {
+        console.error('Erro ao obter produtores:', error.message);
+        res.status(500).json({ message: 'Erro ao obter produtores.' });
+    }
 });
 
 // Rota para obter um produtor pelo ID (qualquer usuário pode acessar)
