@@ -17,7 +17,7 @@ Este projeto é uma aplicação web para a gestão de produtores agrícolas e se
 
 - **Backend**: Node.js, Express.js
 - **Banco de Dados**: MongoDB
-- **Frontend**: (Se aplicável, mencione a tecnologia usada, como React, Angular, etc.)
+- **Frontend**: React
 - **Autenticação**: JWT (JSON Web Tokens)
 
 ## Instalação
