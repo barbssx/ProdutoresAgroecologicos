@@ -1,11 +1,12 @@
 const express = require('express');
 const { protect } = require('../middleware/authMiddleware');
 const { addProduct, updateProduct, deleteProduct } = require('../controllers/productController');
+const Product = require('../models/Product');
 
 const router = express.Router();
 
 // Rota para cadastrar um novo produto para um produtor específico
-router.post('/producers/:producerId/products', protect, addProduct); // Apenas produtores podem adicionar
+router.post('/producers/:producerId/products', protect, addProduct);
 
 // Rota para editar um produto
 router.put('/producers/:producerId/products/:id', protect, updateProduct); 
@@ -14,7 +15,7 @@ router.put('/producers/:producerId/products/:id', protect, updateProduct);
 router.delete('/producers/:producerId/products/:id', protect, deleteProduct); 
 
 // Rota para obter todos os produtos de um produtor específico
-router.get('/producers/:producerId/products', async (req, res) => {
+router.get('/producers/:producerId/products', async (req, res) => { 
     try {
         const products = await Product.find({ producer: req.params.producerId });
         res.status(200).json(products);
