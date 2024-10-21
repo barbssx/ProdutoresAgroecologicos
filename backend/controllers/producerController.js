@@ -3,7 +3,7 @@ const Product = require('../models/Product');
 
 // Registrar um novo produtor
 const registerProducer = async (req, res) => {
-    const { name, email, password, telefone, localizacao } = req.body;
+    const { name, email, password, telefone, localizacao, isAdmin = false } = req.body;
 
     try {
         // Validação dos dados de entrada
@@ -18,7 +18,7 @@ const registerProducer = async (req, res) => {
         }
 
         // Criar novo produtor
-        const producer = new Producer({ name, email, password, telefone, localizacao });
+        const producer = new Producer({ name, email, password, telefone, localizacao, isAdmin });
 
         // Salvar no banco de dados
         await producer.save();
@@ -90,10 +90,10 @@ const addProduct = async (req, res) => {
 
 // Obter produtos de um produtor específico pelo ID
 const getProductsByProducerId = async (req, res) => {
-    const { producerId } = req.params; // use 'producerId' como está na rota
+    const { producerId } = req.params;
     try {
         const producer = await Producer.findById(producerId).populate('products');
-        if (!producer || producer.isAdmin) { // Certifique-se de que o produtor não é admin
+        if (!producer || producer.isAdmin) { 
             return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
         }
         res.status(200).json(producer.products);
@@ -110,7 +110,7 @@ const updateProducer = async (req, res) => {
 
     try {
         const producer = await Producer.findById(producerId);
-        if (!producer || producer.isAdmin) { // Certifique-se de que o produtor não é admin
+        if (!producer || producer.isAdmin) {
             return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
         }
 
@@ -130,7 +130,7 @@ const deleteProducer = async (req, res) => {
     const { producerId } = req.params;
     try {
         const producer = await Producer.findByIdAndDelete(producerId);
-        if (!producer || producer.isAdmin) { // Certifique-se de que o produtor não é admin
+        if (!producer || producer.isAdmin) {
             return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
         }
         res.status(204).send();
