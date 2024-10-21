@@ -309,11 +309,11 @@ const ProducerDetailPage = () => {
                     className="jersey-15-regular"
                   >
                     <option value="">Selecione a estação</option>
-                    <option value="ANUAL">Anual</option>
-                    <option value="VERÃO">Verão</option>
-                    <option value="OUTONO">Outono</option>
-                    <option value="INVERNO">Inverno</option>
-                    <option value="PRIMAVERA">Primavera</option>
+                    <option value="Anual">Anual</option>
+                    <option value="Verão">Verão</option>
+                    <option value="Outono">Outono</option>
+                    <option value="Inverno">Inverno</option>
+                    <option value="Primavera">Primavera</option>
                   </select>
                 </div>
 
@@ -380,11 +380,11 @@ const ProducerDetailPage = () => {
                   className="jersey-15-regular"
                 >
                   <option value="">Selecione a estação</option>
-                  <option value="ANUAL">Anual</option>
-                  <option value="VERÃO">Verão</option>
-                  <option value="OUTONO">Outono</option>
-                  <option value="INVERNO">Inverno</option>
-                  <option value="PRIMAVERA">Primavera</option>
+                  <option value="Anual">Anual</option>
+                  <option value="Verão">Verão</option>
+                  <option value="Outono">Outono</option>
+                  <option value="Inverno">Inverno</option>
+                  <option value="Primavera">Primavera</option>
                 </select>
               </div>
 

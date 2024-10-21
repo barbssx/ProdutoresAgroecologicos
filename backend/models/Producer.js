@@ -8,12 +8,12 @@ const producerSchema = new mongoose.Schema({
       type: String, 
       required: true, 
       unique: true, 
-      match: /.+\@.+\..+/ // Validação simples de email
+      match: /.+\@.+\..+/
   },
   password: { type: String, required: true },
   telefone: { 
       type: String,
-      match: /^\+?[1-9]\d{1,14}$/ // Validação para formato de telefone
+      match: /^\+?[1-9]\d{1,14}$/ 
   },
   localizacao: { type: String },
   products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],

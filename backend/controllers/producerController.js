@@ -43,12 +43,15 @@ const getProducers = async (req, res) => {
 
 // Obter um produtor específico pelo ID
 const getProducerById = async (req, res) => {
-    const { producerId } = req.params; // use 'producerId' como está na rota
+    const { producerId } = req.params;
     try {
-        const producer = await Producer.findById(producerId).populate('products'); // Use 'producerId'
-        if (!producer || producer.isAdmin) { // Certifique-se de que o produtor não é admin
+        const producer = await Producer.findById(producerId).populate('products');
+        
+        // Permitir que o administrador veja seu próprio perfil
+        if (!producer || (producer.isAdmin && producer._id.toString() !== req.user._id.toString())) {
             return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
         }
+
         res.status(200).json(producer);
     } catch (error) {
         console.error('Erro ao carregar o produtor:', error);
