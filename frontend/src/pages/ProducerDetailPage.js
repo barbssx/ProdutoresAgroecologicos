@@ -83,19 +83,30 @@ const ProducerDetailPage = () => {
   const handleAddProduct = async (e) => {
     e.preventDefault();
     setProductLoading(true);
-    try {
-      await addProduct(producerId, productFormData);
-      setShowAddProductForm(false);
-      setProductFormData({ name: '', category: '', pricePerKg: '', unit: '', season: [] });
-      const updatedProducer = await getProducerById(producerId);
-      setProducer(updatedProducer);
-    } catch (err) {
-      console.error('Erro ao cadastrar o produto:', err);
-      setError('Erro ao cadastrar o produto.');
-    } finally {
-      setProductLoading(false);
+
+    if (!productFormData.pricePerKg) {
+        setError('O preço é obrigatório.'); 
+        setProductLoading(false); 
+        return;
     }
-  };
+
+    try {
+        
+        await addProduct(producerId, productFormData);
+        setShowAddProductForm(false);
+        
+        setProductFormData({ name: '', category: '', pricePerKg: '', unit: '', season: [] });
+        const updatedProducer = await getProducerById(producerId);
+        setProducer(updatedProducer);
+    } catch (err) {
+       
+        console.error('Erro ao cadastrar o produto:', err);
+        setError('Erro ao cadastrar o produto.');
+    } finally {
+        setProductLoading(false); 
+    }
+};
+
 
   const handleDeleteProduct = async (productId) => {
     if (window.confirm('Você tem certeza que deseja excluir este produto?')) {
@@ -124,29 +135,45 @@ const ProducerDetailPage = () => {
 
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
-    try {
-      await updateProduct(producerId, editingProduct._id, productFormData);
-      const updatedProducer = await getProducerById(producerId);
-      setProducer(updatedProducer);
-      setEditingProduct(null);
-      setProductFormData({ name: '', category: '', pricePerKg: '', unit: '', season: [] });
-    } catch (err) {
-      console.error('Erro ao atualizar o produto:', err);
-      setError('Erro ao atualizar o produto');
+
+    if (!productFormData.pricePerKg) {
+        setError('O preço é obrigatório.'); 
+        return;
     }
-  };
+
+    try {
+        await updateProduct(producerId, editingProduct._id, productFormData);
+        const updatedProducer = await getProducerById(producerId);
+        setProducer(updatedProducer);
+        setEditingProduct(null);
+        setProductFormData({ name: '', category: '', pricePerKg: '', unit: '', season: [] });
+    } catch (err) {
+        console.error('Erro ao atualizar o produto:', err);
+        setError('Erro ao atualizar o produto');
+    }
+};
+
 
   const handleSeasonChange = (season) => {
-    setProductFormData((prevState) => {
-      const isSelected = prevState.season.includes(season);
-      return {
-        ...prevState,
-        season: isSelected 
-          ? prevState.season.filter((s) => s !== season)
-          : [...prevState.season, season] 
-      };
-    });
+    try {
+      setProductFormData((prevState) => {
+        const isSelected = prevState.season.includes(season);
+        return {
+          ...prevState,
+          season: isSelected 
+            ? prevState.season.filter((s) => s !== season)
+            : [...prevState.season, season]
+        };
+      });
+    } catch (err) {
+      console.error('Erro ao atualizar a estação:', err);
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        season: 'Erro ao atualizar a estação.',
+      }));
+    }
   };
+  
   
 
   const handleSeasonChipClick = (season) => {
@@ -337,6 +364,7 @@ const ProducerDetailPage = () => {
                         <option value="Doces">Doces</option>
                         <option value="Pães">Pães</option>
                         <option value="Conservas">Conservas</option>
+                        <option value="Artesanal">Artesanal</option>
                         <option value="Hortaliças">Hortaliças</option>
                         <option value="Legumes">Legumes</option>
                         <option value="Verduras">Verduras</option>
@@ -445,6 +473,7 @@ const ProducerDetailPage = () => {
                                 <option value="Doces">Doces</option>
                                 <option value="Pães">Pães</option>
                                 <option value="Conservas">Conservas</option>
+                                <option value="Artesanal">Artesanal</option>
                                 <option value="Hortaliças">Hortaliças</option>
                                 <option value="Legumes">Legumes</option>
                                 <option value="Verduras">Verduras</option>

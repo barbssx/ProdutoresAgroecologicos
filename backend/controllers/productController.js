@@ -10,12 +10,13 @@ const addProduct = async (req, res) => {
         return res.status(403).json({ message: 'Você não tem permissão para adicionar produtos a este produtor.' });
     }
 
-    const { name, category, pricePerKg, season } = req.body;
+    const { name, category, pricePerKg, unit, season } = req.body;
 
     const newProduct = new Product({
         name,
         category,
         pricePerKg,
+        unit,
         season,
         producer: producerId,
     });
@@ -47,13 +48,20 @@ const updateProduct = async (req, res) => {
             return res.status(403).json({ message: 'Você não tem permissão para editar este produto.' });
         }
 
-        // Atualiza o produto
+        // Atualiza o produto com os dados do corpo da requisição
         Object.assign(product, req.body);
+        
+        // Verifica se há erros de validação no produto
+        const validationErrors = product.validateSync();
+        if (validationErrors) {
+            return res.status(400).json({ message: 'Erro de validação.', errors: validationErrors });
+        }
+
         await product.save();
         res.status(200).json(product);
     } catch (error) {
         console.error('Erro ao atualizar produto:', error.message);
-        res.status(500).json({ message: 'Erro ao atualizar produto.' });
+        res.status(500).json({ message: 'Erro ao atualizar produto' });
     }
 };
 

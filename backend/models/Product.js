@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
   category: { type: String, required: true },
-  priceperKg: { type: Number, required: true, min: [0, 'O preço não pode ser negativo'] },
+  pricePerKg: { type: Number, required: true, min: [0, 'O preço não pode ser negativo'] },
   unit: { 
     type: String,
     enum: ['KG','L','UN'],

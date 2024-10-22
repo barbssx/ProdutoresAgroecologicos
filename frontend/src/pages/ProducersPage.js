@@ -134,7 +134,7 @@ const ProducersPage = () => {
               {filteredProductsForPopup.length > 0 ? (
                 filteredProductsForPopup.map((product) => (
                   <li key={product._id} className="jersey-15-regular">
-                    <strong>{product.name}</strong> - Preço por KG: {product.pricePerKg} - Estação: {product.season}
+                    <strong>{product.name}</strong> - Preço: {product.pricePerKg} R$ por {product.unit} - Estação: {product.season}
                   </li>
                 ))
               ) : (
