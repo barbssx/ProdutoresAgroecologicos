@@ -13,9 +13,7 @@ const connectDB = async () => {
     console.log('Tentando conectar ao MongoDB com URI:', uri);
 
     await mongoose.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+      useNewUrlParser: true    });
 
     console.log('Conectado ao MongoDB');
   } catch (error) {

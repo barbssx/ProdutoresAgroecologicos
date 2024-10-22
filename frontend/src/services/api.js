@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://produtoresagroecologicos-production.up.railway.app/api',
+  baseURL: 'http://localhost:8080/api',
 });
 
 // Função de login

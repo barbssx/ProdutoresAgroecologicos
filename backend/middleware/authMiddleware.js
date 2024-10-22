@@ -1,30 +1,24 @@
 const jwt = require('jsonwebtoken');
 const Producer = require('../models/Producer');
 
-// Middleware para proteger rotas
 const protect = async (req, res, next) => {
     let token;
-
     // Verifica se o token está presente no cabeçalho de autorização
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         try {
             // Extrai o token do cabeçalho
             token = req.headers.authorization.split(' ')[1];
-
+            
             // Decodifica o token usando a chave secreta
             const decoded = jwt.verify(token, process.env.JWT_SECRET); 
-
             // Busca o usuário no banco de dados e exclui a senha dos dados retornados
             req.user = await Producer.findById(decoded.id).select('-password');
-
             if (!req.user) {
                 return res.status(401).json({ message: 'Usuário não encontrado' });
             }
-
             console.log('Token recebido:', token);
             console.log('Dados decodificados:', decoded);
             console.log('Usuário encontrado:', req.user);
-
             next();
         } catch (error) {
             console.error('Erro ao validar token:', error);

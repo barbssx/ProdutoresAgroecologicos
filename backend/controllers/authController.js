@@ -1,78 +1,42 @@
-const jwt = require('jsonwebtoken');
-const { body, validationResult } = require('express-validator');
 const Producer = require('../models/Producer');
 
-// Função de login
-const loginProducer = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-
-        // Verificar se o produtor existe
-        const producer = await Producer.findOne({ email });
-        if (!producer) {
-            return res.status(401).json({ message: 'Produtor não encontrado' });
-        }
-
-        // Verificar se a senha está correta
-        if (await producer.matchPassword(password)) {
-            // Gerar um token JWT
-            const token = jwt.sign(
-                { id: producer._id, isAdmin: producer.isAdmin }, 
-                process.env.JWT_SECRET, 
-                { expiresIn: '1d' } 
-            );
-
-            // Retornar o token, ID do produtor e a URL do produtor
-            return res.json({ 
-                token, 
-                producerId: producer._id, 
-                producerUrl: `/producers/${producer._id}`
-            });
-        } else {
-            return res.status(401).json({ message: 'Credenciais inválidas' });
-        }
-    } catch (error) {
-        console.error('Erro ao autenticar produtor:', error);
-        return res.status(500).json({ message: 'Erro no servidor', error: error.message });
-    }
-};
-
-// Função para registrar um novo produtor
+// Registrar um novo produtor
 const registerProducer = async (req, res) => {
-    // Validação dos dados de entrada
-    await body('name').notEmpty().withMessage('Nome é obrigatório').run(req);
-    await body('email').isEmail().withMessage('Email inválido').run(req);
-    await body('password').isLength({ min: 6 }).withMessage('A senha deve ter pelo menos 6 caracteres').run(req);
-    await body('isAdmin').optional().isBoolean().withMessage('isAdmin deve ser um booleano').run(req);
+  const { name, email, password } = req.body;
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+  if (!req.user.isAdmin) {
+    return res.status(403).json({ message: 'Somente administradores podem registrar novos produtores.' });
+  }
+
+  try {
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: 'Todos os campos são obrigatórios' });
     }
-
-    try {
-        const { name, email, password, isAdmin } = req.body;
-        const producerExists = await Producer.findOne({ email });
-
-        if (producerExists) {
-            return res.status(400).json({ message: 'Produtor já existe' });
-        }
-
-        const producer = new Producer({
-            name,
-            email,
-            password,
-            isAdmin: isAdmin || false,
-        });
-
-        await producer.save();
-        return res.status(201).json({ message: 'Produtor registrado com sucesso' });
-    } catch (error) {
-        return res.status(500).json({ message: 'Erro no servidor', error: error.message });
-    }
+    const producer = new Producer({ name, email, password });
+    await producer.save();
+    res.status(201).json({ message: 'Produtor registrado com sucesso', producer });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
-module.exports = {
-    loginProducer,
-    registerProducer,
+// Login de um produtor
+const loginProducer = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const producer = await Producer.findOne({ email });
+    if (!producer || !(await producer.matchPassword(password))) {
+      return res.status(401).json({ message: 'Credenciais inválidas' });
+    }
+    const token = producer.getSignedJwtToken();
+    res.status(200).json({ 
+      producerId: producer._id, 
+      token,
+      isAdmin: producer.isAdmin 
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
+
+module.exports = { registerProducer, loginProducer };

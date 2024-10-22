@@ -15,8 +15,11 @@ const ProducersPage = () => {
     const fetchProducers = async () => {
       try {
         const data = await getProducers();
+        // Filtrando administradores
+        const filteredData = data.filter(producer => !producer.isAdmin); 
+
         const producersWithProducts = await Promise.all(
-          data.map(async (producer) => {
+          filteredData.map(async (producer) => {
             try {
               const products = await getProductsByProducer(producer._id);
               return { ...producer, products: products || [] };
@@ -86,8 +89,8 @@ const ProducersPage = () => {
       />
       
       <div style={{ display: 'flex', justifyContent: 'center'}}>
-  <img src="/assets/plants.gif" alt="Plants" style={{ width: '120px', borderRadius: '5px' }} />
-</div>
+        <img src="/assets/plants.gif" alt="Plants" style={{ width: '120px', borderRadius: '5px' }} />
+      </div>
 
       {filteredProducers.length > 0 ? (
         filteredProducers.map((producer) => (

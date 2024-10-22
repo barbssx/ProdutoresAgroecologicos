@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { 
-  getProducerById, 
-  updateProducer, 
-  addProduct, 
-  deleteProduct, 
-  updateProduct 
+import {
+  getProducerById,
+  updateProducer,
+  addProduct,
+  deleteProduct,
+  updateProduct,
 } from '../services/api';
 import './ProducerDetailPage.css';
 
@@ -138,120 +138,142 @@ const ProducerDetailPage = () => {
     navigate('/');
   };
 
+  const closeModal = () => {
+    setEditing(false);
+    setShowAddProductForm(false);
+    setEditingProduct(null);
+    setProductFormData({
+      name: '',
+      category: '',
+      pricePerKg: '',
+      season: '',
+    });
+  };
+
   if (loading) return <p className="jersey-15-regular">Carregando...</p>;
   if (error) return <p className="jersey-15-regular">{error}</p>;
 
   return (
     <main className="producer-detail-page">
-      {editing ? (
-        <form onSubmit={handleSave} className="jersey-15-regular">
-          <h1 className='jersey-15-charted-regular'>Editar {producer.name}</h1>
-          <div>
-            <label htmlFor="name">Nome</label>
-            <input 
-              type="text" 
-              id="name" 
-              name="name" 
-              value={formData.name} 
-              onChange={handleInputChange} 
-              required 
-              className="jersey-15-regular"
-            />
-          </div>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              value={formData.email} 
-              onChange={handleInputChange} 
-              required 
-              className="jersey-15-regular"
-            />
-          </div>
-          <div>
-            <label htmlFor="telefone">Telefone</label>
-            <input 
-              type="text" 
-              id="telefone" 
-              name="telefone" 
-              value={formData.telefone} 
-              onChange={handleInputChange} 
-              className="jersey-15-regular"
-            />
-          </div>
-          <div>
-            <label htmlFor="localizacao">Endereço</label>
-            <input 
-              type="text" 
-              id="localizacao" 
-              name="localizacao" 
-              value={formData.localizacao} 
-              onChange={handleInputChange} 
-              className="jersey-15-regular"
-            />
-          </div>
-          <div>
-            <label htmlFor="biografia">Biografia</label>
-            <textarea 
-              id="biografia" 
-              name="biografia" 
-              value={formData.biografia} 
-              onChange={handleInputChange} 
-              className="jersey-15-regular"
-            />
-          </div>
-          <button type="submit" className="jersey-15-regular">Salvar</button>
-          <button type="button" onClick={() => setEditing(false)} className="jersey-15-regular">Cancelar</button>
-        </form>
-      ) : (
-        <div className="jersey-15-regular">
-          <h1 className='jersey-15-charted-regular'>{producer.name}</h1>
-          <p className="jersey-15-regular">Email: {producer.email}</p>
-          <p className="jersey-15-regular">Telefone: {producer.telefone || 'Não informado'}</p>
-          <p className="jersey-15-regular">Endereço: {producer.localizacao || 'Não informado'}</p>
-          <p className="jersey-15-regular">Biografia: {producer.biografia || 'Não informada'}</p>
+      <h1 className='jersey-15-charted-regular'>{producer.name}</h1>
+      <p className="jersey-15-regular">Email: {producer.email}</p>
+      <p className="jersey-15-regular">Telefone: {producer.telefone || 'Não informado'}</p>
+      <p className="jersey-15-regular">Endereço: {producer.localizacao || 'Não informado'}</p>
+      <p className="jersey-15-regular">Biografia: {producer.biografia || 'Não informada'}</p>
 
-          <div className="button-group">
-            <button onClick={() => setEditing(true)} className="jersey-15-regular">Editar</button>
-            <button onClick={handleLogout} className="jersey-15-regular">Sair</button>
+      <div className="button-group">
+        <button onClick={() => setEditing(true)} className="jersey-15-regular">Editar</button>
+        <button onClick={handleLogout} className="jersey-15-regular">Sair</button>
+      </div>
+
+      <h2 className='jersey-15-charted-regular'>Produtos</h2>
+      <button onClick={() => setShowAddProductForm(true)} className="jersey-15-regular">Incluir Novo Produto</button>
+
+      <div className="product-list">
+        {producer.products && producer.products.length > 0 ? (
+          producer.products.map(product => (
+            <div key={product._id} className="product-item jersey-15-regular">
+              <h3 className='jersey-15-charted-regular'>{product.name}</h3>
+              <p className="jersey-15-regular">
+  Categoria: <span className={`category ${product.category.toLowerCase().replace(/\s+/g, '-')}`}>{product.category}</span>
+</p>
+
+              <p className="jersey-15-regular">Preço por Kg: {product.pricePerKg} R$</p>
+              <p className="jersey-15-regular">Estação: {product.season}</p>
+              <button onClick={() => handleEditProduct(product)} className="jersey-15-regular">Editar Produto</button>
+              <button onClick={() => handleDeleteProduct(product._id)} className="jersey-15-regular">Excluir</button>
+            </div>
+          ))
+        ) : (
+          <p className="jersey-15-regular">Não há produtos cadastrados.</p>
+        )}
+      </div>
+
+      {/* Modal Editar Produtor */}
+      {editing && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
+            <form onSubmit={handleSave} className="jersey-15-regular">
+              <h2 className='jersey-15-charted-regular'>Editar {producer.name}</h2>
+              <div>
+                <label htmlFor="name">Nome</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  className="jersey-15-regular"
+                />
+              </div>
+              <div>
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  className="jersey-15-regular"
+                />
+              </div>
+              <div>
+                <label htmlFor="telefone">Telefone</label>
+                <input
+                  type="text"
+                  id="telefone"
+                  name="telefone"
+                  value={formData.telefone}
+                  onChange={handleInputChange}
+                  className="jersey-15-regular"
+                />
+              </div>
+              <div>
+                <label htmlFor="localizacao">Endereço</label>
+                <input
+                  type="text"
+                  id="localizacao"
+                  name="localizacao"
+                  value={formData.localizacao}
+                  onChange={handleInputChange}
+                  className="jersey-15-regular"
+                />
+              </div>
+              <div>
+                <label htmlFor="biografia">Biografia</label>
+                <textarea
+                  id="biografia"
+                  name="biografia"
+                  value={formData.biografia}
+                  onChange={handleInputChange}
+                  className="jersey-15-regular"
+                />
+              </div>
+              <button type="submit" className="jersey-15-regular">Salvar</button>
+            </form>
           </div>
+        </div>
+      )}
 
-          <h2 className='jersey-15-charted-regular'>Produtos</h2>
-          <button onClick={() => setShowAddProductForm(true)} className="jersey-15-regular">Incluir Novo Produto</button>
-
-          <div className="product-list">
-            {producer.products && producer.products.length > 0 ? (
-              producer.products.map(product => (
-                <div key={product._id} className="product-item jersey-15-regular">
-                  <h3 className='jersey-15-charted-regular'>{product.name}</h3>
-                  <p className="jersey-15-regular">
-                    Categoria: <span className={`category ${product.category.toLowerCase().replace(/\s+/g, '-')}`}>{product.category}</span>
-                  </p>
-                  <p className="jersey-15-regular">Preço por Kg:{product.pricePerKg} R$</p>
-                  <p className="jersey-15-regular">Estação: {product.season}</p>
-                  <button onClick={() => handleEditProduct(product)} className="jersey-15-regular">Editar Produto</button>
-                  <button onClick={() => handleDeleteProduct(product._id)} className="jersey-15-regular">Excluir</button>
-                </div>
-              ))
-            ) : (
-              <p className="jersey-15-regular">Não há produtos cadastrados.</p>
-            )}
-          </div>
-
-          {showAddProductForm && !editingProduct && (
+      {/* Modal Add Produto */}
+      {showAddProductForm && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
             <form onSubmit={handleAddProduct} className="jersey-15-regular">
-              <h2 className='jersey-15-charted-regular'>Cadastrar Novo Produto</h2>
+              <h2 className='jersey-15-charted-regular'>Adicionar Novo Produto</h2>
               <div>
                 <label htmlFor="name">Nome do Produto</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  name="name" 
-                  value={productFormData.name} 
-                  onChange={handleProductInputChange} 
-                  required 
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={productFormData.name}
+                  onChange={handleProductInputChange}
+                  required
                   className="jersey-15-regular"
                 />
               </div>
@@ -263,6 +285,7 @@ const ProducerDetailPage = () => {
                             value={productFormData.category} 
                             onChange={handleProductInputChange} 
                             required
+                            className="jersey-15-regular"
                           >
                             <option value="">Selecione uma categoria</option>
                             <option value="Queijos artesanais">Queijos artesanais</option>
@@ -286,15 +309,16 @@ const ProducerDetailPage = () => {
                           </select>
                         </div>
 
+              
               <div>
                 <label htmlFor="pricePerKg">Preço por Kg</label>
-                <input 
-                  type="number" 
-                  id="pricePerKg" 
-                  name="pricePerKg" 
-                  value={productFormData.pricePerKg} 
-                  onChange={handleProductInputChange} 
-                  required 
+                <input
+                  type="number"
+                  id="pricePerKg"
+                  name="pricePerKg"
+                  value={productFormData.pricePerKg}
+                  onChange={handleProductInputChange}
+                  required
                   className="jersey-15-regular"
                 />
               </div>
@@ -316,82 +340,98 @@ const ProducerDetailPage = () => {
                     <option value="Primavera">Primavera</option>
                   </select>
                 </div>
-
               <button type="submit" disabled={productLoading} className="jersey-15-regular">
-                {productLoading ? 'Carregando...' : 'Cadastrar'}
+                {productLoading ? 'Carregando...' : 'Adicionar'}
               </button>
-              <button type="button" onClick={() => setShowAddProductForm(false)} className="jersey-15-regular">Cancelar</button>
             </form>
-          )}
+          </div>
+        </div>
+      )}
 
-          {editingProduct && (
+      {/* Modal Editar*/}
+      {editingProduct && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
             <form onSubmit={handleUpdateProduct} className="jersey-15-regular">
               <h2 className='jersey-15-charted-regular'>Editar Produto</h2>
               <div>
                 <label htmlFor="name">Nome do Produto</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  name="name" 
-                  value={productFormData.name} 
-                  onChange={handleProductInputChange} 
-                  required 
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={productFormData.name}
+                  onChange={handleProductInputChange}
+                  required
                   className="jersey-15-regular"
                 />
               </div>
               <div>
                 <label htmlFor="category">Categoria</label>
-                <select 
-                  id="category" 
-                  name="category" 
-                  value={productFormData.category} 
-                  onChange={handleProductInputChange} 
+                <select
+                  id="category"
+                  name="category"
+                  value={productFormData.category}
+                  onChange={handleProductInputChange}
                   required
                   className="jersey-15-regular"
                 >
                   <option value="">Selecione uma categoria</option>
-                  <option value="Queijos artesanais">Queijos artesanais</option>
-                  <option value="Laticínios">Laticínios</option>
-                  <option value="Doces">Doces</option>
-                  <option value="Pães">Pães</option>
-                  <option value="Conservas">Conservas</option>
-                </select>
+                            <option value="Queijos artesanais">Queijos artesanais</option>
+                            <option value="Laticínios">Laticínios</option>
+                            <option value="Doces">Doces</option>
+                            <option value="Pães">Pães</option>
+                            <option value="Conservas">Conservas</option>
+                            <option value="Hortaliças">Hortaliças</option>
+                            <option value="Legumes">Legumes</option>
+                            <option value="Verduras">Verduras</option>
+                            <option value="Frutas">Frutas</option>
+                            <option value="Temperos">Temperos</option>
+                            <option value="Grãos">Grãos</option>
+                            <option value="Massas">Massas</option>
+                            <option value="Ovos">Ovos</option>
+                            <option value="Carnes">Carnes</option>
+                            <option value="Peixes">Peixes</option>
+                            <option value="Bebidas">Bebidas</option>
+                            <option value="Mel">Mel</option>
+                            <option value="Produtos Orgânicos">Produtos Orgânicos</option>
+                          
+                  </select>
               </div>
               <div>
                 <label htmlFor="pricePerKg">Preço por Kg</label>
-                <input 
-                  type="number" 
-                  id="pricePerKg" 
-                  name="pricePerKg" 
-                  value={productFormData.pricePerKg} 
-                  onChange={handleProductInputChange} 
-                  required 
+                <input
+                  type="number"
+                  id="pricePerKg"
+                  name="pricePerKg"
+                  value={productFormData.pricePerKg}
+                  onChange={handleProductInputChange}
+                  required
                   className="jersey-15-regular"
                 />
               </div>
               <div>
-                <label htmlFor="season">Estação</label>
-                <select 
-                  id="season" 
-                  name="season" 
-                  value={productFormData.season} 
-                  onChange={handleProductInputChange} 
-                  required 
-                  className="jersey-15-regular"
-                >
-                  <option value="">Selecione a estação</option>
-                  <option value="Anual">Anual</option>
-                  <option value="Verão">Verão</option>
-                  <option value="Outono">Outono</option>
-                  <option value="Inverno">Inverno</option>
-                  <option value="Primavera">Primavera</option>
-                </select>
-              </div>
-
+              <label htmlFor="season">Estação</label>
+                  <select 
+                    id="season" 
+                    name="season" 
+                    value={productFormData.season} 
+                    onChange={handleProductInputChange} 
+                    required 
+                    className="jersey-15-regular"
+                  >
+                    <option value="">Selecione a estação</option>
+                    <option value="Anual">Anual</option>
+                    <option value="Verão">Verão</option>
+                    <option value="Outono">Outono</option>
+                    <option value="Inverno">Inverno</option>
+                    <option value="Primavera">Primavera</option>
+                  </select>
+                </div>
               <button type="submit" className="jersey-15-regular">Atualizar</button>
-              <button type="button" onClick={() => setEditingProduct(null)} className="jersey-15-regular">Cancelar</button>
             </form>
-          )}
+          </div>
         </div>
       )}
     </main>

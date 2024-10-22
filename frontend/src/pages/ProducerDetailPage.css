@@ -123,6 +123,12 @@ button:hover {
   margin-bottom: 0;
 }
 
+.category.ovos {
+  background-color: #ffffff; 
+  color: #000000; 
+  padding: 5px;
+  border-radius: 5px;
+}
 
 .category.massas {
   background-color: #e83e8c; 
@@ -151,6 +157,7 @@ button:hover {
   padding: 5px;
   border-radius: 5px;
 }
+
 .category.laticínios {
   background-color: #ffb3b3; 
   color: #3e3d2f; 
@@ -164,8 +171,6 @@ button:hover {
   padding: 5px;
   border-radius: 5px;
 }
-
-
 
 .category.massas-artesanais {
   background-color: #fd7e14; 
@@ -208,8 +213,6 @@ button:hover {
   padding: 5px;
   border-radius: 5px;
 }
-
-
 
 .category.plantas {
   background-color: #ffc107; 
@@ -269,4 +272,77 @@ button:hover {
   font-weight: 300;
   font-style: normal;
   font-size: 20px;
+}
+/* Modal */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #f5deb3;
+  padding: 20px;
+  border-radius: 10px; 
+  width: 90%;
+  max-width: 500px; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+  position: relative;
+  animation: fadeIn 0.3s; 
+}
+
+/* Efeito de fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 25px; 
+  color: #3e3d2f; 
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: #ff6f61; 
+}
+
+/* Texto do modal */
+.modal-header {
+  font-size: 1.8rem;
+  color: #2f6035; 
+  margin-bottom: 15px;
+}
+
+.modal-body {
+  color: #3e3d2f; 
+  font-size: 1.5rem; 
+  line-height: 1.5; 
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end; 
+  margin-top: 20px;
+}
+
+.modal-footer button {
+  margin-left: 10px; 
 }

@@ -1,26 +1,51 @@
+const jwt = require('jsonwebtoken');
 const Producer = require('../models/Producer');
 const Product = require('../models/Product');
 
-// Registrar um novo produtor
-const registerProducer = async (req, res) => {
-    const { name, email, password, telefone, localizacao, isAdmin = false } = req.body;
+// Middleware de autenticação para decodificar o token e identificar o produtor
+const authMiddleware = async (req, res, next) => {
+    const token = req.headers.authorization?.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).json({ message: 'Acesso negado. Token não fornecido.' });
+    }
 
     try {
-        // Validação dos dados de entrada
+        // Decodificar o token para obter o ID do produtor
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.producerId = decoded.id;
+
+        // Buscar o produtor no banco de dados com base no ID decodificado
+        const producer = await Producer.findById(req.producerId);
+
+        if (!producer) {
+            return res.status(404).json({ message: 'Produtor não encontrado.' });
+        }
+
+        // Adicionar os dados do produtor ao objeto de requisição
+        req.producer = producer;
+        next();
+    } catch (error) {
+        return res.status(401).json({ message: 'Token inválido ou expirado.' });
+    }
+};
+
+// Registrar um novo produtor
+const registerProducer = async (req, res) => {
+    const { name, email, password, telefone, localizacao } = req.body;
+
+    try {
         if (!name || !email || !password) {
             return res.status(400).json({ message: 'Todos os campos são obrigatórios' });
         }
 
-        // Verificar se o produtor já existe
         const producerExists = await Producer.findOne({ email });
         if (producerExists) {
             return res.status(400).json({ message: 'Produtor já cadastrado com este email' });
         }
 
-        // Criar novo produtor
-        const producer = new Producer({ name, email, password, telefone, localizacao, isAdmin });
+        const producer = new Producer({ name, email, password, telefone, localizacao });
 
-        // Salvar no banco de dados
         await producer.save();
         res.status(201).json({ message: 'Produtor registrado com sucesso', producer });
     } catch (error) {
@@ -33,7 +58,6 @@ const registerProducer = async (req, res) => {
 const getProducers = async (req, res) => {
     try {
         const producers = await Producer.find({ isAdmin: false }).populate('products');
-        console.log('Produtores encontrados:', producers); 
         res.status(200).json(producers);
     } catch (error) {
         console.error('Erro ao obter produtores:', error);
@@ -41,15 +65,20 @@ const getProducers = async (req, res) => {
     }
 };
 
-// Obter um produtor específico pelo ID
+// Obter um produtor específico pelo ID (incluindo admin)
 const getProducerById = async (req, res) => {
-    const { producerId } = req.params;
+    const { producerId } = req.params; // 'producerId' vem da rota
+
     try {
         const producer = await Producer.findById(producerId).populate('products');
-        
-        // Permitir que o administrador veja seu próprio perfil
-        if (!producer || (producer.isAdmin && producer._id.toString() !== req.user._id.toString())) {
-            return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
+
+        if (!producer) {
+            return res.status(404).json({ message: 'Produtor não encontrado.' });
+        }
+
+        // Permitir que o administrador veja seus próprios dados
+        if (producer.isAdmin && producer._id.toString() !== req.producer._id.toString()) {
+            return res.status(403).json({ message: 'Você não tem permissão para acessar os dados deste produtor.' });
         }
 
         res.status(200).json(producer);
@@ -65,19 +94,15 @@ const addProduct = async (req, res) => {
     const productData = req.body;
 
     try {
-        console.log("ID do produtor recebido:", producerId);
         const producer = await Producer.findById(producerId).populate('products');
 
         if (!producer || producer.isAdmin) {
-            console.log("Produtor não encontrado ou é admin:", producerId);
             return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
         }
 
-        // Criar e salvar o produto
         const product = new Product({ ...productData, producer: producerId });
         await product.save();
 
-        // Adicionar produto à lista de produtos do produtor
         producer.products.push(product._id);
         await producer.save();
 
@@ -91,11 +116,13 @@ const addProduct = async (req, res) => {
 // Obter produtos de um produtor específico pelo ID
 const getProductsByProducerId = async (req, res) => {
     const { producerId } = req.params;
+
     try {
         const producer = await Producer.findById(producerId).populate('products');
-        if (!producer || producer.isAdmin) { 
+        if (!producer || producer.isAdmin) {
             return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
         }
+
         res.status(200).json(producer.products);
     } catch (error) {
         console.error('Erro ao obter produtos do produtor:', error);
@@ -114,7 +141,6 @@ const updateProducer = async (req, res) => {
             return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
         }
 
-        // Atualiza os dados do produtor
         Object.assign(producer, updateData);
         await producer.save();
 
@@ -128,11 +154,13 @@ const updateProducer = async (req, res) => {
 // Excluir um produtor pelo ID
 const deleteProducer = async (req, res) => {
     const { producerId } = req.params;
+
     try {
         const producer = await Producer.findByIdAndDelete(producerId);
         if (!producer || producer.isAdmin) {
             return res.status(404).json({ message: 'Produtor não encontrado ou é um administrador' });
         }
+
         res.status(204).send();
     } catch (error) {
         console.error('Erro ao excluir o produtor:', error);
@@ -140,7 +168,7 @@ const deleteProducer = async (req, res) => {
     }
 };
 
-// Função para Excluir um Produto
+// Excluir um Produto
 const deleteProduct = async (req, res) => {
     const { producerId, productId } = req.params;
 
@@ -150,12 +178,10 @@ const deleteProduct = async (req, res) => {
             return res.status(404).json({ message: 'Produto não encontrado' });
         }
 
-        // Verifica se o produto pertence ao produtor autenticado
         if (product.producer.toString() !== producerId) {
             return res.status(403).json({ message: 'Você não tem permissão para deletar este produto.' });
         }
 
-        // Exclui o produto
         await Product.findByIdAndDelete(productId);
         res.status(204).send();
     } catch (error) {
@@ -175,12 +201,10 @@ const updateProduct = async (req, res) => {
             return res.status(404).json({ message: 'Produto não encontrado' });
         }
 
-        // Verifica se o produto pertence ao produtor autenticado
         if (product.producer.toString() !== producerId) {
             return res.status(403).json({ message: 'Você não tem permissão para atualizar este produto.' });
         }
 
-        // Atualiza os dados do produto
         Object.assign(product, updateData);
         await product.save();
 
@@ -192,6 +216,7 @@ const updateProduct = async (req, res) => {
 };
 
 module.exports = {
+    authMiddleware,
     registerProducer,
     getProducers,
     getProducerById,
@@ -200,5 +225,5 @@ module.exports = {
     updateProducer,
     deleteProducer,
     deleteProduct,
-    updateProduct
+    updateProduct,
 };
