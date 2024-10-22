@@ -30,7 +30,8 @@ const ProducerDetailPage = () => {
     name: '',
     category: '',
     pricePerKg: '',
-    season: '',
+    unit: '',
+    season: [],
   });
   const [productLoading, setProductLoading] = useState(false);
 
@@ -85,7 +86,7 @@ const ProducerDetailPage = () => {
     try {
       await addProduct(producerId, productFormData);
       setShowAddProductForm(false);
-      setProductFormData({ name: '', category: '', pricePerKg: '', season: '' });
+      setProductFormData({ name: '', category: '', pricePerKg: '', unit: '', season: [] });
       const updatedProducer = await getProducerById(producerId);
       setProducer(updatedProducer);
     } catch (err) {
@@ -112,11 +113,13 @@ const ProducerDetailPage = () => {
   const handleEditProduct = (product) => {
     setEditingProduct(product);
     setProductFormData({
-      name: product.name,
-      category: product.category,
-      pricePerKg: product.pricePerKg,
-      season: product.season,
+      name: product.name,               
+      category: product.category,       
+      pricePerKg: product.price,             
+      unit: product.unit,       
+      season: product.season || [],      
     });
+    
   };
 
   const handleUpdateProduct = async (e) => {
@@ -126,12 +129,38 @@ const ProducerDetailPage = () => {
       const updatedProducer = await getProducerById(producerId);
       setProducer(updatedProducer);
       setEditingProduct(null);
-      setProductFormData({ name: '', category: '', pricePerKg: '', season: '' });
+      setProductFormData({ name: '', category: '', pricePerKg: '', unit: '', season: [] });
     } catch (err) {
       console.error('Erro ao atualizar o produto:', err);
       setError('Erro ao atualizar o produto');
     }
   };
+
+  const handleSeasonChange = (season) => {
+    setProductFormData((prevState) => {
+      const isSelected = prevState.season.includes(season);
+      return {
+        ...prevState,
+        season: isSelected 
+          ? prevState.season.filter((s) => s !== season)
+          : [...prevState.season, season] 
+      };
+    });
+  };
+  
+
+  const handleSeasonChipClick = (season) => {
+    setProductFormData(prevState => {
+      const isSelected = prevState.season.includes(season);
+      return {
+        ...prevState,
+        season: isSelected
+          ? prevState.season.filter(s => s !== season) 
+          : [...prevState.season, season] 
+      };
+    });
+  };
+  
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -146,8 +175,10 @@ const ProducerDetailPage = () => {
       name: '',
       category: '',
       pricePerKg: '',
+      unit: '',
       season: '',
     });
+    
   };
 
   if (loading) return <p className="jersey-15-regular">Carregando...</p>;
@@ -166,6 +197,11 @@ const ProducerDetailPage = () => {
         <button onClick={handleLogout} className="jersey-15-regular">Sair</button>
       </div>
 
+      <div class="divider">
+  <img src="/assets/animals.png" alt="Animais da Fazenda" class="divider-image" />
+      </div>
+
+
       <h2 className='jersey-15-charted-regular'>Produtos</h2>
       <button onClick={() => setShowAddProductForm(true)} className="jersey-15-regular">Incluir Novo Produto</button>
 
@@ -178,7 +214,7 @@ const ProducerDetailPage = () => {
   Categoria: <span className={`category ${product.category.toLowerCase().replace(/\s+/g, '-')}`}>{product.category}</span>
 </p>
 
-              <p className="jersey-15-regular">Preço por Kg: {product.pricePerKg} R$</p>
+              <p className="jersey-15-regular">Preço: {product.pricePerKg} R$ por {product.unit}</p>
               <p className="jersey-15-regular">Estação: {product.season}</p>
               <button onClick={() => handleEditProduct(product)} className="jersey-15-regular">Editar Produto</button>
               <button onClick={() => handleDeleteProduct(product._id)} className="jersey-15-regular">Excluir</button>
@@ -188,6 +224,9 @@ const ProducerDetailPage = () => {
           <p className="jersey-15-regular">Não há produtos cadastrados.</p>
         )}
       </div>
+
+
+      
 
       {/* Modal Editar Produtor */}
       {editing && (
@@ -218,6 +257,9 @@ const ProducerDetailPage = () => {
                   onChange={handleInputChange}
                   required
                   className="jersey-15-regular"
+                  placeholder="exemplo@hotmail.com"
+                 
+
                 />
               </div>
               <div>
@@ -229,6 +271,7 @@ const ProducerDetailPage = () => {
                   value={formData.telefone}
                   onChange={handleInputChange}
                   className="jersey-15-regular"
+                  placeholder="+55 11987654321"
                 />
               </div>
               <div>
@@ -258,182 +301,217 @@ const ProducerDetailPage = () => {
         </div>
       )}
 
-      {/* Modal Add Produto */}
-      {showAddProductForm && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>&times;</span>
-            <form onSubmit={handleAddProduct} className="jersey-15-regular">
-              <h2 className='jersey-15-charted-regular'>Adicionar Novo Produto</h2>
-              <div>
-                <label htmlFor="name">Nome do Produto</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={productFormData.name}
-                  onChange={handleProductInputChange}
-                  required
-                  className="jersey-15-regular"
-                />
+                    
+                    {/* Modal Add Produto */}
+            {showAddProductForm && (
+              <div className="modal">
+                <div className="modal-content">
+                  <span className="close" onClick={closeModal}>&times;</span>
+                  <form onSubmit={handleAddProduct} className="jersey-15-regular">
+                    <h2 className='jersey-15-charted-regular'>Novo Produto</h2>
+                    <div>
+                      <label htmlFor="name">Nome do Produto</label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={productFormData.name}
+                        onChange={handleProductInputChange}
+                        required
+                        className="jersey-15-regular"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="category">Categoria</label>
+                      <select 
+                        id="category" 
+                        name="category" 
+                        value={productFormData.category} 
+                        onChange={handleProductInputChange} 
+                        required
+                        className="jersey-15-regular"
+                      >
+                        <option value="">Selecione uma categoria</option>
+                        <option value="Queijos artesanais">Queijos artesanais</option>
+                        <option value="Laticínios">Laticínios</option>
+                        <option value="Doces">Doces</option>
+                        <option value="Pães">Pães</option>
+                        <option value="Conservas">Conservas</option>
+                        <option value="Hortaliças">Hortaliças</option>
+                        <option value="Legumes">Legumes</option>
+                        <option value="Verduras">Verduras</option>
+                        <option value="Frutas">Frutas</option>
+                        <option value="Temperos">Temperos</option>
+                        <option value="Grãos">Grãos</option>
+                        <option value="Massas">Massas</option>
+                        <option value="Ovos">Ovos</option>
+                        <option value="Carnes">Carnes</option>
+                        <option value="Peixes">Peixes</option>
+                        <option value="Bebidas">Bebidas</option>
+                        <option value="Mel">Mel</option>
+                        <option value="Produtos Orgânicos">Produtos Orgânicos</option>
+                      </select>
+                    </div>
+
+                    {/* Campo Preço */}
+                    <div>
+                      <label htmlFor="pricePerKg">Preço:</label>
+                      <input
+                        type="number"
+                        id="pricePerKg"
+                        name="pricePerKg"
+                        value={productFormData.pricePerKg}
+                        onChange={handleProductInputChange}
+                        required
+                        className="jersey-15-regular"
+                      />
+                    </div>
+
+                    {/* Campo Unidade de Medida */}
+                    <div>
+                      <label htmlFor="unit">Unidade de Medida</label>
+                      <select
+                        id="unit"
+                        name="unit"
+                        value={productFormData.unit}
+                        onChange={handleProductInputChange}
+                        required
+                        className="jersey-15-regular"
+                      >
+                        <option value="">Selecione uma unidade de medida</option>
+                        <option value="UN">UN</option>
+                        <option value="KG">KG</option>
+                        <option value="L">L</option>
+                      </select>
+                    </div>
+
+                    {/* Campo Estação com Chips */}
+                    <div>
+                      <label>Estação</label>
+                      <div className="chip-container">
+                        {['Anual', 'Verão', 'Outono', 'Inverno', 'Primavera'].map((season) => (
+                          <span 
+                            key={season} 
+                            onClick={() => handleSeasonChange(season)} 
+                            className={`chip ${productFormData.season.includes(season) ? 'selected' : ''}`}
+                          >
+                            {season}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <button type="submit" disabled={productLoading} className="jersey-15-regular">
+                      {productLoading ? 'Carregando...' : 'Adicionar'}
+                    </button>
+                  </form>
+                </div>
               </div>
-              <div>
-                          <label htmlFor="category">Categoria</label>
-                          <select 
-                            id="category" 
-                            name="category" 
-                            value={productFormData.category} 
-                            onChange={handleProductInputChange} 
+            )}
+
+
+
+                          {/* Modal Editar */}
+                  {editingProduct && (
+                  <div className="modal">
+                    <div className="modal-content">
+                      <span className="close" onClick={closeModal}>&times;</span>
+                      <form onSubmit={handleUpdateProduct} className="jersey-15-regular">
+                        <h2 className='jersey-15-charted-regular'>Editar Produto</h2>
+                        <div>
+                          <label htmlFor="name">Nome do Produto</label>
+                          <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={productFormData.name}
+                            onChange={handleProductInputChange}
                             required
                             className="jersey-15-regular"
-                          >
-                            <option value="">Selecione uma categoria</option>
-                            <option value="Queijos artesanais">Queijos artesanais</option>
-                            <option value="Laticínios">Laticínios</option>
-                            <option value="Doces">Doces</option>
-                            <option value="Pães">Pães</option>
-                            <option value="Conservas">Conservas</option>
-                            <option value="Hortaliças">Hortaliças</option>
-                            <option value="Legumes">Legumes</option>
-                            <option value="Verduras">Verduras</option>
-                            <option value="Frutas">Frutas</option>
-                            <option value="Temperos">Temperos</option>
-                            <option value="Grãos">Grãos</option>
-                            <option value="Massas">Massas</option>
-                            <option value="Ovos">Ovos</option>
-                            <option value="Carnes">Carnes</option>
-                            <option value="Peixes">Peixes</option>
-                            <option value="Bebidas">Bebidas</option>
-                            <option value="Mel">Mel</option>
-                            <option value="Produtos Orgânicos">Produtos Orgânicos</option>
-                          </select>
+                          />
                         </div>
+                            <div>
+                              <label htmlFor="category">Categoria</label>
+                              <select
+                                id="category"
+                                name="category"
+                                value={productFormData.category}
+                                onChange={handleProductInputChange}
+                                required
+                                className="jersey-15-regular"
+                              >
+                                <option value="">Selecione uma categoria</option>
+                                <option value="Queijos artesanais">Queijos artesanais</option>
+                                <option value="Laticínios">Laticínios</option>
+                                <option value="Doces">Doces</option>
+                                <option value="Pães">Pães</option>
+                                <option value="Conservas">Conservas</option>
+                                <option value="Hortaliças">Hortaliças</option>
+                                <option value="Legumes">Legumes</option>
+                                <option value="Verduras">Verduras</option>
+                                <option value="Frutas">Frutas</option>
+                                <option value="Temperos">Temperos</option>
+                                <option value="Grãos">Grãos</option>
+                                <option value="Massas">Massas</option>
+                                <option value="Ovos">Ovos</option>
+                                <option value="Carnes">Carnes</option>
+                                <option value="Peixes">Peixes</option>
+                                <option value="Bebidas">Bebidas</option>
+                                <option value="Mel">Mel</option>
+                                <option value="Produtos Orgânicos">Produtos Orgânicos</option>
+                              </select>
+                            </div>
+                            <div>
+                              <label htmlFor="pricePerKg">Preço:</label>
+                              <input
+                                type="number"
+                                id="pricePerKg"
+                                name="pricePerKg"
+                                value={productFormData.pricePerKg}
+                                onChange={handleProductInputChange}
+                                required
+                                className="jersey-15-regular"
+                              />
+                            </div>
 
-              
-              <div>
-                <label htmlFor="pricePerKg">Preço por Kg</label>
-                <input
-                  type="number"
-                  id="pricePerKg"
-                  name="pricePerKg"
-                  value={productFormData.pricePerKg}
-                  onChange={handleProductInputChange}
-                  required
-                  className="jersey-15-regular"
-                />
-              </div>
-              <div>
-                  <label htmlFor="season">Estação</label>
-                  <select 
-                    id="season" 
-                    name="season" 
-                    value={productFormData.season} 
-                    onChange={handleProductInputChange} 
-                    required 
-                    className="jersey-15-regular"
-                  >
-                    <option value="">Selecione a estação</option>
-                    <option value="Anual">Anual</option>
-                    <option value="Verão">Verão</option>
-                    <option value="Outono">Outono</option>
-                    <option value="Inverno">Inverno</option>
-                    <option value="Primavera">Primavera</option>
-                  </select>
-                </div>
-              <button type="submit" disabled={productLoading} className="jersey-15-regular">
-                {productLoading ? 'Carregando...' : 'Adicionar'}
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
+                            {/* Campo Unidade de Medida */}
+                            <div>
+                              <label htmlFor="unit">Unidade de Medida</label>
+                              <select
+                                id="unit"
+                                name="unit"
+                                value={productFormData.unit}
+                                onChange={handleProductInputChange}
+                                required
+                                className="jersey-15-regular"
+                              >
+                                <option value="">Selecione uma unidade de medida</option>
+                                <option value="UN">UN</option>
+                                <option value="KG">KG</option>
+                                <option value="L">L</option>
+                              </select>
+                            </div>
 
-      {/* Modal Editar*/}
-      {editingProduct && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>&times;</span>
-            <form onSubmit={handleUpdateProduct} className="jersey-15-regular">
-              <h2 className='jersey-15-charted-regular'>Editar Produto</h2>
-              <div>
-                <label htmlFor="name">Nome do Produto</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={productFormData.name}
-                  onChange={handleProductInputChange}
-                  required
-                  className="jersey-15-regular"
-                />
-              </div>
-              <div>
-                <label htmlFor="category">Categoria</label>
-                <select
-                  id="category"
-                  name="category"
-                  value={productFormData.category}
-                  onChange={handleProductInputChange}
-                  required
-                  className="jersey-15-regular"
-                >
-                  <option value="">Selecione uma categoria</option>
-                            <option value="Queijos artesanais">Queijos artesanais</option>
-                            <option value="Laticínios">Laticínios</option>
-                            <option value="Doces">Doces</option>
-                            <option value="Pães">Pães</option>
-                            <option value="Conservas">Conservas</option>
-                            <option value="Hortaliças">Hortaliças</option>
-                            <option value="Legumes">Legumes</option>
-                            <option value="Verduras">Verduras</option>
-                            <option value="Frutas">Frutas</option>
-                            <option value="Temperos">Temperos</option>
-                            <option value="Grãos">Grãos</option>
-                            <option value="Massas">Massas</option>
-                            <option value="Ovos">Ovos</option>
-                            <option value="Carnes">Carnes</option>
-                            <option value="Peixes">Peixes</option>
-                            <option value="Bebidas">Bebidas</option>
-                            <option value="Mel">Mel</option>
-                            <option value="Produtos Orgânicos">Produtos Orgânicos</option>
-                          
-                  </select>
-              </div>
-              <div>
-                <label htmlFor="pricePerKg">Preço por Kg</label>
-                <input
-                  type="number"
-                  id="pricePerKg"
-                  name="pricePerKg"
-                  value={productFormData.pricePerKg}
-                  onChange={handleProductInputChange}
-                  required
-                  className="jersey-15-regular"
-                />
-              </div>
-              <div>
-              <label htmlFor="season">Estação</label>
-                  <select 
-                    id="season" 
-                    name="season" 
-                    value={productFormData.season} 
-                    onChange={handleProductInputChange} 
-                    required 
-                    className="jersey-15-regular"
-                  >
-                    <option value="">Selecione a estação</option>
-                    <option value="Anual">Anual</option>
-                    <option value="Verão">Verão</option>
-                    <option value="Outono">Outono</option>
-                    <option value="Inverno">Inverno</option>
-                    <option value="Primavera">Primavera</option>
-                  </select>
-                </div>
-              <button type="submit" className="jersey-15-regular">Atualizar</button>
-            </form>
-          </div>
-        </div>
-      )}
+                            {/* Campo Estação com Chips */}
+                            <div>
+                              <label>Estações</label>
+                              <div className="chip-container">
+                                {["Anual", "Verão", "Outono", "Inverno", "Primavera"].map(season => (
+                                  <span
+                                    key={season}
+                                    className={`chip ${productFormData.season.includes(season) ? 'selected' : ''}`}
+                                    onClick={() => handleSeasonChipClick(season)}
+                                  >
+                                    {season}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+
+        <button type="submit" className="jersey-15-regular">Atualizar</button>
+      </form>
+    </div>
+  </div>
+)}
     </main>
   );
 };

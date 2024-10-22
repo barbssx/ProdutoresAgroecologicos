@@ -36,6 +36,18 @@ h3 {
   margin: 50px;
 }
 
+/*Animais da fazenda*/
+.divider {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.divider-image {
+  width: 300px; 
+  background-repeat: repeat-x;
+}
+
+
 /* Formulários */
 form {
   background-color: #f5deb3; 
@@ -345,4 +357,30 @@ button:hover {
 
 .modal-footer button {
   margin-left: 10px; 
+}
+
+.chip-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #8b4513;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center; 
+}
+
+
+.chip {
+  padding: 8px 12px;
+  border-radius: 16px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.chip.selected {
+  background-color: #2f6035;
+  color: white;
 }

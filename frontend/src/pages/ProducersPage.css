@@ -108,12 +108,6 @@ p {
     font-style: normal;
 }
 
-.lora-500 {
-    font-family: "Lora", serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: italic;
-}
 
 .jersey-15-regular {
     font-family: "Jersey 15", sans-serif;
@@ -128,3 +122,6 @@ p {
         flex-direction: column;
     }
 }
+
+
+
