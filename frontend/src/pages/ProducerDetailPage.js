@@ -167,7 +167,7 @@ const ProducerDetailPage = () => {
       });
     } catch (err) {
       console.error('Erro ao atualizar a estação:', err);
-      setErrors((prevErrors) => ({
+      setError((prevErrors) => ({
         ...prevErrors,
         season: 'Erro ao atualizar a estação.',
       }));
@@ -187,6 +187,26 @@ const ProducerDetailPage = () => {
       };
     });
   };
+
+  const SeasonChip = ({ season }) => {
+    const colors = {
+      Primavera: 'lightgreen',
+      Verão: 'yellow',
+      Outono: 'orange',
+      Inverno: 'lightblue',
+      Anual: 'lightgrey',
+    };
+  
+    return (
+      <span 
+        className="season-chip" 
+        style={{ backgroundColor: colors[season] || 'black', padding: '5px', borderRadius: '5px', margin: '2px', color: 'black' }}
+      >
+        {season}
+      </span>
+    );
+  };
+  
   
 
   const handleLogout = () => {
@@ -233,24 +253,28 @@ const ProducerDetailPage = () => {
       <button onClick={() => setShowAddProductForm(true)} className="jersey-15-regular">Incluir Novo Produto</button>
 
       <div className="product-list">
-        {producer.products && producer.products.length > 0 ? (
-          producer.products.map(product => (
-            <div key={product._id} className="product-item jersey-15-regular">
-              <h3 className='jersey-15-charted-regular'>{product.name}</h3>
-              <p className="jersey-15-regular">
-  Categoria: <span className={`category ${product.category.toLowerCase().replace(/\s+/g, '-')}`}>{product.category}</span>
-</p>
-
-              <p className="jersey-15-regular">Preço: {product.pricePerKg} R$ por {product.unit}</p>
-              <p className="jersey-15-regular">Estação: {product.season}</p>
-              <button onClick={() => handleEditProduct(product)} className="jersey-15-regular">Editar Produto</button>
-              <button onClick={() => handleDeleteProduct(product._id)} className="jersey-15-regular">Excluir</button>
-            </div>
-          ))
-        ) : (
-          <p className="jersey-15-regular">Não há produtos cadastrados.</p>
-        )}
+  {producer.products && producer.products.length > 0 ? (
+    producer.products.map(product => (
+      <div key={product._id} className="product-item jersey-15-regular">
+        <h3 className='jersey-15-charted-regular'>{product.name}</h3>
+        <p className="jersey-15-regular">
+          Categoria: <span className={`category ${product.category.toLowerCase().replace(/\s+/g, '-')}`}>{product.category}</span>
+        </p>
+        <p className="jersey-15-regular">Preço {product.pricePerKg} R$ por {product.unit}</p>
+        <p className="jersey-15-regular">
+          Estação: {product.season.map(season => (
+            <SeasonChip key={season} season={season} />
+          ))}
+        </p>
+        <button onClick={() => handleEditProduct(product)} className="jersey-15-regular">Editar Produto</button>
+        <button onClick={() => handleDeleteProduct(product._id)} className="jersey-15-regular">Excluir</button>
       </div>
+    ))
+  ) : (
+    <p className="jersey-15-regular">Não há produtos cadastrados.</p>
+  )}
+</div>
+
 
 
       
@@ -358,28 +382,30 @@ const ProducerDetailPage = () => {
                         required
                         className="jersey-15-regular"
                       >
-                        <option value="">Selecione uma categoria</option>
-                        <option value="Queijos artesanais">Queijos artesanais</option>
-                        <option value="Laticínios">Laticínios</option>
-                        <option value="Doces">Doces</option>
-                        <option value="Pães">Pães</option>
-                        <option value="Conservas">Conservas</option>
-                        <option value="Artesanal">Artesanal</option>
-                        <option value="Hortaliças">Hortaliças</option>
-                        <option value="Legumes">Legumes</option>
-                        <option value="Verduras">Verduras</option>
-                        <option value="Frutas">Frutas</option>
-                        <option value="Temperos">Temperos</option>
-                        <option value="Grãos">Grãos</option>
-                        <option value="Massas">Massas</option>
-                        <option value="Ovos">Ovos</option>
-                        <option value="Carnes">Carnes</option>
-                        <option value="Peixes">Peixes</option>
-                        <option value="Bebidas">Bebidas</option>
-                        <option value="Mel">Mel</option>
-                        <option value="Produtos Orgânicos">Produtos Orgânicos</option>
-                      </select>
-                    </div>
+                      <option value="">Selecione uma categoria</option>
+                      <option value="Artesanal">Artesanal</option>
+                      <option value="Bebidas">Bebidas</option>
+                      <option value="Bolos e Tortas">Bolos e Tortas</option>
+                      <option value="Compota">Compota</option>
+                      <option value="Carnes">Carnes</option>
+                      <option value="Conservas">Conservas</option>
+                      <option value="Doces">Doces</option>
+                      <option value="Ervas Medicinais">Ervas Medicinais</option>
+                      <option value="Flores">Flores</option>
+                      <option value="Frutas">Frutas</option>
+                      <option value="Grãos">Grãos</option>
+                      <option value="Hortaliças">Hortaliças</option>
+                      <option value="Legumes">Legumes</option>
+                      <option value="Laticinios">Laticínios</option>
+                      <option value="Massas Artesanais">Massas Artesanais</option>
+                      <option value="Mel">Mel</option>
+                      <option value="paes">Pães</option>
+                      <option value="Plantas">Plantas</option>
+                      <option value="Queijos Artesanais">Queijos Artesanais</option>
+                      <option value="Temperos">Temperos</option>
+                      <option value="Verduras">Verduras</option>
+                  </select>
+                  </div>
 
                     {/* Campo Preço */}
                     <div>
@@ -466,28 +492,30 @@ const ProducerDetailPage = () => {
                                 onChange={handleProductInputChange}
                                 required
                                 className="jersey-15-regular"
-                              >
+                                >
                                 <option value="">Selecione uma categoria</option>
-                                <option value="Queijos artesanais">Queijos artesanais</option>
-                                <option value="Laticínios">Laticínios</option>
-                                <option value="Doces">Doces</option>
-                                <option value="Pães">Pães</option>
-                                <option value="Conservas">Conservas</option>
                                 <option value="Artesanal">Artesanal</option>
+                                <option value="Bebidas">Bebidas</option>
+                                <option value="Bolos e Tortas">Bolos e Tortas</option>
+                                <option value="Compota">Compota</option>
+                                <option value="Carnes">Carnes</option>
+                                <option value="Conservas">Conservas</option>
+                                <option value="Doces">Doces</option>
+                                <option value="Ervas Medicinais">Ervas Medicinais</option>
+                                <option value="Flores">Flores</option>
+                                <option value="Frutas">Frutas</option>
+                                <option value="Grãos">Grãos</option>
                                 <option value="Hortaliças">Hortaliças</option>
                                 <option value="Legumes">Legumes</option>
-                                <option value="Verduras">Verduras</option>
-                                <option value="Frutas">Frutas</option>
-                                <option value="Temperos">Temperos</option>
-                                <option value="Grãos">Grãos</option>
-                                <option value="Massas">Massas</option>
-                                <option value="Ovos">Ovos</option>
-                                <option value="Carnes">Carnes</option>
-                                <option value="Peixes">Peixes</option>
-                                <option value="Bebidas">Bebidas</option>
+                                <option value="Laticinios">Laticínios</option>
+                                <option value="Massas Artesanais">Massas Artesanais</option>
                                 <option value="Mel">Mel</option>
-                                <option value="Produtos Orgânicos">Produtos Orgânicos</option>
-                              </select>
+                                <option value="paes">Pães</option>
+                                <option value="Plantas">Plantas</option>
+                                <option value="Queijos Artesanais">Queijos Artesanais</option>
+                                <option value="Temperos">Temperos</option>
+                                <option value="Verduras">Verduras</option>
+                            </select>
                             </div>
                             <div>
                               <label htmlFor="pricePerKg">Preço:</label>

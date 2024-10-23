@@ -184,7 +184,7 @@ button:hover {
   border-radius: 5px;
 }
 
-.category.massas-artesanais {
+.category.pães {
   background-color: #fd7e14; 
   color: white; 
   padding: 5px;
@@ -232,6 +232,77 @@ button:hover {
   padding: 5px;
   border-radius: 5px;
 }
+
+.category.bolos-e-tortas {
+  background-color: #00ffbf; 
+  color: #343a40; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.compota {
+  background-color: #ffcc00; 
+  color: #3e3d2f; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.legumes {
+  background-color: #6f42c1; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.temperos {
+  background-color: #fd7e14; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.grãos {
+  background-color: #28a745; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.carnes {
+  background-color: #dc3545; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.peixes {
+  background-color: #007bff; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.bebidas {
+  background-color: #17a2b8; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.mel {
+  background-color: #ffcd39; 
+  color: #3e3d2f; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category.produtos-organicos {
+  background-color: #6c757d; 
+  color: white; 
+  padding: 5px;
+  border-radius: 5px;
+}
+
 
 /* Responsividade */
 @media (max-width: 768px) {
