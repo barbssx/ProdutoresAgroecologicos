@@ -32,7 +32,7 @@ const authMiddleware = async (req, res, next) => {
 
 // Registrar um novo produtor
 const registerProducer = async (req, res) => {
-    const { name, email, password, telefone, localizacao } = req.body;
+    const { name, email, password, telefone, localizacao, biografia } = req.body;
 
     try {
         if (!name || !email || !password) {
@@ -44,7 +44,7 @@ const registerProducer = async (req, res) => {
             return res.status(400).json({ message: 'Produtor já cadastrado com este email' });
         }
 
-        const producer = new Producer({ name, email, password, telefone, localizacao });
+        const producer = new Producer({ name, email, password, telefone, localizacao, biografia });
 
         await producer.save();
         res.status(201).json({ message: 'Produtor registrado com sucesso', producer });

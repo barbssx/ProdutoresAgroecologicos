@@ -234,10 +234,10 @@ const ProducerDetailPage = () => {
   return (
     <main className="producer-detail-page">
       <h1 className='jersey-15-charted-regular'>{producer.name}</h1>
-      <p className="jersey-15-regular">Email: {producer.email}</p>
-      <p className="jersey-15-regular">Telefone: {producer.telefone || 'Não informado'}</p>
-      <p className="jersey-15-regular">Endereço: {producer.localizacao || 'Não informado'}</p>
-      <p className="jersey-15-regular">Biografia: {producer.biografia || 'Não informada'}</p>
+      <p className="jersey-15-regular"><strong>E-mail:</strong> {producer.email}</p>
+      <p className="jersey-15-regular"><strong>Telefone:</strong> {producer.telefone || 'Não informado'}</p>
+      <p className="jersey-15-regular"><strong>Endereço:</strong> {producer.localizacao || 'Não informado'}</p>
+      <p className="jersey-15-regular"><strong>Biografia: </strong>{producer.biografia || 'Não informada'}</p>
 
       <div className="button-group">
         <button onClick={() => setEditing(true)} className="jersey-15-regular">Editar</button>

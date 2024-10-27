@@ -100,9 +100,11 @@ const ProducersPage = () => {
         filteredProducers.map((producer) => (
           <div key={producer._id} onClick={() => handleProducerClick(producer)} className="producer-card">
             <h3 className="jersey-15-charted-regular">{producer.name}</h3>
-            <p className="jersey-15-regular">Email: {producer.email || 'Não informado'}</p>
-            <p className="jersey-15-regular">Telefone: {producer.telefone || 'Não informado'}</p>
-            <p className="jersey-15-regular">Endereço: {producer.localizacao || 'Não informado'}</p>
+            <p className="jersey-15-regular"><strong>E-mail: </strong>{producer.email || 'Não informado'}</p>
+            <p className="jersey-15-regular"><strong>Telefone:</strong>{producer.telefone || 'Não informado'}</p>
+            <p className="jersey-15-regular"><strong>Endereço:</strong> {producer.localizacao || 'Não informado'}</p>
+            <p className="jersey-15-regular"><strong>Biografia:</strong> {producer.biografia || 'Não informado'}</p>
+
             {producer.products.length > 0 ? (
               <div className="product-list">
                 {producer.products.map((product) => (

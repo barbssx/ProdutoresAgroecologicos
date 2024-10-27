@@ -53,7 +53,7 @@ productRouter.delete('/:productId', protect, async (req, res) => {
     await deleteProduct(req, res);
 });
 
-// Use o roteador de produtos
+
 router.use('/:producerId/products', productRouter);
 
 // Rota para atualizar um produtor (somente o produtor pode acessar)
