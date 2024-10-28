@@ -19,7 +19,7 @@ const HomePage = () => {
       
       <img src="/assets/pixel-farm.gif" alt="Fazenda pixel art" className="homepage-image" />
 
-      <p className="homepage-info lora-500">
+      <p className="homepage-info jersey-15-regular">
         Produtos agroecológicos são sazonais, garantindo frescor e sustentabilidade. 
         Tenha paciência ao escolher produtos, pois sua disponibilidade varia de acordo com as estações.
       </p>

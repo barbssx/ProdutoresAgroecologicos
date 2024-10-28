@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const producerSchema = new mongoose.Schema({
   name: { type: String, required: true },
+  icon: { type: String, default: '' },
   email: { 
       type: String, 
       required: true, 

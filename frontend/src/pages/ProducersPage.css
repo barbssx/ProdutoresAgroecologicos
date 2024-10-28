@@ -17,18 +17,27 @@
 
 
 .producer-info {
+  
+  align-items: center; 
   cursor: pointer;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f5deb3;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f5deb3;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid #8b4513;
 }
 
+.producer-icon {
+  width: 30px;
+  height: 30px; 
+  margin-right: 10px; 
+}
 
-.product-item{
-    background-color: #ddd;
+.product-item {
+  background-color: #ddd;
+  max-height: 500px; 
 }
 
 .product-categories {

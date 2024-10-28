@@ -8,6 +8,8 @@ import {
   updateProduct,
 } from '../services/api';
 import './ProducerDetailPage.css';
+import SeletorIcon from '../components/SeletorIcon';
+
 
 const ProducerDetailPage = () => {
   const { producerId } = useParams();
@@ -28,6 +30,7 @@ const ProducerDetailPage = () => {
   const [showAddProductForm, setShowAddProductForm] = useState(false);
   const [productFormData, setProductFormData] = useState({
     name: '',
+    icon: '',
     category: '',
     pricePerKg: '',
     unit: '',
@@ -95,7 +98,7 @@ const ProducerDetailPage = () => {
         await addProduct(producerId, productFormData);
         setShowAddProductForm(false);
         
-        setProductFormData({ name: '', category: '', pricePerKg: '', unit: '', season: [] });
+        setProductFormData({ name: '',icon: '', category: '', pricePerKg: '', unit: '', season: [] });
         const updatedProducer = await getProducerById(producerId);
         setProducer(updatedProducer);
     } catch (err) {
@@ -124,11 +127,13 @@ const ProducerDetailPage = () => {
   const handleEditProduct = (product) => {
     setEditingProduct(product);
     setProductFormData({
-      name: product.name,               
+      name: product.name,
+      icon: product.icon || '',            
       category: product.category,       
       pricePerKg: product.price,             
       unit: product.unit,       
-      season: product.season || [],      
+      season: product.season || [],
+          
     });
     
   };
@@ -397,6 +402,7 @@ const ProducerDetailPage = () => {
                       <option value="Laticinios">Laticínios</option>
                       <option value="Massas Artesanais">Massas Artesanais</option>
                       <option value="Mel">Mel</option>
+                      <option value="Ovos">Ovos</option>
                       <option value="paes">Pães</option>
                       <option value="Plantas">Plantas</option>
                       <option value="Queijos Artesanais">Queijos Artesanais</option>
@@ -508,6 +514,7 @@ const ProducerDetailPage = () => {
                                 <option value="Laticinios">Laticínios</option>
                                 <option value="Massas Artesanais">Massas Artesanais</option>
                                 <option value="Mel">Mel</option>
+                                <option value="Ovos">Ovos</option>
                                 <option value="paes">Pães</option>
                                 <option value="Plantas">Plantas</option>
                                 <option value="Queijos Artesanais">Queijos Artesanais</option>
