@@ -233,6 +233,7 @@ const ProducerDetailPage = () => {
 
   return (
     <main className="producer-detail-page">
+      <div class="producer-info">
       <h1 className='jersey-15-charted-regular'>{producer.name}</h1>
       <p className="jersey-15-regular"><strong>E-mail:</strong> {producer.email}</p>
       <p className="jersey-15-regular"><strong>Telefone:</strong> {producer.telefone || 'Não informado'}</p>
@@ -243,12 +244,9 @@ const ProducerDetailPage = () => {
         <button onClick={() => setEditing(true)} className="jersey-15-regular">Editar</button>
         <button onClick={handleLogout} className="jersey-15-regular">Sair</button>
       </div>
-
-      <div class="divider">
-  <img src="/assets/animals.png" alt="Animais da Fazenda" class="divider-image" />
       </div>
 
-
+  
       <h2 className='jersey-15-charted-regular'>Produtos</h2>
       <button onClick={() => setShowAddProductForm(true)} className="jersey-15-regular">Incluir Novo Produto</button>
 
@@ -338,12 +336,12 @@ const ProducerDetailPage = () => {
               </div>
               <div>
                 <label htmlFor="biografia">Biografia</label>
-                <textarea
+                <textarea className="biografia-box jersey-15-regular"
                   id="biografia"
                   name="biografia"
+                  placeholder="Escreva sua biografia aqui. No máximo 150 letras"
                   value={formData.biografia}
                   onChange={handleInputChange}
-                  className="jersey-15-regular"
                 />
               </div>
               <button type="submit" className="jersey-15-regular">Salvar</button>

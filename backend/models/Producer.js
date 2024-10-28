@@ -16,7 +16,7 @@ const producerSchema = new mongoose.Schema({
       match: /^\+?[1-9]\d{1,14}$/ 
   },
   localizacao: { type: String },
-  biografia: { type: String },
+  biografia: { type: String, maxlength: 150 },
   products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
   isAdmin: { type: Boolean, default: false },
 });

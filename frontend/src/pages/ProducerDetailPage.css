@@ -36,17 +36,6 @@ h3 {
   margin: 50px;
 }
 
-/*Animais da fazenda*/
-.divider {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.divider-image {
-  width: 300px; 
-  background-repeat: repeat-x;
-}
-
 
 /* Formulários */
 form {
@@ -72,7 +61,7 @@ select {
   border: 2px solid #8b4513;
   border-radius: 5px;
   background-color: #f5deb3;
-  color: #3e3d2f;
+  color: black;
   font-size: 1rem;
 }
 
@@ -374,8 +363,7 @@ button:hover {
   background-color: #f5deb3;
   padding: 20px;
   border-radius: 10px; 
-  width: 90%;
-  max-width: 500px; 
+  width: 100%;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
   position: relative;
   animation: fadeIn 0.3s; 
@@ -454,4 +442,16 @@ button:hover {
 .chip.selected {
   background-color: #2f6035;
   color: white;
+}
+
+
+.biografia-box {
+  width: 500px; 
+  height: auto;
+  padding: 10px; 
+  border: 2px solid #8b4513;
+  border-radius: 5px;
+  background-color: #f5deb3;
+  resize: none; 
+  overflow: hidden; 
 }
