@@ -78,18 +78,8 @@ const ProducerDetailPage = () => {
 
   const handleProductInputChange = (e) => {
     const { name, value } = e.target;
-  
-    let formattedValue = value;
-    if (name === "category") {
-      formattedValue = value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-    }
-  
-    setProductFormData((prevData) => ({
-      ...prevData,
-      [name]: formattedValue,
-    }));
+    setProductFormData({ ...productFormData, [name]: value });
   };
-  
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
@@ -406,8 +396,8 @@ const ProducerDetailPage = () => {
                       <option value="Frutas">Frutas</option>
                       <option value="Grãos">Grãos</option>
                       <option value="Hortaliças">Hortaliças</option>
-                      <option value="Laticínios">Laticínios</option>
                       <option value="Legumes">Legumes</option>
+                      <option value="Laticínios">Laticínios</option>
                       <option value="Massas Artesanais">Massas Artesanais</option>
                       <option value="Mel">Mel</option>
                       <option value="Ovos">Ovos</option>
@@ -518,8 +508,8 @@ const ProducerDetailPage = () => {
                                 <option value="Frutas">Frutas</option>
                                 <option value="Grãos">Grãos</option>
                                 <option value="Hortaliças">Hortaliças</option>
-                                <option value="Laticínios">Laticínios</option>
                                 <option value="Legumes">Legumes</option>
+                                <option value="Laticínios">Laticínios</option>
                                 <option value="Massas Artesanais">Massas Artesanais</option>
                                 <option value="Mel">Mel</option>
                                 <option value="Ovos">Ovos</option>
