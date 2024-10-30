@@ -8,8 +8,6 @@ import {
   updateProduct,
 } from '../services/api';
 import './ProducerDetailPage.css';
-import SeletorIcon from '../components/SeletorIcon';
-
 
 const ProducerDetailPage = () => {
   const { producerId } = useParams();
@@ -80,8 +78,18 @@ const ProducerDetailPage = () => {
 
   const handleProductInputChange = (e) => {
     const { name, value } = e.target;
-    setProductFormData({ ...productFormData, [name]: value });
+  
+    let formattedValue = value;
+    if (name === "category") {
+      formattedValue = value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+  
+    setProductFormData((prevData) => ({
+      ...prevData,
+      [name]: formattedValue,
+    }));
   };
+  
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
@@ -398,12 +406,12 @@ const ProducerDetailPage = () => {
                       <option value="Frutas">Frutas</option>
                       <option value="Grãos">Grãos</option>
                       <option value="Hortaliças">Hortaliças</option>
-                      <option value="Legumes">Legumes</option>
                       <option value="Laticínios">Laticínios</option>
+                      <option value="Legumes">Legumes</option>
                       <option value="Massas Artesanais">Massas Artesanais</option>
                       <option value="Mel">Mel</option>
                       <option value="Ovos">Ovos</option>
-                      <option value="Pães">Pães</option>
+                      <option value="Padaria">Padaria</option>
                       <option value="Plantas">Plantas</option>
                       <option value="Queijos Artesanais">Queijos Artesanais</option>
                       <option value="Temperos">Temperos</option>
@@ -510,12 +518,12 @@ const ProducerDetailPage = () => {
                                 <option value="Frutas">Frutas</option>
                                 <option value="Grãos">Grãos</option>
                                 <option value="Hortaliças">Hortaliças</option>
-                                <option value="Legumes">Legumes</option>
                                 <option value="Laticínios">Laticínios</option>
+                                <option value="Legumes">Legumes</option>
                                 <option value="Massas Artesanais">Massas Artesanais</option>
                                 <option value="Mel">Mel</option>
                                 <option value="Ovos">Ovos</option>
-                                <option value="Pães">Pães</option>
+                                <option value="Padaria">Padaria</option>
                                 <option value="Plantas">Plantas</option>
                                 <option value="Queijos Artesanais">Queijos Artesanais</option>
                                 <option value="Temperos">Temperos</option>

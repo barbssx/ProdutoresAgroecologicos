@@ -146,7 +146,7 @@ button:hover {
 }
 
 .category.hortaliças {
-  background-color: #78c679; 
+  background-color: #00ff59; 
   color: white; 
   padding: 5px;
   border-radius: 5px;
@@ -159,7 +159,7 @@ button:hover {
   border-radius: 5px;
 }
 
-.category.Laticínios {
+.category.laticinios {
   background-color: #ffb3b3; 
   color: #3e3d2f; 
   padding: 5px;
@@ -173,8 +173,8 @@ button:hover {
   border-radius: 5px;
 }
 
-.category.pães {
-  background-color: #fd7e14; 
+.category.padaria {
+  background-color: #ff5900; 
   color: white; 
   padding: 5px;
   border-radius: 5px;
