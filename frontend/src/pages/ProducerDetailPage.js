@@ -399,11 +399,11 @@ const ProducerDetailPage = () => {
                       <option value="Grãos">Grãos</option>
                       <option value="Hortaliças">Hortaliças</option>
                       <option value="Legumes">Legumes</option>
-                      <option value="Laticinios">Laticínios</option>
+                      <option value="Laticínios">Laticínios</option>
                       <option value="Massas Artesanais">Massas Artesanais</option>
                       <option value="Mel">Mel</option>
                       <option value="Ovos">Ovos</option>
-                      <option value="paes">Pães</option>
+                      <option value="Pães">Pães</option>
                       <option value="Plantas">Plantas</option>
                       <option value="Queijos Artesanais">Queijos Artesanais</option>
                       <option value="Temperos">Temperos</option>
@@ -511,11 +511,11 @@ const ProducerDetailPage = () => {
                                 <option value="Grãos">Grãos</option>
                                 <option value="Hortaliças">Hortaliças</option>
                                 <option value="Legumes">Legumes</option>
-                                <option value="Laticinios">Laticínios</option>
+                                <option value="Laticínios">Laticínios</option>
                                 <option value="Massas Artesanais">Massas Artesanais</option>
                                 <option value="Mel">Mel</option>
                                 <option value="Ovos">Ovos</option>
-                                <option value="paes">Pães</option>
+                                <option value="Pães">Pães</option>
                                 <option value="Plantas">Plantas</option>
                                 <option value="Queijos Artesanais">Queijos Artesanais</option>
                                 <option value="Temperos">Temperos</option>
