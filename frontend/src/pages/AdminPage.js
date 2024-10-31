@@ -32,16 +32,14 @@ const Modal = ({ show, handleClose, onSubmit, newProducer, setNewProducer, addin
             placeholder="A senha deve ter pelo menos 6 caracteres."
             className="jersey-15-regular"
             style={{
-              border: '2px solid #8b4513', backgroundColor: '#f5deb3',
+              border: '2px solid #8b4513',
+              backgroundColor: '#f5deb3',
               fontSize: '16px',
-              
             }}
             value={newProducer.password}
             onChange={(e) => setNewProducer({ ...newProducer, password: e.target.value })}
             required
           />
-
-
           <input
             type="text"
             placeholder="+55 11987654321"
@@ -151,12 +149,14 @@ const AdminPage = () => {
   return (
     <div>
       <h1 className="jersey-15-charted-regular">Painel do Administrador</h1>
-      <button className="jersey-15-regular" onClick={handleLogout}>Sair</button>
+      <div className="button-container">
+        <button className="jersey-15-regular" onClick={handleLogout}>Sair</button>
+        <button className="jersey-15-regular" onClick={() => setShowForm(true)}>
+          Adicionar Produtor
+        </button>
+      </div>
+      <img src="/assets/cow.gif" alt="Vaca" style={{ display: 'block', margin: '20px auto', width: '120px' }} />
 
-      <h2 className="jersey-15-charted-regular">Adicionar Produtor</h2>
-      <button className="jersey-15-regular" onClick={() => setShowForm(true)}>
-        Adicionar Produtor
-      </button>
 
       <Modal 
         show={showForm} 

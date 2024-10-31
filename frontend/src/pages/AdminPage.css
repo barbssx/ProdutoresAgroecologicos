@@ -11,6 +11,7 @@ html, body {
     background-color: #d2b48c;
     min-height: 100vh;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 h1, h2 {
@@ -29,6 +30,21 @@ form input {
     border: 1px solid #8b4513;
     border-radius: 5px;
     font-size: 16px;
+    
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; 
+    margin: 1em auto;
+    max-width: 500px; 
+    border: 2px solid #8b4513; 
+    border-radius: 5px; 
+    background-color: #f5deb3;
+    padding: 5px; 
+    
 }
 
 
@@ -54,7 +70,8 @@ ul {
 }
 
 ul li {
-    margin-bottom: 10px;
+    margin: 1em auto !important;
+    max-width: 500px; 
     padding: 10px;
     background-color: #f5deb3;
     border: 1px solid #8b4513;
@@ -66,6 +83,7 @@ ul li button {
     background-color: #8b0000;
     color: white;
     border: none;
+    max-width: 100px;
     border-radius: 3px;
     padding: 5px 10px;
     cursor: pointer;
@@ -116,3 +134,46 @@ ul li button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
   
+
+  @media (max-width: 768px) {
+    .admin-page-container {
+        padding: 10px;
+    }
+
+    h1, h2 {
+        margin: 10px;
+        font-size: 1.5em; /* Ajuste o tamanho do texto para telas menores */
+    }
+
+    form input {
+        font-size: 14px; /* Diminui o tamanho da fonte em inputs */
+    }
+
+    .button-container {
+        flex-direction: column; /* Empilha os botões em dispositivos menores */
+        max-width: 90%; /* Faz com que o botão use mais espaço na tela */
+    }
+
+    ul li {
+        max-width: 90%; /* Adapta a lista para telas menores */
+        padding: 8px; /* Ajusta o padding */
+    }
+}
+
+@media (max-width: 480px) {
+    h1, h2 {
+        font-size: 1.2em;
+    }
+
+    form input {
+        padding: 8px;
+    }
+
+    form button {
+        padding: 8px 16px;
+    }
+
+    ul li {
+        padding: 6px;
+    }
+}
