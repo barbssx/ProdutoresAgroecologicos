@@ -35,7 +35,7 @@ const HomePage = () => {
           <h3 className="jersey-15-charted-regular" style={{ fontSize: "30px" }}>
                 Se você é um produtor
               </h3>
-          <p className="lora-500">Faça o login para acessar sua conta e gerenciar seus produtos.</p>
+          <p className="jersey-15-regular">Faça o login para acessar sua conta e gerenciar seus produtos.</p>
         </div>
 
         <div 
@@ -47,7 +47,7 @@ const HomePage = () => {
         >
             <h3 className="jersey-15-charted-regular" style={{ fontSize: "30px" }}>
               Se você é um consumidor
-            </h3><p className="lora-500">Veja os produtores e descubra os produtos disponíveis.</p>
+            </h3><p className="jersey-15-regular">Veja os produtores e descubra os produtos disponíveis.</p>
         </div>
       </div>
     </div>
