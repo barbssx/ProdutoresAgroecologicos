@@ -18,8 +18,8 @@ const HomePage = () => {
       <h1 className="jersey-15-charted-regular">Bem-vindo à nossa plataforma agroecológica!</h1>
       
       <img 
-    src="/public/assets/pixel-farm.gif" 
-    srcset="/public/assets/animals.png 768w, /public/assets/pixel-farm.gif 1200w"
+    src="/assets/pixel-farm.gif" 
+    srcset="/assets/animals.png 768w, /assets/pixel-farm.gif 1200w"
     sizes="(max-width: 800px) 100vw, 50vw"
     alt="Fazenda pixel art" 
     className="homepage-image" 
