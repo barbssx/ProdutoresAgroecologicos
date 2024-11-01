@@ -17,7 +17,15 @@ const HomePage = () => {
     <div className="homepage-container">
       <h1 className="jersey-15-charted-regular">Bem-vindo à nossa plataforma agroecológica!</h1>
       
-      <img src="/assets/pixel-farm.gif" alt="Fazenda pixel art" className="homepage-image" />
+      <img 
+    src="/public/assets/pixel-farm.gif" 
+    srcset="/public/assets/animals.png 768w, /public/assets/pixel-farm.gif 1200w"
+    sizes="(max-width: 800px) 100vw, 50vw"
+    alt="Fazenda pixel art" 
+    className="homepage-image" 
+/>
+
+
 
       <p className="homepage-info jersey-15-regular">
         Produtos agroecológicos são sazonais, garantindo frescor e sustentabilidade. 
