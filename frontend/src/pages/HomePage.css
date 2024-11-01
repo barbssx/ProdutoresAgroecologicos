@@ -72,3 +72,9 @@ h3 {
 .homepage-div p {
   color: #3e3d2f; 
 }
+
+@media (max-width: 800px) {
+.homepage-image {
+  box-shadow: none;
+  }
+}
