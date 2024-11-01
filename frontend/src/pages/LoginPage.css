@@ -32,7 +32,7 @@ html, body {
   max-width: 500px;
   margin: 5px 0; 
   padding: 30px;
-  background-color: #d2b48c;
+  background-color: #d2b48c !important;
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 }
@@ -45,7 +45,7 @@ html, body {
   margin-bottom: 20px;
 }
 
-/* Estilodo formulário */
+/* Estilo do formulário */
 .container-login form {
   display: flex;
   flex-direction: column;
@@ -61,12 +61,18 @@ html, body {
 /* Estilo dos inputs */
 .container-login input {
   padding: 10px;
-  border: 1px solid #8b4513;
+  border: 1px solid #8b4513 !important;
   border-radius: 4px;
   width: 100%;
   margin-bottom: 15px;
-  background-color: #fff8dc;
-  color: #3e3d2f;
+  background-color: #fff8dc !important;
+  color: #3e3d2f !important;
+}
+
+/* Foco nos inputs */
+.container-login input:focus {
+  border-color: #2f6035; 
+  outline: none; 
 }
 
 /* Botão de login */

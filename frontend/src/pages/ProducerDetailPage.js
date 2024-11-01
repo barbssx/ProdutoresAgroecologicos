@@ -281,297 +281,315 @@ const ProducerDetailPage = () => {
       
 
       {/* Modal Editar Produtor */}
-      {editing && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>&times;</span>
-            <form onSubmit={handleSave} className="jersey-15-regular">
-              <h2 className='jersey-15-charted-regular'>Editar {producer.name}</h2>
-              <div>
-                <label htmlFor="name">Nome</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  className="jersey-15-regular"
-                />
-              </div>
-              <div>
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="jersey-15-regular"
-                  placeholder="exemplo@hotmail.com"
-                 
-
-                />
-              </div>
-              <div>
-                <label htmlFor="telefone">Telefone</label>
-                <input
-                  type="text"
-                  id="telefone"
-                  name="telefone"
-                  value={formData.telefone}
-                  onChange={handleInputChange}
-                  className="jersey-15-regular"
-                  placeholder="+55 11987654321"
-                />
-              </div>
-              <div>
-                <label htmlFor="localizacao">Endereço</label>
-                <input
-                  type="text"
-                  id="localizacao"
-                  name="localizacao"
-                  value={formData.localizacao}
-                  onChange={handleInputChange}
-                  className="jersey-15-regular"
-                />
-              </div>
-              <div>
-                <label htmlFor="biografia">Biografia</label>
-                <textarea className="biografia-box jersey-15-regular"
-                  id="biografia"
-                  name="biografia"
-                  placeholder="Escreva sua biografia aqui. No máximo 150 letras"
-                  value={formData.biografia}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <button type="submit" className="jersey-15-regular">Salvar</button>
-            </form>
-          </div>
+{editing && (
+  <div className="modal">
+    <div className="modal-content">
+      <form onSubmit={handleSave} className="jersey-15-regular">
+        <h2 className='jersey-15-charted-regular'>Editar {producer.name}</h2>
+        
+        {/* Campos do formulário */}
+        <div>
+          <label htmlFor="name">Nome</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+            className="jersey-15-regular"
+          />
         </div>
-      )}
-
-                    
-                    {/* Modal Add Produto */}
-            {showAddProductForm && (
-              <div className="modal">
-                <div className="modal-content">
-                  <span className="close" onClick={closeModal}>&times;</span>
-                  <form onSubmit={handleAddProduct} className="jersey-15-regular">
-                    <h2 className='jersey-15-charted-regular'>Novo Produto</h2>
-                    <div>
-                      <label htmlFor="name">Nome do Produto</label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={productFormData.name}
-                        onChange={handleProductInputChange}
-                        required
-                        className="jersey-15-regular"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="category">Categoria</label>
-                      <select 
-                        id="category" 
-                        name="category" 
-                        value={productFormData.category} 
-                        onChange={handleProductInputChange} 
-                        required
-                        className="jersey-15-regular"
-                      >
-                      <option value="">Selecione uma categoria</option>
-                      <option value="Artesanal">Artesanal</option>
-                      <option value="Bebidas">Bebidas</option>
-                      <option value="Bolos e Tortas">Bolos e Tortas</option>
-                      <option value="Compota">Compota</option>
-                      <option value="Carnes">Carnes</option>
-                      <option value="Conservas">Conservas</option>
-                      <option value="Doces">Doces</option>
-                      <option value="Ervas Medicinais">Ervas Medicinais</option>
-                      <option value="Flores">Flores</option>
-                      <option value="Frutas">Frutas</option>
-                      <option value="Grãos">Grãos</option>
-                      <option value="Hortaliças">Hortaliças</option>
-                      <option value="Legumes">Legumes</option>
-                      <option value="Laticínios">Laticínios</option>
-                      <option value="Massas Artesanais">Massas Artesanais</option>
-                      <option value="Mel">Mel</option>
-                      <option value="Ovos">Ovos</option>
-                      <option value="Padaria">Padaria</option>
-                      <option value="Plantas">Plantas</option>
-                      <option value="Queijos Artesanais">Queijos Artesanais</option>
-                      <option value="Temperos">Temperos</option>
-                      <option value="Verduras">Verduras</option>
-                  </select>
-                  </div>
-
-                    {/* Campo Preço */}
-                    <div>
-                      <label htmlFor="pricePerKg">Preço:</label>
-                      <input
-                        type="number"
-                        id="pricePerKg"
-                        name="pricePerKg"
-                        value={productFormData.pricePerKg}
-                        onChange={handleProductInputChange}
-                        required
-                        className="jersey-15-regular"
-                      />
-                    </div>
-
-                    {/* Campo Unidade de Medida */}
-                    <div>
-                      <label htmlFor="unit">Unidade de Medida</label>
-                      <select
-                        id="unit"
-                        name="unit"
-                        value={productFormData.unit}
-                        onChange={handleProductInputChange}
-                        required
-                        className="jersey-15-regular"
-                      >
-                        <option value="">Selecione uma unidade de medida</option>
-                        <option value="UN">UN</option>
-                        <option value="KG">KG</option>
-                        <option value="L">L</option>
-                      </select>
-                    </div>
-
-                    {/* Campo Estação com Chips */}
-                    <div>
-                      <label>Estação</label>
-                      <div className="chip-container">
-                        {['Anual', 'Verão', 'Outono', 'Inverno', 'Primavera'].map((season) => (
-                          <span 
-                            key={season} 
-                            onClick={() => handleSeasonChange(season)} 
-                            className={`chip ${productFormData.season.includes(season) ? 'selected' : ''}`}
-                          >
-                            {season}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <button type="submit" disabled={productLoading} className="jersey-15-regular">
-                      {productLoading ? 'Carregando...' : 'Adicionar'}
-                    </button>
-                  </form>
-                </div>
-              </div>
-            )}
-
-
-
-                          {/* Modal Editar */}
-                  {editingProduct && (
-                  <div className="modal">
-                    <div className="modal-content">
-                      <span className="close" onClick={closeModal}>&times;</span>
-                      <form onSubmit={handleUpdateProduct} className="jersey-15-regular">
-                        <h2 className='jersey-15-charted-regular'>Editar Produto</h2>
-                        <div>
-                          <label htmlFor="name">Nome do Produto</label>
-                          <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={productFormData.name}
-                            onChange={handleProductInputChange}
-                            required
-                            className="jersey-15-regular"
-                          />
-                        </div>
-                            <div>
-                              <label htmlFor="category">Categoria</label>
-                              <select
-                                id="category"
-                                name="category"
-                                value={productFormData.category}
-                                onChange={handleProductInputChange}
-                                required
-                                className="jersey-15-regular"
-                                >
-                                <option value="">Selecione uma categoria</option>
-                                <option value="Artesanal">Artesanal</option>
-                                <option value="Bebidas">Bebidas</option>
-                                <option value="Bolos e Tortas">Bolos e Tortas</option>
-                                <option value="Compota">Compota</option>
-                                <option value="Carnes">Carnes</option>
-                                <option value="Conservas">Conservas</option>
-                                <option value="Doces">Doces</option>
-                                <option value="Ervas Medicinais">Ervas Medicinais</option>
-                                <option value="Flores">Flores</option>
-                                <option value="Frutas">Frutas</option>
-                                <option value="Grãos">Grãos</option>
-                                <option value="Hortaliças">Hortaliças</option>
-                                <option value="Legumes">Legumes</option>
-                                <option value="Laticínios">Laticínios</option>
-                                <option value="Massas Artesanais">Massas Artesanais</option>
-                                <option value="Mel">Mel</option>
-                                <option value="Ovos">Ovos</option>
-                                <option value="Padaria">Padaria</option>
-                                <option value="Plantas">Plantas</option>
-                                <option value="Queijos Artesanais">Queijos Artesanais</option>
-                                <option value="Temperos">Temperos</option>
-                                <option value="Verduras">Verduras</option>
-                            </select>
-                            </div>
-                            <div>
-                              <label htmlFor="pricePerKg">Preço:</label>
-                              <input
-                                type="number"
-                                id="pricePerKg"
-                                name="pricePerKg"
-                                value={productFormData.pricePerKg}
-                                onChange={handleProductInputChange}
-                                required
-                                className="jersey-15-regular"
-                              />
-                            </div>
-
-                            {/* Campo Unidade de Medida */}
-                            <div>
-                              <label htmlFor="unit">Unidade de Medida</label>
-                              <select
-                                id="unit"
-                                name="unit"
-                                value={productFormData.unit}
-                                onChange={handleProductInputChange}
-                                required
-                                className="jersey-15-regular"
-                              >
-                                <option value="">Selecione uma unidade de medida</option>
-                                <option value="UN">UN</option>
-                                <option value="KG">KG</option>
-                                <option value="L">L</option>
-                              </select>
-                            </div>
-
-                            {/* Campo Estação com Chips */}
-                            <div>
-                              <label>Estações</label>
-                              <div className="chip-container">
-                                {["Anual", "Verão", "Outono", "Inverno", "Primavera"].map(season => (
-                                  <span
-                                    key={season}
-                                    className={`chip ${productFormData.season.includes(season) ? 'selected' : ''}`}
-                                    onClick={() => handleSeasonChipClick(season)}
-                                  >
-                                    {season}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-
-        <button type="submit" className="jersey-15-regular">Atualizar</button>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+            className="jersey-15-regular"
+            placeholder="exemplo@hotmail.com"
+          />
+        </div>
+        <div>
+          <label htmlFor="telefone">Telefone</label>
+          <input
+            type="text"
+            id="telefone"
+            name="telefone"
+            value={formData.telefone}
+            onChange={handleInputChange}
+            className="jersey-15-regular"
+            placeholder="+55 11987654321"
+          />
+        </div>
+        <div>
+          <label htmlFor="localizacao">Endereço</label>
+          <input
+            type="text"
+            id="localizacao"
+            name="localizacao"
+            value={formData.localizacao}
+            onChange={handleInputChange}
+            className="jersey-15-regular"
+          />
+        </div>
+        <div>
+          <label htmlFor="biografia">Biografia</label>
+          <textarea
+            className="biografia-box jersey-15-regular"
+            id="biografia"
+            name="biografia"
+            placeholder="Escreva sua biografia aqui. No máximo 150 letras"
+            value={formData.biografia}
+            onChange={handleInputChange}
+            maxLength="150"
+          />
+        </div>
+        
+        {/* Botões de ação */}
+        <div className="modal-footer">
+        <button type="submit" className="btn-save jersey-15-regular">Salvar</button>
+        <button type="button" className="btn-close jersey-15-regular" onClick={closeModal}>Fechar</button>
+        </div>
       </form>
     </div>
   </div>
 )}
+
+
+                    
+                   {/* Modal Add Produto */}
+              {showAddProductForm && (
+                <div className="modal">
+                  <div className="modal-content">
+                    <form onSubmit={handleAddProduct} className="jersey-15-regular">
+                      <h2 className='jersey-15-charted-regular'>Novo Produto</h2>
+                      <div>
+                        <label htmlFor="name">Nome do Produto</label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={productFormData.name}
+                          onChange={handleProductInputChange}
+                          required
+                          className="jersey-15-regular"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="category">Categoria</label>
+                        <select 
+                          id="category" 
+                          name="category" 
+                          value={productFormData.category} 
+                          onChange={handleProductInputChange} 
+                          required
+                          className="jersey-15-regular"
+                        >
+                          <option value="">Selecione uma categoria</option>
+                          <option value="Artesanal">Artesanal</option>
+                          <option value="Bebidas">Bebidas</option>
+                          <option value="Bolos e Tortas">Bolos e Tortas</option>
+                          <option value="Compota">Compota</option>
+                          <option value="Carnes">Carnes</option>
+                          <option value="Conservas">Conservas</option>
+                          <option value="Doces">Doces</option>
+                          <option value="Ervas Medicinais">Ervas Medicinais</option>
+                          <option value="Flores">Flores</option>
+                          <option value="Frutas">Frutas</option>
+                          <option value="Grãos">Grãos</option>
+                          <option value="Hortaliças">Hortaliças</option>
+                          <option value="Legumes">Legumes</option>
+                          <option value="Laticínios">Laticínios</option>
+                          <option value="Massas Artesanais">Massas Artesanais</option>
+                          <option value="Mel">Mel</option>
+                          <option value="Ovos">Ovos</option>
+                          <option value="Padaria">Padaria</option>
+                          <option value="Plantas">Plantas</option>
+                          <option value="Queijos Artesanais">Queijos Artesanais</option>
+                          <option value="Temperos">Temperos</option>
+                          <option value="Verduras">Verduras</option>
+                        </select>
+                      </div>
+
+                      {/* Campo Preço */}
+                      <div>
+                        <label htmlFor="pricePerKg">Preço:</label>
+                        <input
+                          type="number"
+                          id="pricePerKg"
+                          name="pricePerKg"
+                          value={productFormData.pricePerKg}
+                          onChange={handleProductInputChange}
+                          required
+                          className="jersey-15-regular"
+                        />
+                      </div>
+
+                      {/* Campo Unidade de Medida */}
+                      <div>
+                        <label htmlFor="unit">Unidade de Medida</label>
+                        <select
+                          id="unit"
+                          name="unit"
+                          value={productFormData.unit}
+                          onChange={handleProductInputChange}
+                          required
+                          className="jersey-15-regular"
+                        >
+                          <option value="">Selecione uma unidade de medida</option>
+                          <option value="UN">UN</option>
+                          <option value="KG">KG</option>
+                          <option value="L">L</option>
+                        </select>
+                      </div>
+
+                      {/* Campo Estação com Chips */}
+                      <div>
+                        <label>Estação</label>
+                        <div className="chip-container">
+                          {['Anual', 'Verão', 'Outono', 'Inverno', 'Primavera'].map((season) => (
+                            <span 
+                              key={season} 
+                              onClick={() => handleSeasonChange(season)} 
+                              className={`chip ${productFormData.season.includes(season) ? 'selected' : ''}`}
+                            >
+                              {season}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Botões Adicionar e Fechar */}
+                      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
+                        <button type="submit" disabled={productLoading} className="modal-button">
+                          {productLoading ? 'Carregando...' : 'Adicionar'}
+                        </button>
+                        <button type="button" onClick={closeModal} className="modal-button">
+                          Fechar
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
+
+
+                         
+                              {/* Modal Editar */}
+              {editingProduct && (
+                <div className="modal">
+                  <div className="modal-content">
+                    <form onSubmit={handleUpdateProduct} className="jersey-15-regular">
+                      <h2 className='jersey-15-charted-regular'>Editar Produto</h2>
+                      <div>
+                        <label htmlFor="name">Nome do Produto</label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={productFormData.name}
+                          onChange={handleProductInputChange}
+                          required
+                          className="jersey-15-regular"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="category">Categoria</label>
+                        <select
+                          id="category"
+                          name="category"
+                          value={productFormData.category}
+                          onChange={handleProductInputChange}
+                          required
+                          className="jersey-15-regular"
+                        >
+                          <option value="">Selecione uma categoria</option>
+                          <option value="Artesanal">Artesanal</option>
+                          <option value="Bebidas">Bebidas</option>
+                          <option value="Bolos e Tortas">Bolos e Tortas</option>
+                          <option value="Compota">Compota</option>
+                          <option value="Carnes">Carnes</option>
+                          <option value="Conservas">Conservas</option>
+                          <option value="Doces">Doces</option>
+                          <option value="Ervas Medicinais">Ervas Medicinais</option>
+                          <option value="Flores">Flores</option>
+                          <option value="Frutas">Frutas</option>
+                          <option value="Grãos">Grãos</option>
+                          <option value="Hortaliças">Hortaliças</option>
+                          <option value="Legumes">Legumes</option>
+                          <option value="Laticínios">Laticínios</option>
+                          <option value="Massas Artesanais">Massas Artesanais</option>
+                          <option value="Mel">Mel</option>
+                          <option value="Ovos">Ovos</option>
+                          <option value="Padaria">Padaria</option>
+                          <option value="Plantas">Plantas</option>
+                          <option value="Queijos Artesanais">Queijos Artesanais</option>
+                          <option value="Temperos">Temperos</option>
+                          <option value="Verduras">Verduras</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label htmlFor="pricePerKg">Preço:</label>
+                        <input
+                          type="number"
+                          id="pricePerKg"
+                          name="pricePerKg"
+                          value={productFormData.pricePerKg}
+                          onChange={handleProductInputChange}
+                          required
+                          className="jersey-15-regular"
+                        />
+                      </div>
+
+                      {/* Campo Unidade de Medida */}
+                      <div>
+                        <label htmlFor="unit">Unidade de Medida</label>
+                        <select
+                          id="unit"
+                          name="unit"
+                          value={productFormData.unit}
+                          onChange={handleProductInputChange}
+                          required
+                          className="jersey-15-regular"
+                        >
+                          <option value="">Selecione uma unidade de medida</option>
+                          <option value="UN">UN</option>
+                          <option value="KG">KG</option>
+                          <option value="L">L</option>
+                        </select>
+                      </div>
+
+                      {/* Campo Estação com Chips */}
+                      <div>
+                        <label>Estações</label>
+                        <div className="chip-container">
+                          {["Anual", "Verão", "Outono", "Inverno", "Primavera"].map(season => (
+                            <span
+                              key={season}
+                              className={`chip ${productFormData.season.includes(season) ? 'selected' : ''}`}
+                              onClick={() => handleSeasonChipClick(season)}
+                            >
+                              {season}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+                        <button type="submit" className="modal-button">Atualizar</button>
+                        <button type="button" className="modal-button" onClick={closeModal} style={{ marginLeft: '10px' }}>
+                          Fechar
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
+
     </main>
   );
 };

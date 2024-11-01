@@ -8,7 +8,7 @@ html, body {
 .admin-page-container {
     text-align: center;
     padding: 20px;
-    background-color: #d2b48c;
+    background-color: var(--claro)!important;
     min-height: 100vh;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -42,7 +42,7 @@ form input {
     max-width: 500px; 
     border: 2px solid #8b4513; 
     border-radius: 5px; 
-    background-color: #f5deb3;
+    background-color: var(--claro);
     padding: 5px; 
     
 }
@@ -73,7 +73,7 @@ ul li {
     margin: 1em auto !important;
     max-width: 500px; 
     padding: 10px;
-    background-color: #f5deb3;
+    background-color: var(--claro);
     border: 1px solid #8b4513;
     border-radius: 5px;
 }
@@ -119,7 +119,7 @@ ul li button:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -142,21 +142,21 @@ ul li button:hover {
 
     h1, h2 {
         margin: 10px;
-        font-size: 1.5em; /* Ajuste o tamanho do texto para telas menores */
+        font-size: 1.5em; 
     }
 
     form input {
-        font-size: 14px; /* Diminui o tamanho da fonte em inputs */
+        font-size: 14px; 
     }
 
     .button-container {
-        flex-direction: column; /* Empilha os botões em dispositivos menores */
-        max-width: 90%; /* Faz com que o botão use mais espaço na tela */
+        flex-direction: column; 
+        max-width: 90%; 
     }
 
     ul li {
-        max-width: 90%; /* Adapta a lista para telas menores */
-        padding: 8px; /* Ajusta o padding */
+        max-width: 90%;
+        padding: 8px; 
     }
 }
 

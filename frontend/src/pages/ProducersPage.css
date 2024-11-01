@@ -1,306 +1,157 @@
 .producer-page { 
-    padding: 20px;
-    background-color: #d2b48c !important;
-    color: #3e3d2f; 
-    font-family: "Open Sans", sans-serif; 
+  padding: 20px;
+  background-color: #d2b48c !important;
+  color: #3e3d2f; 
+  font-family: "Open Sans", sans-serif; 
 }
 
 .producer-card {
-    cursor: pointer;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f5deb3;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-
-.producer-info {
-  
-  align-items: center; 
   cursor: pointer;
   border: 1px solid #ddd;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #f5deb3;
+  background-color: #fce9c6;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.produto-modal {
+  background-color: var(--claro) !important; 
+  padding: 10px;
+  border-radius: 10px; 
+}
+
+.producer-info {
+  align-items: center; 
+  cursor: pointer;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 5px; 
+  background-color: var(--claro);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 2px solid #8b4513;
-}
-
-.producer-icon {
-  width: 30px;
-  height: 30px; 
-  margin-right: 10px; 
 }
 
 .product-item {
   background-color: #ddd;
   max-height: 500px;
   max-width: 500px;
+  margin-bottom: 5px; /* Ajuste para diminuir o espaço entre itens */
 }
 
 .product-categories {
-    margin-top: 10px; 
+  margin-top: 5px; /* Reduza o espaço acima das categorias */
 }
 
 .category {
-    display: inline-block; 
-    padding: 5px 10px; 
-    border-radius: 20px; 
-    margin: 5px; 
-    font-family: "Jersey 15", sans-serif;
+  display: inline-block; 
+  padding: 5px 10px; 
+  border-radius: 20px; 
+  margin: 5px; 
+  font-family: "Jersey 15", sans-serif;
 }
 
-.category.ovos {
-    background-color: #ffffff; 
-    color: #000000; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.massas {
-    background-color: #e83e8c; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.queijos-artesanais {
-    background-color: #f9d85a; 
-    color: #3e3d2f; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.hortaliças {
-    background-color: #00ff59; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-
-  .category.padaria {
-    background-color: #ff5900; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  
-  .category.verduras {
-    background-color: #3001ff; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.laticínios {
-    background-color: #ffb3b3; 
-    color: #3e3d2f; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.frutas {
-    background-color: #ff6f61; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  
-  .category.artesanato {
-    background-color: #6610f2; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.conservas {
-    background-color: #20c997; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.doces {
-    background-color: #dc3545; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.ervas-medicinais {
-    background-color: #17a2b8; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.flores {
-    background-color: #e83e8c; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.plantas {
-    background-color: #ffc107; 
-    color: #3e3d2f; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.bolos-e-tortas {
-    background-color: #00ffbf; 
-    color: #343a40; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.compota {
-    background-color: #ffcc00; 
-    color: #3e3d2f; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.legumes {
-    background-color: #6f42c1; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.temperos {
-    background-color: #fd7e14; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.grãos {
-    background-color: #28a745; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.carnes {
-    background-color: #dc3545; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.peixes {
-    background-color: #007bff; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.bebidas {
-    background-color: #17a2b8; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.mel {
-    background-color: #ffcd39; 
-    color: #3e3d2f; 
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .category.produtos-organicos {
-    background-color: #6c757d; 
-    color: white; 
-    padding: 5px;
-    border-radius: 5px;
-  }
+.category.ovos { background-color: #ffffff; color: #000000; }
+.category.massas { background-color: #e83e8c; color: white; }
+.category.queijos-artesanais { background-color: #f9d85a; color: #3e3d2f; }
+.category.hortaliças { background-color: #00ff59; color: white; }
+.category.padaria { background-color: #ff5900; color: white; }
+.category.verduras { background-color: #3001ff; color: white; }
+.category.laticínios { background-color: #ffb3b3; color: #3e3d2f; }
+.category.frutas { background-color: #ff6f61; color: white; }
+.category.artesanato { background-color: #6610f2; color: white; }
+.category.conservas { background-color: #20c997; color: white; }
+.category.doces { background-color: #dc3545; color: white; }
+.category.ervas-medicinais { background-color: #17a2b8; color: white; }
+.category.flores { background-color: #e83e8c; color: white; }
+.category.plantas { background-color: #ffc107; color: #3e3d2f; }
+.category.bolos-e-tortas { background-color: #00ffbf; color: #343a40; }
+.category.compota { background-color: #ffcc00; color: #3e3d2f; }
+.category.legumes { background-color: #6f42c1; color: white; }
+.category.temperos { background-color: #fd7e14; color: white; }
+.category.grãos { background-color: #28a745; color: white; }
+.category.carnes { background-color: #dc3545; color: white; }
+.category.peixes { background-color: #007bff; color: white; }
+.category.bebidas { background-color: #17a2b8; color: white; }
+.category.mel { background-color: #ffcd39; color: #3e3d2f; }
+.category.produtos-organicos { background-color: #6c757d; color: white; }
 
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    max-width: 500px; 
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    text-align: center; 
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 600px;
+  max-height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  text-align: center;
 }
 
-.modal-content h2, .modal-content p, .modal-content h4 {
-    margin: 10px 0;
+.modal-content h2 {
+  margin-top: 0;
 }
 
-p {
-    font-size: 1rem;
+.modal-content h3 {
+  margin-top: 5px;
+  font-size: 30px;
 }
 
 .modal-content button {
-    margin-top: 20px; 
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px; 
-    background-color: #2f6035;
-    color: white;
-    cursor: pointer; 
-    transition: background-color 0.3s;
-    font-family: "Jersey 15", sans-serif; 
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2f6035;
+  color: white;
+  cursor: pointer;
+  font-family: "Jersey 15", sans-serif;
+  margin-top: 10px;
+  font-size: 20px;
+  max-width: 110px;
 }
 
 .modal-content button:hover {
-    background-color:#6e4d1b; 
-
+  background-color: #6e4d1b;
 }
 
 .jersey-10-regular {
-    font-family: "Jersey 10", sans-serif;
-    font-weight: 900;
-    font-style: normal;
+  font-family: "Jersey 10", sans-serif;
+  font-weight: 900;
+  font-style: normal;
 }
 
 .jersey-15-charted-regular {
-    font-family: "Jersey 15 Charted", sans-serif;
-    font-size: 50px;
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Jersey 15 Charted", sans-serif;
+  font-size: 50px;
+  font-weight: 400;
+  font-style: normal;
 }
 
-
 .jersey-15-regular {
-    font-family: "Jersey 15", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 1rem;
+  font-family: "Jersey 15", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1rem;
 }
 
 @media (max-width: 768px) {
-    .producer-card {
-        display: flex;
-        flex-direction: column;
-    }
+  .producer-card {
+      display: flex;
+      flex-direction: column;
+  }
 }
-
-
-

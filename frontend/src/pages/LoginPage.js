@@ -43,7 +43,7 @@ const LoginPage = () => {
           <h1 className="jersey-15-charted-regular">Produtor, faça o seu login</h1>
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="email">Email</label>
+              <label className="jersey-15-regular" htmlFor="email">Email</label>
               <input
                 type="email"
                 id="email"
@@ -53,7 +53,7 @@ const LoginPage = () => {
               />
             </div>
             <div>
-              <label htmlFor="password">Senha</label>
+              <label className="jersey-15-regular" htmlFor="password">Senha</label>
               <input
                 type="password"
                 id="password"
@@ -71,7 +71,8 @@ const LoginPage = () => {
       </div>
       <div className="footer" />
     </div>
-  );
+);
+
 };
 
 export default LoginPage;

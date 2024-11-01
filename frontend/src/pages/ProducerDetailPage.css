@@ -1,6 +1,14 @@
+
+:root {
+  --sandy-brown: #fce9c6;;
+  --tan: #d2b48c;
+  --claro: #fff3dc ;
+
+}
+
 .producer-detail-page {
   padding: 20px;
-  background-color: #d2b48c;
+  background-color: var(--tan);
   color: #3e3d2f; 
   font-family: "Open Sans", sans-serif;
   min-height: 100vh;
@@ -40,7 +48,7 @@ h3 {
 
 /* Formulários */
 form {
-  background-color: #f5deb3; 
+  background-color: var(--sandy-brown); 
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -61,7 +69,7 @@ select {
   margin-bottom: 20px;
   border: 2px solid #8b4513;
   border-radius: 5px;
-  background-color: #f5deb3;
+  background-color: var(--sandy-brown);
   color: black;
   font-size: 1rem;
 }
@@ -91,7 +99,6 @@ button:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Produtos lado a lado */
 .product-list {
   margin-top: 30px;
   display: flex;
@@ -103,14 +110,15 @@ button:hover {
   padding: 15px;
   border: 2px solid #8b4513;
   border-radius: 10px;
-  background-color: #f5deb3; 
+  background-color: var(--claro)!important; 
   margin: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   flex: 0 1 calc(25% - 20px);
   text-align: left;
+  
 }
 
-/* Espaço entre as informações de cada produto */
+
 .product-list h3 {
   color: #2f6035; 
   margin-bottom: 15px; 
@@ -358,10 +366,11 @@ button:hover {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1000;
+  
 }
 
 .modal-content {
-  background-color: #f5deb3;
+  background-color: var(--tan);
   padding: 10px;
   border-radius: 10px; 
   width: 100%;
@@ -447,12 +456,20 @@ button:hover {
 
 
 .biografia-box {
-  width: 500px; 
+  width: 100%;
   height: auto;
+  max-height: 200px; 
+  overflow-y: auto; 
   padding: 10px; 
   border: 2px solid #8b4513;
   border-radius: 5px;
-  background-color: #f5deb3;
-  resize: none; 
-  overflow: hidden; 
+  background-color: var(--claro) !important;
 }
+
+.modal-footer {
+  display: flex;
+  justify-content: space-around;
+  gap: 5px;
+}
+
+

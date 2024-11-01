@@ -4,12 +4,6 @@
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
-  background-color: #f4a460;
-  font-family: "Open Sans", sans-serif;
-  color: #3e3d2f; 
-}
 
 
 .homepage-container {

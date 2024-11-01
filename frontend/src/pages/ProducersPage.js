@@ -131,29 +131,29 @@ const ProducersPage = () => {
         <p className="jersey-15-regular">Nenhum produtor cadastrado.</p>
       )}
 
-      {selectedProducer && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+{selectedProducer && (
+    <div className="modal-overlay" onClick={handleCloseModal}>
+        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2 className="jersey-15-charted-regular">{selectedProducer.name}</h2>
             <p className="jersey-15-regular">Email: {selectedProducer.email}</p>
             <p className="jersey-15-regular">Telefone: {selectedProducer.telefone || 'Não informado'}</p>
             <p className="jersey-15-regular">Endereço: {selectedProducer.localizacao || 'Não informado'}</p>
-            <h4 className="jersey-15-regular">Produtos:</h4>
+            <h3 className="jersey-15-regular">Produtos:</h3>
             <ul className="product-list">
-              {filteredProductsForPopup.length > 0 ? (
-                filteredProductsForPopup.map((product) => (
-                  <li key={product._id} className="jersey-15-regular">
-                    <strong>{product.name}</strong> - Preço {product.pricePerKg} R$ por {product.unit} - Estação: {product.season.join(', ')}
-                  </li>
-                ))
-              ) : (
-                <p className="jersey-15-regular">Nenhum produto disponível para este produtor.</p>
-              )}
+                {filteredProductsForPopup.length > 0 ? (
+                    filteredProductsForPopup.map((product) => (
+                        <li key={product._id} className="jersey-15-regular produto-modal">
+                            <strong>{product.name}</strong> - Preço {product.pricePerKg} R$ por {product.unit} - Estação: {product.season.join(', ')}
+                        </li>
+                    ))
+                ) : (
+                    <p className="jersey-15-regular">Nenhum produto disponível para este produtor.</p>
+                )}
             </ul>
             <button onClick={handleCloseModal}>Fechar</button>
-          </div>
         </div>
-      )}
+    </div>
+)}
     </div>
   );
 };
