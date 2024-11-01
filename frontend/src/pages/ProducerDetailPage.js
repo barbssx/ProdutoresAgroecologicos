@@ -244,14 +244,14 @@ const ProducerDetailPage = () => {
       <p className="jersey-15-regular"><strong>Biografia: </strong>{producer.biografia || 'Não informada'}</p>
 
       <div className="button-group">
-        <button onClick={() => setEditing(true)} className="jersey-15-regular">Editar</button>
-        <button onClick={handleLogout} className="jersey-15-regular">Sair</button>
+        <button onClick={() => setEditing(true)} className="jersey-15-regular btn-produto">Editar</button>
+        <button onClick={handleLogout} className="jersey-15-regular btn-produto">Sair</button>
       </div>
       </div>
 
   
       <h2 className='jersey-15-charted-regular'>Produtos</h2>
-      <button onClick={() => setShowAddProductForm(true)} className="jersey-15-regular">Incluir Novo Produto</button>
+      <button onClick={() => setShowAddProductForm(true)} className="jersey-15-regular btn-incluir">Incluir Novo Produto</button>
 
       <div className="product-list">
   {producer.products && producer.products.length > 0 ? (
@@ -267,8 +267,8 @@ const ProducerDetailPage = () => {
             <SeasonChip key={season} season={season} />
           ))}
         </p>
-        <button onClick={() => handleEditProduct(product)} className="jersey-15-regular">Editar Produto</button>
-        <button onClick={() => handleDeleteProduct(product._id)} className="jersey-15-regular">Excluir</button>
+        <button onClick={() => handleEditProduct(product)} className="jersey-15-regular btn-produto">Editar</button>
+        <button onClick={() => handleDeleteProduct(product._id)} className="jersey-15-regular btn-produto">Excluir</button>
       </div>
     ))
   ) : (

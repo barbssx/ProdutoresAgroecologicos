@@ -37,11 +37,11 @@
   background-color: #ddd;
   max-height: 500px;
   max-width: 500px;
-  margin-bottom: 5px; /* Ajuste para diminuir o espaço entre itens */
+  margin-bottom: 5px; 
 }
 
 .product-categories {
-  margin-top: 5px; /* Reduza o espaço acima das categorias */
+  margin-top: 5px; 
 }
 
 .category {

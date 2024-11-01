@@ -62,7 +62,7 @@ const LoginPage = () => {
                 required
               />
             </div>
-            <button className="jersey-15-regular" type="submit" disabled={loading}>
+            <button className="jersey-15-regular btn-submit" type="submit" disabled={loading}>
               {loading ? 'Entrando...' : 'Entrar'}
             </button>
             {error && <p className="error-message">{error}</p>}

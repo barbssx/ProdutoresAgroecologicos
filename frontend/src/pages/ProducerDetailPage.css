@@ -472,4 +472,12 @@ button:hover {
   gap: 5px;
 }
 
+.btn-produto {
+  max-width: 100px;
+}
+
+.btn-incluir {
+  max-width: 300px;
+}
+
 
