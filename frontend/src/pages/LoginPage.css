@@ -115,5 +115,6 @@ button:hover:not(:disabled) {
 }
 
 .btn-submit {
-  max-width: 370px;
+  max-width: 100px;
+  margin: 10px 150px;
 }

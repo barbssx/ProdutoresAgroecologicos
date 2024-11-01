@@ -325,6 +325,11 @@ button:hover {
       padding: 10px; 
       flex: 0 1 calc(50% - 20px);
   }
+
+  .product-item {
+    max-width: 500px;
+    min-width: 300px;
+  }
 }
 
 /* Fontes */

@@ -19,8 +19,8 @@ const HomePage = () => {
       
       <img 
     src="/assets/pixel-farm.gif" 
-    srcset="/assets/animals.png 768w, /assets/pixel-farm.gif 1200w"
-    sizes="(max-width: 800px) 100vw, 50vw"
+    srcset="/assets/pixel_small.png 768w, /assets/pixel-farm.gif 1200w"
+    sizes="(max-width: 700px) 100vw, 50vw"
     alt="Fazenda pixel art" 
     className="homepage-image" 
 />
