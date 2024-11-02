@@ -464,7 +464,7 @@ const ProducerDetailPage = () => {
                       </div>
 
                       {/* Botões Adicionar e Fechar */}
-                      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
+                      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around' }}>
                         <button type="submit" disabled={productLoading} className="modal-button">
                           {productLoading ? 'Carregando...' : 'Adicionar'}
                         </button>
@@ -579,7 +579,7 @@ const ProducerDetailPage = () => {
                         </div>
                       </div>
 
-                      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
                         <button type="submit" className="modal-button">Atualizar</button>
                         <button type="button" className="modal-button" onClick={closeModal} style={{ marginLeft: '10px' }}>
                           Fechar

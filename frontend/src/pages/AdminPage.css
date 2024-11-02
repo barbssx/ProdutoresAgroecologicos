@@ -1,9 +1,10 @@
 
-html, body {
-    height: 100%;
-    background-color: #f4a460;
-    color: #3e3d2f;
-}
+:root {
+    --sandy-brown: #fce9c6;;
+    --tan: #d2b48c;
+    --claro: #fff3dc ;
+  
+  }
 
 .admin-page-container {
     text-align: center;
@@ -21,6 +22,10 @@ h1, h2 {
     color: #2f6035;
     margin: 20px;
     text-align: center;
+}
+
+form {
+    background-color: var(--claro) !important;
 }
 
 form input {
@@ -127,7 +132,7 @@ ul li button:hover {
   }
   
   .modal-content {
-    background: #f5deb3;
+    background: var(--tan);
     padding: 20px;
     border-radius: 5px;
     width: 400px;

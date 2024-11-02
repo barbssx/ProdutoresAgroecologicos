@@ -83,7 +83,7 @@ const ProducersPage = () => {
 
   return (
     <div className="producer-page">
-      <h1 className="jersey-15-charted-regular">Lista de Produtores</h1>
+      <h1 className="jersey-15-charted-regular">Catálogo de Produtores</h1>
 
       {/* Filtro */}
       <ProductFilter

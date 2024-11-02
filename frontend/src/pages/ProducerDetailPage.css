@@ -71,7 +71,7 @@ select {
   border-radius: 5px;
   background-color: var(--sandy-brown);
   color: black;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 input[type="text"]:focus,
