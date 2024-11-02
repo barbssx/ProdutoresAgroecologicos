@@ -111,32 +111,35 @@ const AdminPage = () => {
   const handleAddProducer = async (e) => {
     e.preventDefault();
     setAddingProducer(true);
-
+  
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(newProducer.email)) {
       setError('Por favor, insira um e-mail válido.');
       setAddingProducer(false);
       return;
     }
-
+  
     if (newProducer.password.length < 6) {
       setError('A senha deve ter pelo menos 6 caracteres.');
       setAddingProducer(false);
       return;
     }
-
+  
     try {
       const createdProducer = await addProducer(newProducer);
       setProducers([...producers, createdProducer]);
       setNewProducer({ name: '', email: '', password: '', telefone: '', localizacao: '' });
       setError('');
+      setShowForm(false);
+  
+      window.location.reload();
     } catch (err) {
       setError('Erro ao adicionar produtor.');
     } finally {
       setAddingProducer(false);
-      setShowForm(false);
     }
   };
+  
 
   const handleLogout = () => {
     localStorage.removeItem('token');

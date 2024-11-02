@@ -348,8 +348,6 @@ const ProducerDetailPage = () => {
             maxLength="150"
           />
         </div>
-        
-        {/* Botões de ação */}
         <div className="modal-footer">
         <button type="submit" className="btn-save jersey-15-regular">Salvar</button>
         <button type="button" className="btn-close jersey-15-regular" onClick={closeModal}>Fechar</button>
