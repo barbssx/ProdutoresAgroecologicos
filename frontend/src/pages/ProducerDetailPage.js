@@ -203,7 +203,7 @@ const ProducerDetailPage = () => {
     return (
       <span 
         className="season-chip" 
-        style={{ backgroundColor: colors[season] || 'black', padding: '5px', borderRadius: '5px', margin: '2px', color: 'black' }}
+        style={{ backgroundColor: colors[season] || 'black', padding: '5px', borderRadius: '5px', margin: '2px', color: 'black', border: '2px solid black' }}
       >
         {season}
       </span>

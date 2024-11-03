@@ -52,9 +52,10 @@
   font-family: "Jersey 15", sans-serif;
 }
 
+
 .category.ovos {
   background-color: #ffffff; 
-  border: 1px solid black;
+  border: 2px solid black;
   color: #000000; 
   padding: 5px;
   border-radius: 5px;
@@ -62,13 +63,15 @@
 
 .category.massas-artesanais {
   background-color: #ff4400; 
-  color: white; 
+  border: 2px solid black;
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.queijos-artesanais {
   background-color: #f9d85a; 
+  border: 2px solid black;
   color: #000000; 
   padding: 5px;
   border-radius: 5px;
@@ -76,133 +79,152 @@
 
 .category.hortaliças {
   background-color: #00ff59; 
-  color: white; 
+  border: 2px solid black;
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.verduras {
   background-color: #3001ff; 
-  color: white; 
+  border: 2px solid black;
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
-.category.laticinios {
-  background-color: #ffb3b3; 
+.category.laticínios {
+  background-color: #bbb3ff;
+  border: 2px solid black;
   color: #000000; 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.frutas {
-  background-color: #ff006a; 
-  color: white; 
+  background-color: #ff006a;
+  border: 2px solid black;
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.padaria {
-  background-color: #ad9f00; 
-  color: white; 
+  background-color: #ad9f00;
+  border: 2px solid black; 
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.artesanato {
-  background-color: #6610f2; 
-  color: white; 
+  background-color: #6610f2;
+  border: 2px solid black; 
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.conservas {
-  background-color: #20c997; 
-  color: white; 
+  background-color: #20c997;
+  border: 2px solid black;
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.doces {
-  background-color: #000000; 
-  color: white; 
+  background-color: #aefe96;
+  border: 2px solid black;
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.ervas-medicinais {
-  background-color: #17a2b8; 
-  color: white; 
+  background-color: #17a2b8;
+  border: 2px solid black;
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.ervas-aromaticas {
-  background-color: #f18585; 
-  color: white; 
+  background-color: #f18585;
+  border: 2px solid black; 
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.flores {
-  background-color: #ff499e; 
-  color: white; 
+  background-color: #ff499e;
+  border: 2px solid black;
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.plantas {
-  background-color: #016f04; 
+  background-color: #016f04;
+  border: 2px solid black;
   color: #000000; 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.bolos-e-tortas {
-  background-color: #00ffbf; 
+  background-color: #00ffbf;
+  border: 2px solid black;
   color: #000000; 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.compota {
-  background-color: #ffcc00; 
+  background-color: #ffcc00;
+  border: 2px solid black;
   color: #000000; 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.legumes {
-  background-color: #6f42c1; 
-  color: white; 
+  background-color: #6f42c1;
+  border: 2px solid black;
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.temperos {
-  background-color: #fd7e14; 
-  color: white; 
+  background-color: #fd7e14;
+  border: 2px solid black; 
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.grãos {
   background-color: #ff894a; 
-  color: white; 
+  border: 2px solid black;
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.carnes {
   background-color: #ff0019; 
-  color: white; 
+  border: 2px solid black;
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.peixes {
   background-color: #007bff; 
-  color: white; 
+  border: 2px solid black;
+  color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
@@ -210,25 +232,26 @@
 .category.bebidas {
   background-color: #72e8fa; 
   color: rgb(0, 0, 0); 
-  border: 1px solid black;
+  border: 2px solid black;
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.mel {
-  background-color: #ffcd39; 
+  background-color: #ffcd39;
+  border: 2px solid black; 
   color: #000000; 
   padding: 5px;
   border-radius: 5px;
 }
 
 .category.produtos-organicos {
-  background-color: #6c757d; 
+  background-color: #6c757d;
+  border: 2px solid black;
   color: rgb(0, 0, 0); 
   padding: 5px;
   border-radius: 5px;
 }
-
 
 
 .modal-overlay {

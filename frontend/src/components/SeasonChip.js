@@ -13,7 +13,7 @@ const SeasonChip = ({ season }) => {
   return (
     <span 
       className="season-chip" 
-      style={{ backgroundColor: seasonColors[season], color: 'black', padding: '5px 10px', borderRadius: '15px', margin: '5px' }}
+      style={{ backgroundColor: seasonColors[season], color: 'black', padding: '5px 10px', borderRadius: '5px', margin: '5px', border: '2px solid black' }}
     >
       {season}
     </span>
