@@ -395,7 +395,7 @@ const ProducerDetailPage = () => {
                           <option value="Carnes">Carnes</option>
                           <option value="Conservas">Conservas</option>
                           <option value="Doces">Doces</option>
-                          <option value="Ervas Aromáticas">Ervas Aromáticas</option>
+                          <option value="Ervas Aromaticas">Ervas Aromáticas</option>
                           <option value="Ervas Medicinais">Ervas Medicinais</option>
                           <option value="Flores">Flores</option>
                           <option value="Frutas">Frutas</option>
@@ -514,7 +514,7 @@ const ProducerDetailPage = () => {
                           <option value="Carnes">Carnes</option>
                           <option value="Conservas">Conservas</option>
                           <option value="Doces">Doces</option>
-                          <option value="Ervas Aromáticas">Ervas Aromáticas</option>
+                          <option value="Ervas Aromaticas">Ervas Aromáticas</option>
                           <option value="Ervas Medicinais">Ervas Medicinais</option>
                           <option value="Flores">Flores</option>
                           <option value="Frutas">Frutas</option>
