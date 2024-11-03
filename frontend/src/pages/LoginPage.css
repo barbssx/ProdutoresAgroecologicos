@@ -14,7 +14,7 @@ html, body {
 /* Imagem de patinho */
 .login-image {
   display: block;
-  margin: auto; 
+  margin:50px 0 25px 0; 
   width: 130px; 
   border-radius: 10px; 
 }
@@ -30,7 +30,6 @@ html, body {
 /* Container do formulário de login */
 .container-login {
   max-width: 500px;
-  margin: 5px 0; 
   padding: 30px;
   background-color: #d2b48c !important;
   border-radius: 10px;
@@ -110,8 +109,8 @@ button:hover:not(:disabled) {
   background-image: url('/public/assets/fence1.png');
   background-repeat: repeat-x;
   background-size: contain;
-  position: relative;
   bottom: 0;
+  position: fixed;
 }
 
 .btn-submit {
