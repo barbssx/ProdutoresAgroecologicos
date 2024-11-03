@@ -78,7 +78,7 @@ const ProducersPage = () => {
       })
     : [];
 
-  if (loading) return <p>Carregando produtores e produtos, por favor aguarde...</p>;
+  if (loading) return <p className="jersey-15-regular">Carregando produtores e produtos, por favor aguarde...</p>;
   if (error) return <p>{error}</p>;
 
   return (

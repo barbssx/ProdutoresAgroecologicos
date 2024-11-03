@@ -402,7 +402,7 @@ const ProducerDetailPage = () => {
                           <option value="Grãos">Grãos</option>
                           <option value="Hortaliças">Hortaliças</option>
                           <option value="Legumes">Legumes</option>
-                          <option value="Laticínios">Laticínios</option>
+                          <option value="Laticinios">Laticinios</option>
                           <option value="Massas Artesanais">Massas Artesanais</option>
                           <option value="Mel">Mel</option>
                           <option value="Ovos">Ovos</option>
@@ -464,7 +464,7 @@ const ProducerDetailPage = () => {
 
                       {/* Botões Adicionar e Fechar */}
                       <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-around' }}>
-                        <button type="submit" disabled={productLoading} className="modal-button">
+                        <button type="submit" disabled={productLoading} className="modal-button jersey-15-regular">
                           {productLoading ? 'Carregando...' : 'Adicionar'}
                         </button>
                         <button type="button" onClick={closeModal} className="modal-button">
@@ -521,7 +521,7 @@ const ProducerDetailPage = () => {
                           <option value="Grãos">Grãos</option>
                           <option value="Hortaliças">Hortaliças</option>
                           <option value="Legumes">Legumes</option>
-                          <option value="Laticínios">Laticínios</option>
+                          <option value="Laticinios">Laticinios</option>
                           <option value="Massas Artesanais">Massas Artesanais</option>
                           <option value="Mel">Mel</option>
                           <option value="Ovos">Ovos</option>
