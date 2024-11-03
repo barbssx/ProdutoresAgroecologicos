@@ -14,7 +14,7 @@ html, body {
 /* Imagem de patinho */
 .login-image {
   display: block;
-  margin:50px 0 25px 0; 
+  margin: auto;
   width: 130px; 
   border-radius: 10px; 
 }
