@@ -261,7 +261,7 @@ const ProducerDetailPage = () => {
         <p className="jersey-15-regular">
           Categoria: <span className={`category ${product.category.toLowerCase().replace(/\s+/g, '-')}`}>{product.category}</span>
         </p>
-        <p className="jersey-15-regular">Preço {product.pricePerKg} R$ por {product.unit}</p>
+        <p className="jersey-15-regular">Preço: {product.pricePerKg} R$ por {product.unit}</p>
         <p className="jersey-15-regular">
           Estação: {product.season.map(season => (
             <SeasonChip key={season} season={season} />
@@ -395,6 +395,7 @@ const ProducerDetailPage = () => {
                           <option value="Carnes">Carnes</option>
                           <option value="Conservas">Conservas</option>
                           <option value="Doces">Doces</option>
+                          <option value="Ervas Aromáticas">Ervas Aromáticas</option>
                           <option value="Ervas Medicinais">Ervas Medicinais</option>
                           <option value="Flores">Flores</option>
                           <option value="Frutas">Frutas</option>
@@ -513,6 +514,7 @@ const ProducerDetailPage = () => {
                           <option value="Carnes">Carnes</option>
                           <option value="Conservas">Conservas</option>
                           <option value="Doces">Doces</option>
+                          <option value="Ervas Aromáticas">Ervas Aromáticas</option>
                           <option value="Ervas Medicinais">Ervas Medicinais</option>
                           <option value="Flores">Flores</option>
                           <option value="Frutas">Frutas</option>
