@@ -1,16 +1,14 @@
-# ProdutoresAgroecologicos
+# Desenvolvimento de uma plataforma web para produtores de agroecológicos da região de Presidente Prudente
 
-# Projeto de Gestão de Produtores Agrícolas
 
 ## Descrição
-
-Este projeto é uma aplicação web para a gestão de produtores agrícolas e seus produtos. A aplicação permite que administradores registrem, visualizem e gerenciem produtores, além de permitir que os próprios produtores adicionem e gerenciem seus produtos.
+A aplicação visa facilitar a conexão entre produtores e consumidores, promovendo a produção agrícola local.
 
 ## Funcionalidades
 
 - **Cadastro de Produtores**: Apenas administradores podem registrar novos produtores.
-- **Visualização de Produtores**: Qualquer usuário pode visualizar a lista de produtores e seus detalhes.
-- **Gerenciamento de Produtos**: Produtores podem adicionar e excluir produtos de sua propriedade.
+- **Visualização de Produtores**: Futuros consumidores podem visualizar um catálogo dos produtores disponíveis.
+- **Gerenciamento de Produtos**: Produtores podem adicionar e excluir seus produtos.
 - **Controle de Acesso**: Implementação de um sistema de autenticação com controle de acesso para administradores e produtores.
 
 ## Tecnologias Usadas
@@ -20,8 +18,20 @@ Este projeto é uma aplicação web para a gestão de produtores agrícolas e se
 - **Frontend**: React
 - **Autenticação**: JWT (JSON Web Tokens)
 
+## Integrantes do Grupo
+
+- Alíni Soriano Pereira
+- Ana Paula Lagisck
+- Barbara Sthefani Leite Silva
+- Camila Franciane Evangelista de Melo
+- Leonardo de Oliveira Lopes
+- Regina Sanae Kurata
+- Renan Fortaleza de Carvalho
+- Rubens Luiz Rodrigues
+
+
 ## Instalação
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu_usuario/seu_repositorio.git
+   git clone https://github.com/barbssx/ProdutoresAgroecologicos.git
